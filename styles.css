@@ -297,6 +297,14 @@ body {
     font-size: 1.5vh;
 }
 
+.apple-device .button {
+    font-size: 2vh;
+    font-weight: bold;
+    padding: 0.6vh;
+    border: 0.3vh solid #3d3d3d;
+    border-radius: 1.3vh;
+}
+
 
 /*
 |======================|
