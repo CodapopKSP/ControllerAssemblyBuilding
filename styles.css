@@ -92,37 +92,36 @@ body {
     transform: translate(-15vh, 7.5vh);
     margin: 0.75vh;
     z-index: 0;
-
 }
 .container-grid.has-23child {
     transform: translate(-15vh, 7.5vh);
     margin: 0.75vh;
     z-index: 0;
-
 }
 .container-grid.has-22child {
     transform: translateY(7.5vh);
     margin: 0.75vh;
     z-index: 0;
-
 }
 .container-grid.has-21child {
     transform: translateY(7.5vh);
     margin: 0.75vh;
     z-index: 0;
-
 }
 .container-grid.has-12child {
     transform: translateY(0vh);
     margin: 0.75vh;
     z-index: 0;
-
 }
 .container-grid.has-31child {
     transform: translateY(15vh);
     margin: 0.75vh;
     z-index: 0;
-
+}
+.container-grid.has-11child {
+    transform: translateY(0vh);
+    margin: 0.75vh;
+    z-index: 0;
 }
 
 .container-grid-array {
@@ -297,14 +296,6 @@ body {
     font-size: 1.5vh;
 }
 
-.apple-device .button {
-    font-size: 2vh;
-    font-weight: bold;
-    padding: 0.6vh;
-    border: 0.3vh solid #3d3d3d;
-    border-radius: 1.3vh;
-}
-
 
 /*
 |======================|
@@ -369,6 +360,12 @@ body {
     height: 45vh;
     min-width: 7vh;
     min-height: 22vh;
+}
+.one-one {
+    width: 15vh;
+    height: 15vh;
+    min-width: 15vh;
+    min-height: 15vh;
 }
 
 
@@ -473,7 +470,7 @@ body {
     width: 15vh;
     height: 7.875vh;
     background-image: url('containers/2x4.png');
-    right: 19%;
+    right: 16%;
     bottom: 1vh;
 }
 
@@ -481,7 +478,7 @@ body {
     width: 11.25vh;
     height: 7.8vh;
     background-image: url('containers/2x3.png');
-    right: 36%;
+    right: 33%;
     bottom: 1vh;
 }
 
@@ -489,7 +486,7 @@ body {
     width: 7.5vh;
     height: 7.725vh;
     background-image: url('containers/2x2.png');
-    right: 49%;
+    right: 46%;
     bottom: 1vh;
 }
 
@@ -497,7 +494,7 @@ body {
     width: 3.75vh;
     height: 10.725vh;
     background-image: url('containers/3x1.png');
-    right: 59%;
+    right: 56%;
     bottom: 1vh;
 }
 
@@ -505,7 +502,7 @@ body {
     width: 3.75vh;
     height: 7.5vh;
     background-image: url('containers/2x1.png');
-    right: 65.7%;
+    right: 62.7%;
     bottom: 1vh;
 }
 
@@ -513,8 +510,16 @@ body {
     width: 7.5vh;
     height: 4.125vh;
     background-image: url('containers/1x2.png');
-    right: 73%;
-    bottom: 4vh;
+    right: 69%;
+    bottom: 1vh;
+}
+
+#add-1x1 {
+    width: 3.75vh;
+    height: 4.125vh;
+    background-image: url('containers/1x1.png');
+    right: 79%;
+    bottom: 1vh;
 }
 
 #delete-bin {

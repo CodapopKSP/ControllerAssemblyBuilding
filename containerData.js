@@ -15,6 +15,17 @@ containerData is an array that contains all of the data for each container.
     vertical_ruler:     The dimensions to be displayed on the vertical ruler.
 */
 
+// Mark 0
+const Mark0 = {
+    name: "Mark 0 Container",
+    class: "one-one",
+    price: 45,
+    num_modules: 1,
+    num_angled: 1,
+    horizontal_ruler: "12.5cm",
+    vertical_ruler: "12.5cm"
+}
+
 // Mark I Horizontal
 const MarkIhoriz = {
     name: "Mark I Container (Horizontal)",
