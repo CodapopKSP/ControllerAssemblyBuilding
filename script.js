@@ -381,7 +381,7 @@ infoButton.addEventListener('click', function() {
     '<button class="btn btn-primary text-center" onclick="window.open(\'https://www.reddit.com/gallery/12sq3nn\', \'_blank\')">Full Catalog</button>' +
     '<button class="btn btn-primary text-center" onclick="window.open(\'https://www.reddit.com/gallery/12hjaoy\', \'_blank\')">Recommended Configs</button>' +
     '<button class="btn btn-primary text-center" onclick="window.open(\'https://www.reddit.com/r/UntitledSpaceCraft/comments/xvm0tw/untitled_space_craft_how_to_orderwhat_to_expect/\', \'_blank\')">Ordering and Shipping</button>' +
-    '<div style="font-family: \'Roboto\', sans-serif;"><br></br>These controllers only work with KSP1. KSP2 compatibility is not yet available.</div>',
+    '<div style="font-family: \'Roboto\', sans-serif;"><br></br>These controllers are compatible with both KSP1 and KSP2.</div>',
     showCancelButton: true,
     cancelButtonText: 'Cancel',
     buttonsStyling: false,

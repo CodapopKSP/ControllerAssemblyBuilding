@@ -19,7 +19,7 @@ containerData is an array that contains all of the data for each container.
 const Mark0 = {
     name: "Mark 0 Container",
     class: "one-one",
-    price: 45,
+    price: 50,
     num_modules: 1,
     num_angled: 1,
     horizontal_ruler: "12.5cm",
@@ -30,7 +30,7 @@ const Mark0 = {
 const MarkIhoriz = {
     name: "Mark I Container (Horizontal)",
     class: "one-two",
-    price: 50,
+    price: 55,
     num_modules: 2,
     num_angled: 2,
     horizontal_ruler: "24cm",
@@ -41,7 +41,7 @@ const MarkIhoriz = {
 const MarkIvert = {
     name: "Mark I Container (Vertical)",
     class: "two-one",
-    price: 50,
+    price: 55,
     num_modules: 2,
     num_angled: 1,
     num_level: 1,
@@ -53,7 +53,7 @@ const MarkIvert = {
 const MarkII = {
     name: "Mark II Container",
     class: "three-one",
-    price: 60,
+    price: 65,
     num_modules: 3,
     num_angled: 1,
     num_level: 1,
@@ -66,7 +66,7 @@ const MarkII = {
 const MarkIII = {
     name: "Mark III Container",
     class: "two-two",
-    price: 70,
+    price: 75,
     num_modules: 4,
     num_angled: 2,
     num_level: 2,
@@ -78,7 +78,7 @@ const MarkIII = {
 const MarkIV = {
     name: "Mark IV Container",
     class: "two-three",
-    price: 90,
+    price: 95,
     num_modules: 6,
     num_angled: 3,
     num_level: 3,
@@ -90,7 +90,7 @@ const MarkIV = {
 const MarkV = {
     name: "Mark V Container",
     class: "two-four",
-    price: 120,
+    price: 125,
     num_modules: 8,
     num_angled: 4,
     num_level: 4,
