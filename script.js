@@ -272,7 +272,7 @@ saveButton.addEventListener('click', function() {
   } else {
     urlConfigCode.push(`&color=rgb(0,0,0)`);
   }
-  const url = "https://codapopksp.github.io/?config=" + urlConfigCode.join('');
+  const url = "https://untitledspacecraft.com/?config=" + urlConfigCode.join('');
 
   // Copy the URL to the clipboard
   navigator.clipboard.writeText(url).then(() => {
