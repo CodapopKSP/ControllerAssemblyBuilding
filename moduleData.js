@@ -70,7 +70,7 @@ let moduleData = [
         image: "modules/time.png",
         image_light: "modules/light/time_l.png",
         tooltip: "The Time module manages the timewarp functions of the game. A large rocker switch allows you to step up/down timewarp speeds. A button with an LED indicator lights up if the game is in timewarp, and pressing it will cancel timewarp. Physical timewarp can be activated by holding a button and pressing the large rocker. Another button allows you to warp directly to the next maneuver node. Three more buttons allow you to pause, quicksave, and load the last quicksave. Note: This module is only available for Windows. This module has a function from KSP1 that won't work in KSP2 (Phys TW); Consider requesting a modification.",
-        has: ['Timewarp'],
+        has: ['Timewarp', 'Pause', 'Save', 'Load'],
         needs_data: true
     },
     {
@@ -89,37 +89,43 @@ let moduleData = [
         image: "modules/nav2.png",
         image_light: "modules/light/nav2_l.png",
         tooltip: "The Navigation (Time) module combines some of the features of the Navigation module and the Time module. A large switch toggles the Map and lights up slightly while on. A large rocker switch allows you to step up/down timewarp speeds. A button with an LED indicator lights up if the game is in timewarp, and pressing it will cancel timewarp. Physical timewarp can be activated by holding a button and pressing the large rocker. Other buttons handle Pause, Cycle Ship, and Reset Map Focus. Note: This module is only available for Windows. This module has a function from KSP1 that won't work in KSP2 (Phys TW); Consider requesting a modification.",
-        has: ['Timewarp', 'Map'],
+        has: ['Timewarp', 'Map', 'Pause'],
         needs_data: true
     },
     {
-        name: "Telemetry Module",
-        id: "c1",
+        name: "Utility Module (Navigation)",
+        id: "b4",
         price: 85,
-        image: "modules/telem.png",
-        image_light: "modules/light/telem_l.png",
-        tooltip: "The Telemetry module features a large LCD screen that provides a ton of data regarding the status of the current vessel. Four buttons allow the user to select which display mode is currently active. Please note that the large amounts of data being sent to the controller have a tendency to overload controllers that use this module with other display modules (currently Control Systems, Action Groups, and the Stop Timewarp button LED). The buttons on these modules should still work as intended, but the LED indicators might not always update properly.",
-        has: ['Telemetry']
+        image: "modules/utility_nav.png",
+        image_light: "modules/light/utility_nav_l.png",
+        tooltip: "The Utility (Navigation) module combines some of the features of the Navigation module and the EVA module. A large switch toggles the Map and lights up slightly while on. It includes buttons for EVA functions as well as buttons for cycling the Navball mode and cycling ships. Parachute deployment can be achieved by pressing both the Jump and Light buttons at the same time. It also features a Monopropellant fuel gauge to show the current fuel level of the kerbal's jetpack. Note: This module is only available for Windows.",
+        has: ['EVA', 'Map'],
+        needs_data: true
+    },
+    {
+        name: "Utility Module (Time)",
+        id: "b5",
+        price: 85,
+        image: "modules/utility_time.png",
+        image_light: "modules/light/utility_time_l.png",
+        tooltip: "The Utility (Time) module combines some of the features of the Time module and the EVA module. It includes buttons for EVA functions as well as buttons for pause, quicksave, and quickload. Parachute deployment can be achieved by pressing both the Jump and Light buttons at the same time. It also features a Monopropellant fuel gauge to show the current fuel level of the kerbal's jetpack. Note: This module is only available for Windows.",
+        has: ['EVA', 'Pause', 'Save', 'Load'],
+        needs_data: true
+    },
+    {
+        name: "EVA Module",
+        id: "d1",
+        price: 85,
+        image: "modules/eva.png",
+        image_light: "modules/light/eva_l.png",
+        tooltip: "The EVA module controls Kerbals while on EVA. It provides dedicated inputs for walking/flying, and it includes buttons for the other EVA functions. Parachute deployment can be achieved by pressing both the Jump and Light buttons at the same time. It also features a Monopropellant fuel gauge to show the current fuel level of the kerbal's jetpack. Note: This module is only available for Windows.",
+        needs_data: true
     },
     {
         name: "Blank Module Cover",
         id: "i1",
         price: 0,
-        image: "modules/blank.png",
-        tooltip: "Blank module covers can be useful if you want to have a larger container without needing to fill it with modules, or if you know you eventually want to fill it but don't yet have the means to do so. For an additional $10 you can have an image or text engraved onto the surface.",
-    },
-    {
-        name: "Blank Module Cover",
-        id: "i2",
-        price: 0,
         image: "modules/blank-agency.png",
-        tooltip: "Blank module covers can be useful if you want to have a larger container without needing to fill it with modules, or if you know you eventually want to fill it but don't yet have the means to do so. For an additional $10 you can have an image or text engraved onto the surface.",
-    },
-    {
-        name: "Blank Module Cover",
-        id: "i3",
-        price: 0,
-        image: "modules/blank-logo.png",
         tooltip: "Blank module covers can be useful if you want to have a larger container without needing to fill it with modules, or if you know you eventually want to fill it but don't yet have the means to do so. For an additional $10 you can have an image or text engraved onto the surface.",
     },
     {
@@ -223,12 +229,12 @@ let moduleData = [
         tooltip: "The Camera module allows you to change the view and position of the camera. The white buttons control the camera angle, and the rest of the buttons toggle the UI, take a screenshot, toggle IVA view, and cycle the camera modes. Note: This module is only available for Windows.",
     },
     {
-        name: "EVA Module",
-        id: "d1",
+        name: "Telemetry Module",
+        id: "c1",
         price: 85,
-        image: "modules/eva.png",
-        image_light: "modules/light/eva_l.png",
-        tooltip: "The EVA module controls Kerbals while on EVA. It provides dedicated inputs for walking/flying, and it includes buttons for the other EVA functions. Parachute deployment can be achieved by pressing both the Jump and Light buttons at the same time. It also features a Monopropellant fuel gauge to show the current fuel level of the kerbal's jetpack. Note: This module is only available for Windows.",
-        needs_data: true
+        image: "modules/telem.png",
+        image_light: "modules/light/telem_l.png",
+        tooltip: "The Telemetry module features a large LCD screen that provides a ton of data regarding the status of the current vessel. Four buttons allow the user to select which display mode is currently active. Please note that the large amounts of data being sent to the controller have a tendency to overload controllers that use this module with other display modules (currently Control Systems, Action Groups, and the Stop Timewarp button LED). The buttons on these modules should still work as intended, but the LED indicators might not always update properly.",
+        has: ['Telemetry']
     }
 ];
