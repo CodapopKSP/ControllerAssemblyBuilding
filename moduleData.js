@@ -88,8 +88,8 @@ let moduleData = [
         price: 85,
         image: "modules/nav2.png",
         image_light: "modules/light/nav2_l.png",
-        tooltip: "The Navigation (Time) module combines some of the features of the Navigation module and the Time module. A large switch toggles the Map and lights up slightly while on. A large rocker switch allows you to step up/down timewarp speeds. A button with an LED indicator lights up if the game is in timewarp, and pressing it will cancel timewarp. Physical timewarp can be activated by holding a button and pressing the large rocker. Other buttons handle Pause, Cycle Ship, and Reset Map Focus. Note: This module is only available for Windows. This module has a function from KSP1 that won't work in KSP2 (Phys TW); Consider requesting a modification.",
-        has: ['Timewarp', 'Map', 'Pause'],
+        tooltip: "The Navigation (Time) module combines some of the features of the Navigation module and the Time module. A large switch toggles the Map and lights up slightly while on. A large rocker switch allows you to step up/down timewarp speeds. A button with an LED indicator lights up if the game is in timewarp, and pressing it will cancel timewarp. Physical timewarp can be activated by holding a button and pressing the large rocker. Other buttons handle warpingto the next maneuver node, Cycle Ship, and Reset Map Focus. Note: This module is only available for Windows. This module has a function from KSP1 that won't work in KSP2 (Phys TW); Consider requesting a modification.",
+        has: ['Timewarp', 'Map'],
         needs_data: true
     },
     {
