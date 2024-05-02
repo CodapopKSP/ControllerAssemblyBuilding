@@ -637,6 +637,16 @@ body {
     margin-top: 0.5vh;
 }
 
+#recommended-configs-description-wrapper {
+    position: absolute;
+    width: 50vh;
+    z-index: 0;
+    text-align: center;
+    font-size: 2.3vh;
+    top: 48%;
+    visibility: hidden;
+}
+
 
 /*
 |==========|

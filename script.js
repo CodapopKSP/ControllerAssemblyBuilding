@@ -9,6 +9,7 @@ const deleteBin = document.getElementById('delete-bin')
 const urlParameters = new URLSearchParams(window.location.search);
 const controllerConfigString = urlParameters.get('config');
 const colorConfigString = urlParameters.get('color');
+const descriptionConfigString = urlParameters.get('description');
 
 // Prevent users from right clicking
 document.addEventListener('contextmenu', function(event) {
@@ -161,15 +162,15 @@ recommendedConfigsButton.addEventListener('click', function() {
   Swal.fire({
     title: 'Recommended Configurations',
     html:
-    '<button id="btn1" class="btn btn-primary text-center" onclick="window.location.href=\'https://untitledspacecraft.com/?config=z2400h1b1b4g1a3f3f5f6&color=rgb(0,0,0)\'">Jebediah\'s Command</button>' +
-    '<button id="btn2" class="btn btn-primary text-center" onclick="window.location.href=\'https://untitledspacecraft.com/?config=z2300b3a4g1f3f6f5\'">USS Button Box</button>' +
-    '<button id="btn3" class="btn btn-primary text-center" onclick="window.location.href=\'https://untitledspacecraft.com/?config=z2300b5h1b3f2a5e1&color=rgb(0,0,0)\'">Keyboard\'s Lament</button>' +
-    '<button id="btn1" class="btn btn-primary text-center" onclick="window.location.href=\'https://untitledspacecraft.com/?config=z1200f2a5\'">Keyboard Companion 1</button>' +
-    '<button id="btn1" class="btn btn-primary text-center" onclick="window.location.href=\'https://untitledspacecraft.com/?config=z1200f2g1\'">Keyboard Companion 2</button>' +
-    '<button id="btn1" class="btn btn-primary text-center" onclick="window.location.href=\'https://untitledspacecraft.com/?config=z2200a5b3f4f5\'">External Command Seat 1</button>' +
-    '<button id="btn1" class="btn btn-primary text-center" onclick="window.location.href=\'https://untitledspacecraft.com/?config=z2200g1b3f2a4\'">External Command Seat 2</button>' +
-    '<button id="btn1" class="btn btn-primary text-center" onclick="window.location.href=\'https://untitledspacecraft.com/?config=z2313h1b3b5f1f6g1z2115c1a3&color=rgb(0,0,0)\'">Valentina\'s Command</button>' +
-    '<button id="btn1" class="btn btn-primary text-center" onclick="window.location.href=\'https://untitledspacecraft.com/?config=z3111a1h3e1z2413g1b1h1h2d1f3a2f5z3116c1b2f6&color=rgb(0,0,0)\'">Mission Control</button>',
+    '<button id="btn1" class="btn btn-primary text-center" onclick="window.location.href=\'https://untitledspacecraft.com/?config=z2413h1b1b4g1a3f3f5f6&color=rgb(0,0,0)&description=JebediahsCommandDescription\'">Jebediah\'s Command</button>' +
+    '<button id="btn2" class="btn btn-primary text-center" onclick="window.location.href=\'https://untitledspacecraft.com/?config=z2300b3a4g1f3f6f5&color=rgb(10,136,176)&description=ButtonBoxDescription\'">USS Button Box</button>' +
+    '<button id="btn3" class="btn btn-primary text-center" onclick="window.location.href=\'https://untitledspacecraft.com/?config=z2300b5h1b3f2a5e1&color=rgb(222,78,5)&description=KeyboardsLamentDescription\'">Keyboard\'s Lament</button>' +
+    '<button id="btn1" class="btn btn-primary text-center" onclick="window.location.href=\'https://untitledspacecraft.com/?config=z1200f2a5&color=rgb(52,38,125)&description=KeybCompanion1Description\'">Keyboard Companion 1</button>' +
+    '<button id="btn1" class="btn btn-primary text-center" onclick="window.location.href=\'https://untitledspacecraft.com/?config=z1200f2g1&color=rgb(207,199,163)&description=KeybCompanion2Description\'">Keyboard Companion 2</button>' +
+    '<button id="btn1" class="btn btn-primary text-center" onclick="window.location.href=\'https://untitledspacecraft.com/?config=z2213a5b3f4f5&color=rgb(0,0,0)&description=ExtCommandSeat1Description\'">External Command Seat 1</button>' +
+    '<button id="btn1" class="btn btn-primary text-center" onclick="window.location.href=\'https://untitledspacecraft.com/?config=z2213g1b3f2a4&color=rgb(0,0,0)&description=ExtCommandSeat2Description\'">External Command Seat 2</button>' +
+    '<button id="btn1" class="btn btn-primary text-center" onclick="window.location.href=\'https://untitledspacecraft.com/?config=z2313h1b3b5f1f6g1z2115c1a3&color=rgb(255,255,255)&description=ValentinasCommandDescription\'">Valentina\'s Command</button>' +
+    '<button id="btn1" class="btn btn-primary text-center" onclick="window.location.href=\'https://untitledspacecraft.com/?config=z3111a1h3e1z2413g1b1h1h2d1f3a2f5z3116c1b2f6&color=rgb(173,22,27)&description=MissionControlDescription\'">Mission Control</button>',
     showCancelButton: true,
     cancelButtonText: 'Cancel',
     buttonsStyling: false,
@@ -577,6 +578,8 @@ modules.forEach(module => {
     tooltip.style.display = 'none';
     setContainerStackZIndex(module, 'reset');
     deleteBin.classList.add('highlight');
+    const recConfigsDescriptionLabel = document.getElementById('recommended-config-description');
+    recConfigsDescriptionLabel.style.visibility = 'hidden';
   });
   
 
@@ -821,15 +824,17 @@ function addContainer(containerData, type) {
           Highlight the Delete Container.
         */
         if (event.target.id === counter) {
-            event.dataTransfer.setData('dragged', event.target.id);
-            event.target.classList.add('dragging2');
-            const id = event.target.id;
-            event.dataTransfer.setData('text/plain', id);
-            const containerGrids = document.querySelectorAll('.container-grid')
-            containerGrids.forEach(containerGrid => {
-              containerGrid.classList.add('dragging-container');
-            })
-            deleteBin.classList.add('highlight');
+          event.dataTransfer.setData('dragged', event.target.id);
+          event.target.classList.add('dragging2');
+          const id = event.target.id;
+          event.dataTransfer.setData('text/plain', id);
+          const containerGrids = document.querySelectorAll('.container-grid')
+          containerGrids.forEach(containerGrid => {
+            containerGrid.classList.add('dragging-container');
+          })
+          deleteBin.classList.add('highlight');
+          const recConfigsDescriptionLabel = document.getElementById('recommended-config-description');
+          recConfigsDescriptionLabel.style.visibility = 'hidden';
         }
       });
 
@@ -930,7 +935,7 @@ function addContainer(containerData, type) {
 //|------------------------|
 
 // Load a controller from a valid URL
-function loadController(inputData, color) {
+function loadController(inputData, color, description) {
   /*
     Load a controller from URL config.
     Takes two parameters:
@@ -1056,6 +1061,44 @@ function loadController(inputData, color) {
     })
   }
   updateTotalPrice()
+
+  const recConfigsDescriptionLabel = document.getElementById('recommended-config-description');
+  if (description==='JebediahsCommandDescription') {
+    recConfigsDescriptionLabel.innerHTML = JebediahsCommandDescription;
+    recConfigsDescriptionLabel.style.visibility = 'visible';
+  }
+  if (description==='ButtonBoxDescription') {
+    recConfigsDescriptionLabel.innerHTML = ButtonBoxDescription;
+    recConfigsDescriptionLabel.style.visibility = 'visible';
+  }
+  if (description==='KeyboardsLamentDescription') {
+    recConfigsDescriptionLabel.innerHTML = KeyboardsLamentDescription;
+    recConfigsDescriptionLabel.style.visibility = 'visible';
+  }
+  if (description==='KeybCompanion1Description') {
+    recConfigsDescriptionLabel.innerHTML = KeybCompanion1Description;
+    recConfigsDescriptionLabel.style.visibility = 'visible';
+  }
+  if (description==='KeybCompanion2Description') {
+    recConfigsDescriptionLabel.innerHTML = KeybCompanion2Description;
+    recConfigsDescriptionLabel.style.visibility = 'visible';
+  }
+  if (description==='ExtCommandSeat1Description') {
+    recConfigsDescriptionLabel.innerHTML = ExtCommandSeat1Description;
+    recConfigsDescriptionLabel.style.visibility = 'visible';
+  }
+  if (description==='ExtCommandSeat2Description') {
+    recConfigsDescriptionLabel.innerHTML = ExtCommandSeat2Description;
+    recConfigsDescriptionLabel.style.visibility = 'visible';
+  }
+  if (description==='ValentinasCommandDescription') {
+    recConfigsDescriptionLabel.innerHTML = ValentinasCommandDescription;
+    recConfigsDescriptionLabel.style.visibility = 'visible';
+  }
+  if (description==='MissionControlDescription') {
+    recConfigsDescriptionLabel.innerHTML = MissionControlDescription;
+    recConfigsDescriptionLabel.style.visibility = 'visible';
+  }
 }
 
 
@@ -1063,7 +1106,7 @@ function loadController(inputData, color) {
 window.onload = function() {
   if (controllerConfigString) {
     if (controllerConfigString.startsWith('z')) {
-      loadController(controllerConfigString, colorConfigString);
+      loadController(controllerConfigString, colorConfigString, descriptionConfigString);
     }
   }
 }
