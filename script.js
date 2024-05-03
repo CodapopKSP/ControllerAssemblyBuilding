@@ -162,13 +162,13 @@ recommendedConfigsButton.addEventListener('click', function() {
   Swal.fire({
     title: 'Recommended Configurations',
     html:
-    '<button id="btn1" class="btn btn-primary text-center" onclick="window.location.href=\'https://untitledspacecraft.com/?config=z2413h1b1b4g1a3f3f5f6&color=rgb(0,0,0)&description=JebediahsCommandDescription\'">Jebediah\'s Command</button>' +
-    '<button id="btn2" class="btn btn-primary text-center" onclick="window.location.href=\'https://untitledspacecraft.com/?config=z2313b3a4g1f3f6f5&color=rgb(10,136,176)&description=ButtonBoxDescription\'">USS Button Box</button>' +
-    '<button id="btn3" class="btn btn-primary text-center" onclick="window.location.href=\'https://untitledspacecraft.com/?config=z2313b5h1b3f2a5e1&color=rgb(222,78,5)&description=KeyboardsLamentDescription\'">Keyboard\'s Lament</button>' +
-    '<button id="btn1" class="btn btn-primary text-center" onclick="window.location.href=\'https://untitledspacecraft.com/?config=z1213f2a5&color=rgb(52,38,125)&description=KeybCompanion1Description\'">Keyboard Companion 1</button>' +
-    '<button id="btn1" class="btn btn-primary text-center" onclick="window.location.href=\'https://untitledspacecraft.com/?config=z1213f2g1&color=rgb(207,199,163)&description=KeybCompanion2Description\'">Keyboard Companion 2</button>' +
-    '<button id="btn1" class="btn btn-primary text-center" onclick="window.location.href=\'https://untitledspacecraft.com/?config=z2213a5b3f4f5&color=rgb(202,202,202)&description=ExtCommandSeat1Description\'">External Command Seat 1</button>' +
-    '<button id="btn1" class="btn btn-primary text-center" onclick="window.location.href=\'https://untitledspacecraft.com/?config=z2213g1b3f2a4&color=rgb(14,98,38)&description=ExtCommandSeat2Description\'">External Command Seat 2</button>' +
+    '<button id="btn1" class="btn btn-primary text-center" onclick="window.location.href=\'https://untitledspacecraft.com/?config=z2400h1b1b4g1a3f3f5f6&color=rgb(0,0,0)&description=JebediahsCommandDescription\'">Jebediah\'s Command</button>' +
+    '<button id="btn2" class="btn btn-primary text-center" onclick="window.location.href=\'https://untitledspacecraft.com/?config=z2300b3a4g1f3f6f5&color=rgb(10,136,176)&description=ButtonBoxDescription\'">USS Button Box</button>' +
+    '<button id="btn3" class="btn btn-primary text-center" onclick="window.location.href=\'https://untitledspacecraft.com/?config=z2300b5h1b3f2a5e1&color=rgb(222,78,5)&description=KeyboardsLamentDescription\'">Keyboard\'s Lament</button>' +
+    '<button id="btn1" class="btn btn-primary text-center" onclick="window.location.href=\'https://untitledspacecraft.com/?config=z1200f2a5&color=rgb(52,38,125)&description=KeybCompanion1Description\'">Keyboard Companion 1</button>' +
+    '<button id="btn1" class="btn btn-primary text-center" onclick="window.location.href=\'https://untitledspacecraft.com/?config=z1200f2g1&color=rgb(207,199,163)&description=KeybCompanion2Description\'">Keyboard Companion 2</button>' +
+    '<button id="btn1" class="btn btn-primary text-center" onclick="window.location.href=\'https://untitledspacecraft.com/?config=z2200a5b3f4f5&color=rgb(202,202,202)&description=ExtCommandSeat1Description\'">External Command Seat 1</button>' +
+    '<button id="btn1" class="btn btn-primary text-center" onclick="window.location.href=\'https://untitledspacecraft.com/?config=z2200g1b3f2a4&color=rgb(14,98,38)&description=ExtCommandSeat2Description\'">External Command Seat 2</button>' +
     '<button id="btn1" class="btn btn-primary text-center" onclick="window.location.href=\'https://untitledspacecraft.com/?config=z2313h1b3b5f1f6g1z2115c1a3&color=rgb(255,255,255)&description=ValentinasCommandDescription\'">Valentina\'s Command</button>' +
     '<button id="btn1" class="btn btn-primary text-center" onclick="window.location.href=\'https://untitledspacecraft.com/?config=z3111a1h3e1z2413g1b1h1h2d1f3a2f5z3116c1b2f6&color=rgb(173,22,27)&description=MissionControlDescription\'">Mission Control</button>',
     showCancelButton: true,
@@ -376,13 +376,11 @@ infoButton.addEventListener('click', function() {
   Swal.fire({
     title: 'Information',
     html:
-    '<div style="font-family: \'Roboto\', sans-serif;"><br></br>For information about kits or further customization, please read the full guide.</div>' +
+    '<div style="font-family: \'Roboto\', sans-serif;"><br></br>For information about kits, please read the full guide.</div>' +
     '<button class="btn btn-primary text-center" onclick="window.open(\'https://www.reddit.com/r/UntitledSpaceCraft/comments/12hjtms/start_here_a_guide_to_untitled_space_craft/\', \'_blank\')">Starter Guide</button>' +
     '<div style="font-family: \'Roboto\', sans-serif;"><br></br>Useful Documents</div>' +
-    '<button class="btn btn-primary text-center" onclick="window.open(\'https://www.reddit.com/gallery/12sq3nn\', \'_blank\')">Full Catalog</button>' +
-    '<button class="btn btn-primary text-center" onclick="window.open(\'https://www.reddit.com/gallery/12hjaoy\', \'_blank\')">Recommended Configs</button>' +
     '<button class="btn btn-primary text-center" onclick="window.open(\'https://www.reddit.com/r/UntitledSpaceCraft/comments/xvm0tw/untitled_space_craft_how_to_orderwhat_to_expect/\', \'_blank\')">Ordering and Shipping</button>' +
-    '<div style="font-family: \'Roboto\', sans-serif;"><br></br>These controllers are compatible with both KSP1 and KSP2.</div>',
+    '<div style="font-family: \'Roboto\', sans-serif;"><br></br>These controllers are compatible with both KSP1 and KSP2. The buttons and joysticks also work with other games.</div>',
     showCancelButton: true,
     cancelButtonText: 'Cancel',
     buttonsStyling: false,
@@ -1062,34 +1060,49 @@ function loadController(inputData, color, description) {
   }
   updateTotalPrice()
 
-  const recConfigsDescriptionLabel = document.getElementById('recommended-config-description');
+  const recConfigsDescriptionLabel = document.getElementById('recommended-configs-description');
+  const recConfigsDescriptionWrapper = document.getElementById('recommended-configs-description-wrapper');
   if (description==='JebediahsCommandDescription') {
     recConfigsDescriptionLabel.innerHTML = JebediahsCommandDescription;
     recConfigsDescriptionLabel.style.visibility = 'visible';
+    recConfigsDescriptionWrapper.style.width = '70vh';
+    recConfigsDescriptionWrapper.style.top = '12%';
   }
   if (description==='ButtonBoxDescription') {
     recConfigsDescriptionLabel.innerHTML = ButtonBoxDescription;
     recConfigsDescriptionLabel.style.visibility = 'visible';
+    recConfigsDescriptionWrapper.style.width = '70vh';
+    recConfigsDescriptionWrapper.style.top = '12%';
   }
   if (description==='KeyboardsLamentDescription') {
     recConfigsDescriptionLabel.innerHTML = KeyboardsLamentDescription;
     recConfigsDescriptionLabel.style.visibility = 'visible';
+    recConfigsDescriptionWrapper.style.width = '70vh';
+    recConfigsDescriptionWrapper.style.top = '12%';
   }
   if (description==='KeybCompanion1Description') {
     recConfigsDescriptionLabel.innerHTML = KeybCompanion1Description;
     recConfigsDescriptionLabel.style.visibility = 'visible';
+    recConfigsDescriptionWrapper.style.width = '70vh';
+    recConfigsDescriptionWrapper.style.top = '12%';
   }
   if (description==='KeybCompanion2Description') {
     recConfigsDescriptionLabel.innerHTML = KeybCompanion2Description;
     recConfigsDescriptionLabel.style.visibility = 'visible';
+    recConfigsDescriptionWrapper.style.width = '70vh';
+    recConfigsDescriptionWrapper.style.top = '12%';
   }
   if (description==='ExtCommandSeat1Description') {
     recConfigsDescriptionLabel.innerHTML = ExtCommandSeat1Description;
     recConfigsDescriptionLabel.style.visibility = 'visible';
+    recConfigsDescriptionWrapper.style.width = '70vh';
+    recConfigsDescriptionWrapper.style.top = '12%';
   }
   if (description==='ExtCommandSeat2Description') {
     recConfigsDescriptionLabel.innerHTML = ExtCommandSeat2Description;
     recConfigsDescriptionLabel.style.visibility = 'visible';
+    recConfigsDescriptionWrapper.style.width = '70vh';
+    recConfigsDescriptionWrapper.style.top = '12%';
   }
   if (description==='ValentinasCommandDescription') {
     recConfigsDescriptionLabel.innerHTML = ValentinasCommandDescription;

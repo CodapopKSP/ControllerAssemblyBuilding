@@ -233,11 +233,19 @@ body {
     }
 
     .swal2-popup {
-        transform: scale(0.8);
+        transform: scale(0.8) !important;
     }
     
     #swal2-title {
-        font-size: 1.5vh;
+        font-size: 2vh;
+    }
+
+    .btn {
+        width: 25vh !important;
+    }
+
+    #swal2-content {
+        width: 27vh !important;
     }
 }
 
@@ -639,11 +647,9 @@ body {
 
 #recommended-configs-description-wrapper {
     position: absolute;
-    width: 50vh;
     z-index: 0;
     text-align: center;
     font-size: 2.3vh;
-    top: 48%;
     visibility: hidden;
 }
 
@@ -674,8 +680,8 @@ body {
     border-radius: 1.5vh !important;
     background-color: #3d3d3d !important;
     opacity: 0.9 !important;
-    width: 40vh !important;
     user-select: text;
+    align-items: center;
 }
 
 #swal2-content {
@@ -683,6 +689,7 @@ body {
     font-size: 1.5vh;
     display: grid !important;
     font-family: 'Roboto', sans-serif !important;
+    width: 30vh;
 }
 
 .swal2-title {
