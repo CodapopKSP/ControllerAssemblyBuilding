@@ -418,7 +418,9 @@ document.addEventListener('DOMContentLoaded', () => {
       addContainer(container.containerType, container.containerClass);
       // Remove recommended configs description
       const recConfigsDescriptionLabel = document.getElementById('recommended-config-description');
+      const recConfigsDescriptionWrapper = document.getElementById('recommended-configs-description-wrapper');
       recConfigsDescriptionLabel.style.visibility = 'hidden';
+      recConfigsDescriptionWrapper.style.visibility = 'hidden';
     });
   });
 });
@@ -581,7 +583,9 @@ modules.forEach(module => {
     setContainerStackZIndex(module, 'reset');
     deleteBin.classList.add('highlight');
     const recConfigsDescriptionLabel = document.getElementById('recommended-config-description');
+    const recConfigsDescriptionWrapper = document.getElementById('recommended-configs-description-wrapper');
     recConfigsDescriptionLabel.style.visibility = 'hidden';
+    recConfigsDescriptionWrapper.style.visibility = 'hidden';
   });
   
 
@@ -837,7 +841,9 @@ function addContainer(containerData, type) {
           })
           deleteBin.classList.add('highlight');
           const recConfigsDescriptionLabel = document.getElementById('recommended-config-description');
+          const recConfigsDescriptionWrapper = document.getElementById('recommended-configs-description-wrapper');
           recConfigsDescriptionLabel.style.visibility = 'hidden';
+          recConfigsDescriptionWrapper.style.visibility = 'hidden';
         }
       });
 
