@@ -1065,8 +1065,8 @@ function loadController(inputData, color, description) {
   if (description==='JebediahsCommandDescription') {
     recConfigsDescriptionLabel.innerHTML = JebediahsCommandDescription;
     recConfigsDescriptionLabel.style.visibility = 'visible';
-    recConfigsDescriptionWrapper.style.width = '70vh';
-    recConfigsDescriptionWrapper.style.top = '12%';
+    recConfigsDescriptionWrapper.style.width = '75vh';
+    recConfigsDescriptionWrapper.style.top = '10%';
   }
   if (description==='ButtonBoxDescription') {
     recConfigsDescriptionLabel.innerHTML = ButtonBoxDescription;
@@ -1078,7 +1078,7 @@ function loadController(inputData, color, description) {
     recConfigsDescriptionLabel.innerHTML = KeyboardsLamentDescription;
     recConfigsDescriptionLabel.style.visibility = 'visible';
     recConfigsDescriptionWrapper.style.width = '70vh';
-    recConfigsDescriptionWrapper.style.top = '12%';
+    recConfigsDescriptionWrapper.style.top = '10%';
   }
   if (description==='KeybCompanion1Description') {
     recConfigsDescriptionLabel.innerHTML = KeybCompanion1Description;
@@ -1096,21 +1096,25 @@ function loadController(inputData, color, description) {
     recConfigsDescriptionLabel.innerHTML = ExtCommandSeat1Description;
     recConfigsDescriptionLabel.style.visibility = 'visible';
     recConfigsDescriptionWrapper.style.width = '70vh';
-    recConfigsDescriptionWrapper.style.top = '12%';
+    recConfigsDescriptionWrapper.style.top = '10%';
   }
   if (description==='ExtCommandSeat2Description') {
     recConfigsDescriptionLabel.innerHTML = ExtCommandSeat2Description;
     recConfigsDescriptionLabel.style.visibility = 'visible';
     recConfigsDescriptionWrapper.style.width = '70vh';
-    recConfigsDescriptionWrapper.style.top = '12%';
+    recConfigsDescriptionWrapper.style.top = '10%';
   }
   if (description==='ValentinasCommandDescription') {
     recConfigsDescriptionLabel.innerHTML = ValentinasCommandDescription;
     recConfigsDescriptionLabel.style.visibility = 'visible';
+    recConfigsDescriptionWrapper.style.width = '70vh';
+    recConfigsDescriptionWrapper.style.top = '48%';
   }
   if (description==='MissionControlDescription') {
     recConfigsDescriptionLabel.innerHTML = MissionControlDescription;
     recConfigsDescriptionLabel.style.visibility = 'visible';
+    recConfigsDescriptionWrapper.style.width = '50vh';
+    recConfigsDescriptionWrapper.style.top = '48%';
   }
 }
 
