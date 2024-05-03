@@ -417,10 +417,8 @@ document.addEventListener('DOMContentLoaded', () => {
     addButton.addEventListener('click', () => {
       addContainer(container.containerType, container.containerClass);
       // Remove recommended configs description
-      const recConfigsDescriptionLabel = document.getElementById('recommended-config-description');
-      const recConfigsDescriptionWrapper = document.getElementById('recommended-configs-description-wrapper');
+      const recConfigsDescriptionLabel = document.getElementById('recommended-configs-description');
       recConfigsDescriptionLabel.style.visibility = 'hidden';
-      recConfigsDescriptionWrapper.style.visibility = 'hidden';
     });
   });
 });
@@ -582,10 +580,8 @@ modules.forEach(module => {
     tooltip.style.display = 'none';
     setContainerStackZIndex(module, 'reset');
     deleteBin.classList.add('highlight');
-    const recConfigsDescriptionLabel = document.getElementById('recommended-config-description');
-    const recConfigsDescriptionWrapper = document.getElementById('recommended-configs-description-wrapper');
+    const recConfigsDescriptionLabel = document.getElementById('recommended-configs-description');
     recConfigsDescriptionLabel.style.visibility = 'hidden';
-    recConfigsDescriptionWrapper.style.visibility = 'hidden';
   });
   
 
@@ -840,10 +836,8 @@ function addContainer(containerData, type) {
             containerGrid.classList.add('dragging-container');
           })
           deleteBin.classList.add('highlight');
-          const recConfigsDescriptionLabel = document.getElementById('recommended-config-description');
-          const recConfigsDescriptionWrapper = document.getElementById('recommended-configs-description-wrapper');
+          const recConfigsDescriptionLabel = document.getElementById('recommended-configs-description');
           recConfigsDescriptionLabel.style.visibility = 'hidden';
-          recConfigsDescriptionWrapper.style.visibility = 'hidden';
         }
       });
 
