@@ -327,12 +327,12 @@ contactButton.addEventListener('click', function() {
     title: 'Contact Information',
     html:
     '<div style="font-family: \'Roboto\', sans-serif;">Click a button to copy.</div>' +
-    '<button class="btn btn-reddit text-center" data-clipboard-text="https://www.reddit.com/user/CodapopKSP">Reddit:   u/CodapopKSP</button>' +
-    '<button class="btn btn-discord text-center" data-clipboard-text="codapopksp">Discord:   codapopksp</button>' +
-    '<button class="btn btn-insta text-center" data-clipboard-text="untitled_space_craft">Instagram: untitled_space_craft</button>' +
     '<button class="btn btn-email text-center" data-clipboard-text="untitledspacecraft.controllers@gmail.com">Email: untitledspacecraft\n.controllers@gmail.com</button>' +
-    '<div style="font-family: \'Roboto\', sans-serif;"><br></br>You can also visit the Untitled Space Craft subreddit for more information.</div>' +
-    '<button class="btn btn-primary text-center" onclick="window.open(\'https://www.reddit.com/r/UntitledSpaceCraft/\', \'_blank\')">Click to visit r/UntitledSpaceCraft</button>',
+    '<button class="btn btn-discord text-center" data-clipboard-text="codapopksp">Discord:   codapopksp</button>' +
+    '<button class="btn btn-reddit text-center" data-clipboard-text="https://www.reddit.com/user/CodapopKSP">Reddit:   u/CodapopKSP</button>' +
+    '<div style="font-family: \'Roboto\', sans-serif;"><br></br>You can also visit the Untitled Space Craft subreddit or Instagram for pics of completed builds.</div>' +
+    '<button class="btn btn-primary text-center" onclick="window.open(\'https://www.reddit.com/r/UntitledSpaceCraft/\', \'_blank\')">Click to visit r/UntitledSpaceCraft</button>' +
+    '<button class="btn btn-insta text-center" data-clipboard-text="untitled_space_craft">Instagram: untitled_space_craft</button>',
     showCancelButton: true,
     cancelButtonText: 'Cancel',
     buttonsStyling: false,
@@ -377,7 +377,7 @@ infoButton.addEventListener('click', function() {
     title: 'Information',
     html:
     '<div style="font-family: \'Roboto\', sans-serif;"><br></br>For information about kits, please read the full guide.</div>' +
-    '<button class="btn btn-primary text-center" onclick="window.open(\'https://www.reddit.com/r/UntitledSpaceCraft/comments/12hjtms/start_here_a_guide_to_untitled_space_craft/\', \'_blank\')">Starter Guide</button>' +
+    '<button class="btn btn-primary text-center" id="starter-guide-button">Starter Guide</button>' +
     '<div style="font-family: \'Roboto\', sans-serif;"><br></br>Useful Documents</div>' +
     '<button class="btn btn-primary text-center" onclick="window.open(\'https://www.reddit.com/r/UntitledSpaceCraft/comments/xvm0tw/untitled_space_craft_how_to_orderwhat_to_expect/\', \'_blank\')">Ordering and Shipping</button>' +
     '<div style="font-family: \'Roboto\', sans-serif;"><br></br>These controllers are compatible with both KSP1 and KSP2. The buttons and joysticks also work with other games.</div>',
@@ -388,6 +388,17 @@ infoButton.addEventListener('click', function() {
     customClass: {
       cancelButton: 'btn btn-danger',
     },
+  });
+
+  // Add event listener to the Starter Guide button after it's been created
+  const starterGuideButton = document.getElementById('starter-guide-button');
+  starterGuideButton.addEventListener('click', function() {
+    const page1 = document.getElementById('page-wrapper');
+    const page2 = document.getElementById('page2-wrapper');
+    page1.style.visibility = 'hidden';
+    page2.style.visibility = 'visible';
+    // Close the Swal.fire popup
+    Swal.close();
   });
 });
 
@@ -1136,3 +1147,18 @@ window.onload = function() {
     }
   }
 }
+
+
+
+//|----------------|
+//|     Page 2     |
+//|----------------|
+
+const page2BackButtonButton = document.getElementById('back-button');
+page2BackButtonButton.addEventListener('click', function() {
+  const page1 = document.getElementById('page-wrapper');
+  const page2 = document.getElementById('page2-wrapper');
+  page1.style.visibility = 'visible';
+  page2.style.visibility = 'hidden';
+  
+});

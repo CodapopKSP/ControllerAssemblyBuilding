@@ -58,126 +58,161 @@
 	</header>
 	<body>
 		<div id="wrapper-wrapper">
-		<!-- Wrapper for containing page elements -->
-		<div id="page-wrapper">
+			<!-- Wrapper for containing page elements -->
+			<div id="page-wrapper">
 
-			<!-- Left Module Array -->
-			<div id="left-array" class="left-module-array module-array"></div>
+				<!-- Left Module Array -->
+				<div id="left-array" class="left-module-array module-array"></div>
 
-			<!-- Controller Design Canvas -->
-			<div id="canvas">
-				<button style="font-family: 'Orbitron', sans-serif;" id="save", class="button">Save</button>
-				<button style="font-family: 'Orbitron', sans-serif;" id="lights", class="button">Light</button>
-				<a href="https://untitledspacecraft.com/">
-					<button style="font-family: 'Orbitron', sans-serif;" id="reset", class="button">Reset</button>
-				</a>
-				<button style="font-family: 'Orbitron', sans-serif;" id="recommendedConfigs", class="button">Recommended Configs</button>
-				<button style="font-family: 'Orbitron', sans-serif;" id="report", class="button">Engineer's Report</button>
-				<button style="font-family: 'Orbitron', sans-serif;" id="contact", class="button">Contact</button>
-				<button style="font-family: 'Orbitron', sans-serif;" id="info", class="button">Info</button>
+				<!-- Controller Design Canvas -->
+				<div id="canvas">
+					<button style="font-family: 'Orbitron', sans-serif;" id="save", class="button">Save</button>
+					<button style="font-family: 'Orbitron', sans-serif;" id="lights", class="button">Light</button>
+					<a href="https://untitledspacecraft.com/">
+						<button style="font-family: 'Orbitron', sans-serif;" id="reset", class="button">Reset</button>
+					</a>
+					<button style="font-family: 'Orbitron', sans-serif;" id="recommendedConfigs", class="button">Recommended Configs</button>
+					<button style="font-family: 'Orbitron', sans-serif;" id="report", class="button">Engineer's Report</button>
+					<button style="font-family: 'Orbitron', sans-serif;" id="contact", class="button">Contact</button>
+					<button style="font-family: 'Orbitron', sans-serif;" id="info", class="button">Info</button>
+						
+					<div style="font-family: 'Orbitron', sans-serif;" id="price-display">Total: $0</div>
+					</h1>
+
+					<!-- Top Container Grid -->
+					<div class="container-grid-array-top container-grid-array">
+						<div id="11" class="container-grid"></div>
+						<div id="12" class="container-grid"></div>
+						<div id="13" class="container-grid"></div>
+						<div id="14" class="container-grid"></div>
+						<div id="15" class="container-grid"></div>
+						<div id="16" class="container-grid"></div>
+					</div>
+
+					<!-- Welcome Message and Directions -->
+					<div id="welcome-message" style="text-align: center; font-size: 1vh;">
+						<h1 style="font-family: Arial;">Click a container on the bottom to begin.<br></br></h1>
+						<h1 style="font-family: Arial;">To add more than one container, drag the container to a spot on the canvas grid.</h1>
+						<h1 style="font-family: Arial;">To remove a container, drag it to the trash.</h1>
+					</div>
+
+					<!-- Bottom Container Grid -->
+					<div class="container-grid-array-bottom container-grid-array">
+						<div id="21" class="container-grid"></div>
+						<div id="22" class="container-grid"></div>
+						<div id="23" class="container-grid"></div>
+						<div id="24" class="container-grid"></div>
+						<div id="25" class="container-grid"></div>
+						<div id="26" class="container-grid"></div>
+					</div>
+					<div id="recommended-configs-description-wrapper">
+						<label id="recommended-configs-description">Test</label>
+					</div>
 					
-				<div style="font-family: 'Orbitron', sans-serif;" id="price-display">Total: $0</div>
-				</h1>
 
-				<!-- Top Container Grid -->
-				<div class="container-grid-array-top container-grid-array">
-					<div id="11" class="container-grid"></div>
-					<div id="12" class="container-grid"></div>
-					<div id="13" class="container-grid"></div>
-					<div id="14" class="container-grid"></div>
-					<div id="15" class="container-grid"></div>
-					<div id="16" class="container-grid"></div>
+					<!-- Delete Bin -->
+					<div id="delete-bin"></div>
+
+					<!-- Color Picker -->
+					<div class="color-options">
+						<button class="color-button" id="ColorA" style="background-color: rgb(207,199,163);"></button>
+						<button class="color-button" id="ColorB" style="background-color: rgb(227,158,160);"></button>
+						<button class="color-button" id="ColorC" style="background-color: rgb(197,157,207);"></button>
+						<button class="color-button" id="ColorD" style="background-color: rgb(173,22,27);"></button>
+						<button class="color-button" id="ColorE" style="background-color: rgb(52,38,125);"></button>
+						<button class="color-button" id="ColorF" style="background-color: rgb(102,51,4);"></button>
+						<button class="color-button" id="ColorG" style="background-color: rgb(10,136,176);"></button>
+						<button class="color-button" id="ColorH" style="background-color: rgb(0,0,0);"></button>
+						<button class="color-button" id="ColorI" style="background-color: rgb(14,98,38);"></button>
+						<button class="color-button" id="ColorJ" style="background-color: rgb(222,78,5);"></button>
+						<button class="color-button" id="ColorK" style="background-color: rgb(202,202,202);"></button>
+						<button class="color-button" id="ColorL" style="background-color: rgb(254,212,3);"></button>
+						<button class="color-button" id="ColorL" style="background-color: rgb(255,255,255);"></button>
+					</div>
+
+					<!-- Container Creation Buttons -->
+					<button id="add-2x4", class="add-container-button">
+						<span style="font-family: 'Roboto', sans-serif;" class="tooltip">
+							<strong style="font-size: 1.8vh;">Mark V Container</strong>
+							<span style="font-size: 1.7vh;"><br>$125</br></span>
+						</span>
+					</button>
+					<button id="add-2x3", class="add-container-button">
+						<span style="font-family: 'Roboto', sans-serif;" class="tooltip">
+							<strong style="font-size: 1.8vh;">Mark IV Container</strong>
+							<span style="font-size: 1.7vh;"><br>$95</br></span>
+						</span>
+					</button>
+					<button id="add-2x2", class="add-container-button">
+						<span style="font-family: 'Roboto', sans-serif;" class="tooltip">
+							<strong style="font-size: 1.8vh;">Mark III Container</strong>
+							<span style="font-size: 1.7vh;"><br>$75</br></span>
+						</span>
+					</button>
+					<button id="add-3x1", class="add-container-button">
+						<span style="font-family: 'Roboto', sans-serif;" class="tooltip">
+							<strong style="font-size: 1.8vh;">Mark II Container</strong>
+							<span style="font-size: 1.7vh;"><br>$65</br></span>
+						</span>
+					</button>
+					<button id="add-1x2", class="add-container-button">
+						<span style="font-family: 'Roboto', sans-serif;" class="tooltip">
+							<strong style="font-size: 1.8vh;">Mark I Container (Horizontal)</strong>
+							<span style="font-size: 1.7vh;"><br>$55</br></span>
+						</span>
+					</button>
+					<button id="add-2x1", class="add-container-button">
+						<span style="font-family: 'Roboto', sans-serif;" class="tooltip">
+							<strong style="font-size: 1.8vh;">Mark I Container (Vertical)</strong>
+							<span style="font-size: 1.7vh;"><br>$55</br></span>
+						</span>
+					</button>
+					<button id="add-1x1", class="add-container-button">
+						<span style="font-family: 'Roboto', sans-serif;" class="tooltip">
+							<strong style="font-size: 1.8vh;">Mark 0 Container</strong>
+							<span style="font-size: 1.7vh;"><br>$50</br></span>
+						</span>
+					</button>
 				</div>
 
-				<!-- Welcome Message and Directions -->
-				<div id="welcome-message" style="text-align: center; font-size: 1vh;">
-					<h1 style="font-family: Arial;">Click a container on the bottom to begin.<br></br></h1>
-					<h1 style="font-family: Arial;">To add more than one container, drag the container to a spot on the canvas grid.</h1>
-					<h1 style="font-family: Arial;">To remove a container, drag it to the trash.</h1>
-				</div>
-
-				<!-- Bottom Container Grid -->
-				<div class="container-grid-array-bottom container-grid-array">
-					<div id="21" class="container-grid"></div>
-					<div id="22" class="container-grid"></div>
-					<div id="23" class="container-grid"></div>
-					<div id="24" class="container-grid"></div>
-					<div id="25" class="container-grid"></div>
-					<div id="26" class="container-grid"></div>
-				</div>
-				<div id="recommended-configs-description-wrapper">
-					<label id="recommended-configs-description">Test</label>
-				</div>
-				
-
-				<!-- Delete Bin -->
-				<div id="delete-bin"></div>
-
-				<!-- Color Picker -->
-				<div class="color-options">
-					<button class="color-button" id="ColorA" style="background-color: rgb(207,199,163);"></button>
-					<button class="color-button" id="ColorB" style="background-color: rgb(227,158,160);"></button>
-					<button class="color-button" id="ColorC" style="background-color: rgb(197,157,207);"></button>
-					<button class="color-button" id="ColorD" style="background-color: rgb(173,22,27);"></button>
-					<button class="color-button" id="ColorE" style="background-color: rgb(52,38,125);"></button>
-					<button class="color-button" id="ColorF" style="background-color: rgb(102,51,4);"></button>
-					<button class="color-button" id="ColorG" style="background-color: rgb(10,136,176);"></button>
-					<button class="color-button" id="ColorH" style="background-color: rgb(0,0,0);"></button>
-					<button class="color-button" id="ColorI" style="background-color: rgb(14,98,38);"></button>
-					<button class="color-button" id="ColorJ" style="background-color: rgb(222,78,5);"></button>
-					<button class="color-button" id="ColorK" style="background-color: rgb(202,202,202);"></button>
-					<button class="color-button" id="ColorL" style="background-color: rgb(254,212,3);"></button>
-					<button class="color-button" id="ColorL" style="background-color: rgb(255,255,255);"></button>
-				</div>
-
-				<!-- Container Creation Buttons -->
-				<button id="add-2x4", class="add-container-button">
-					<span style="font-family: 'Roboto', sans-serif;" class="tooltip">
-						<strong style="font-size: 1.8vh;">Mark V Container</strong>
-						<span style="font-size: 1.7vh;"><br>$125</br></span>
-					</span>
-				</button>
-				<button id="add-2x3", class="add-container-button">
-					<span style="font-family: 'Roboto', sans-serif;" class="tooltip">
-						<strong style="font-size: 1.8vh;">Mark IV Container</strong>
-						<span style="font-size: 1.7vh;"><br>$95</br></span>
-					</span>
-				</button>
-				<button id="add-2x2", class="add-container-button">
-					<span style="font-family: 'Roboto', sans-serif;" class="tooltip">
-						<strong style="font-size: 1.8vh;">Mark III Container</strong>
-						<span style="font-size: 1.7vh;"><br>$75</br></span>
-					</span>
-				</button>
-				<button id="add-3x1", class="add-container-button">
-					<span style="font-family: 'Roboto', sans-serif;" class="tooltip">
-						<strong style="font-size: 1.8vh;">Mark II Container</strong>
-						<span style="font-size: 1.7vh;"><br>$65</br></span>
-					</span>
-				</button>
-				<button id="add-1x2", class="add-container-button">
-					<span style="font-family: 'Roboto', sans-serif;" class="tooltip">
-						<strong style="font-size: 1.8vh;">Mark I Container (Horizontal)</strong>
-						<span style="font-size: 1.7vh;"><br>$55</br></span>
-					</span>
-				</button>
-				<button id="add-2x1", class="add-container-button">
-					<span style="font-family: 'Roboto', sans-serif;" class="tooltip">
-						<strong style="font-size: 1.8vh;">Mark I Container (Vertical)</strong>
-						<span style="font-size: 1.7vh;"><br>$55</br></span>
-					</span>
-				</button>
-				<button id="add-1x1", class="add-container-button">
-					<span style="font-family: 'Roboto', sans-serif;" class="tooltip">
-						<strong style="font-size: 1.8vh;">Mark 0 Container</strong>
-						<span style="font-size: 1.7vh;"><br>$50</br></span>
-					</span>
-				</button>
+				<!-- Right Module Array -->
+				<div id="right-array" class="right-module-array module-array"></div>
 			</div>
-
-			<!-- Right Module Array -->
-			<div id="right-array" class="right-module-array module-array"></div>
 		</div>
+		<div id="page2-wrapper">
+			<div id="starter-guide-wrapper">
+				<b>Welcome to Untitled Space Craft!</b><br>
+				<br>
+				If you're reading this, you probably came here from Matt Lowne's YouTube channel or other media where he showcases the controller that he has commissioned from me. If you aren't already, you should subscribe to <a href="https://www.youtube.com/@MattLowne">his channel</a>!
+				I also recommend you check out and subscribe to the Kerbal Controllers subreddit, r/KerbalControllers, to view some of the great builds happening there! If you're interested in building your own Kerbal Controller, you can read <a href="https://www.instructables.com/Kerbal-Controller-the-Basics/">my and Rogor's award-winning Instructable</a>.<br>
+				<br>
+				<b>About USC</b><br>
+				<br>
+				Untitled Space Craft is a fully modular controller system for playing Kerbal Space Program. It is designed to supplement or fully replace the keyboard as a means of playing the game, instead allowing you to use various buttons, switches, joysticks, levers, dials, and key locks to pilot your space craft. It also includes LEDs and display readouts to provide information that may not even be readily available in the vanilla game. The controls are punchy and intuitive, leading to a much more immersive gameplay experience.<br>
+				<br>
+				<b>Containers and Modules</b><br>
+				<br>
+				USC controllers are broken down into containers and modules. Containers come in seven different sizes and are designed to hold a set number of modules. They include a USB port to connect directly to your PC and are pre-loaded with code for running all of the modules. Modules fit into the containers and hold all of the inputs and displays of the controller. The 24 unique modules can be organized, swapped, and run separately in any configuration of your choosing. Please note that some configurations will only work on Windows.<br>
+				<br>
+				Please feel free to request a container size or module that is not in the catalog. I can't guarantee I'll be able to offer it, but I'm always interested in expanding the catalog to suit demand.<br>
+				<br>
+				<b>How to Order, Warranty, and Shipping Info</b><br>
+				<br>
+				If you would like to order or would like more information on the warranty or shipping, please visit <a href="https://www.reddit.com/r/UntitledSpaceCraft/comments/xvm0tw/untitled_space_craft_how_to_orderwhat_to_expect/">the ordering guide page.</a><br>
+				<br>
+				<b>Kits and DIY Options</b><br>
+				<br>
+				I offer kits for a reduced price. The modules each are 40% off the listed price, though the containers continue to be the same price. Please note that this is only recommended for those with soldering experience. While a guide is provided, the construction process can be fairly unforgiving if you don't pay attention to detail, though the soldering is technically easy and entirely through-hole. This option is taken entirely at your own risk and non-refundable. I will happily ship replacement parts at cost and offer advice, but you must be able to fix mistakes and proceed with care.<br>
+				<br>
+				If you wish to design your own container to add USC modules into, I am willing to provide the necessary dimensions and magnets.<br>
+				<br>
+				<b>About the Developer</b><br>
+				<br>
+				I live in Taiwan where I teach English and design new devices and products. I created USC in 2021 after my original Kerbal controller received a lot of praise and attention on Reddit and elsewhere. Since then I have designed all of the products sold here as well as their construction techniques in my free time. This has been an amazing project for me to hone my embedded systems engineering, business, and web development skills. I am currently looking for fulltime work, so please feel free to contact me if you believe my skills might be a good match at your company!
+			</div>
+			<button id="back-button", class="back-button btn">
+				Back
+			</button>
 		</div>
 
 		<!-- Scripts -->

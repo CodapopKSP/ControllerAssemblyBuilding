@@ -8,7 +8,7 @@ body {
     margin: 0;
     overflow-y: hidden;
     overflow-x: visible;
-    user-select: none
+    user-select: none;
 }
 
 .hidden {
@@ -37,6 +37,34 @@ body {
     overflow-x: hidden;
     overflow-y: hidden;
     flex-shrink: 0;
+}
+
+#page2-wrapper {
+    position: absolute;
+    background: #d4d4d4;
+    width: 94vw;
+    font-size: 1.5vh;
+    top: 10vh;
+    left: 2vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 0.5vh solid rgb(0, 0, 0);
+    padding: 1vh;
+    visibility: hidden;
+}
+
+#starter-guide-wrapper {
+    justify-content: center;
+}
+
+.back-button {
+    margin-top: 3vh !important;
+    height: 5vh;
+    width: 10vw;
+    font-size: 2vh !important;
+    background-color: #686868 !important;
+    color: white !important;
 }
 
 #canvas {
@@ -246,6 +274,11 @@ body {
 
     #swal2-content {
         width: 27vh !important;
+    }
+
+    #page2-wrapper {
+        font-size: 1.2vh;
+        width: 92vw;
     }
 }
 
@@ -705,11 +738,11 @@ body {
 .btn-discord {
     background-color: #7289da !important;
 }
-
+/*
 .btn-insta {
     background-color: #C13584 !important;
 }
-
+*/
 .btn-email {
     background-color: #3bc14f !important;
 }
