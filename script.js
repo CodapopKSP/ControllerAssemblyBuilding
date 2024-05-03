@@ -416,6 +416,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const addButton = document.getElementById(container.addButtonId);
     addButton.addEventListener('click', () => {
       addContainer(container.containerType, container.containerClass);
+      // Remove recommended configs description
+      const recConfigsDescriptionLabel = document.getElementById('recommended-config-description');
+      recConfigsDescriptionLabel.style.visibility = 'hidden';
     });
   });
 });
@@ -569,6 +572,7 @@ modules.forEach(module => {
       Update module class to dragging and hide tooltip.
       Reset the zIndex of the container stack.
       Highlight the Delete Bin.
+      Get rid of recommended configs description.
     */
     module.classList.add('dragging');
     event.dataTransfer.setData('text/plain', this.id);
@@ -820,6 +824,7 @@ function addContainer(containerData, type) {
           Add class dragging2 to the element.
           Add class dragging-container to containerGrids for visibility.
           Highlight the Delete Container.
+          Get rid of recommended configs description.
         */
         if (event.target.id === counter) {
           event.dataTransfer.setData('dragged', event.target.id);
@@ -1102,7 +1107,7 @@ function loadController(inputData, color, description) {
   if (description==='ExtCommandSeat2Description') {
     recConfigsDescriptionLabel.innerHTML = ExtCommandSeat2Description;
     recConfigsDescriptionLabel.style.visibility = 'visible';
-    recConfigsDescriptionWrapper.style.width = '70vh';
+    recConfigsDescriptionWrapper.style.width = '65vh';
     recConfigsDescriptionWrapper.style.top = '12%';
   }
   if (description==='ValentinasCommandDescription') {
