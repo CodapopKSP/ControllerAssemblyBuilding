@@ -6,8 +6,7 @@
 
 body {
     margin: 0;
-    overflow-y: hidden;
-    overflow-x: visible;
+    overflow: hidden;
     user-select: none;
 }
 
@@ -17,8 +16,8 @@ body {
 
 #wrapper-wrapper {
     position: relative;
-    height: 100vh;
-    width: 100vw;
+    height: 99vh;
+    width: 99vw;
     display: flex;
     justify-content: center;
     align-items: top;
@@ -35,7 +34,6 @@ body {
     max-width: 180vh;
     transform: translateY(-4%) !important;
     overflow-x: hidden;
-    overflow-y: hidden;
     flex-shrink: 0;
 }
 
@@ -43,7 +41,8 @@ body {
     position: absolute;
     background: #d4d4d4;
     width: 94vw;
-    font-size: 1.5vh;
+    max-height: 80vh;
+    font-size: 1.7vh;
     top: 10vh;
     left: 2vw;
     display: flex;
@@ -54,8 +53,28 @@ body {
     visibility: hidden;
 }
 
+#page3-wrapper {
+    position: absolute;
+    background: #d4d4d4;
+    width: 94vw;
+    max-height: 80vh;
+    font-size: 1.7vh;
+    top: 10vh;
+    left: 2vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 0.5vh solid rgb(0, 0, 0);
+    padding: 1vh;
+    visibility: hidden;
+}
+
+#ordering-guide-wrapper {
+    overflow-y:scroll;
+}
+
 #starter-guide-wrapper {
-    justify-content: center;
+    overflow-y:scroll;
 }
 
 .back-button {
@@ -274,11 +293,6 @@ body {
 
     #swal2-content {
         width: 27vh !important;
-    }
-
-    #page2-wrapper {
-        font-size: 1.2vh;
-        width: 92vw;
     }
 }
 

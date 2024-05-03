@@ -376,10 +376,9 @@ infoButton.addEventListener('click', function() {
   Swal.fire({
     title: 'Information',
     html:
-    '<div style="font-family: \'Roboto\', sans-serif;"><br></br>For information about kits, please read the full guide.</div>' +
+    '<div style="font-family: \'Roboto\', sans-serif;"><br></br>For more information, you may read the following guides.</div>' +
     '<button class="btn btn-primary text-center" id="starter-guide-button">Starter Guide</button>' +
-    '<div style="font-family: \'Roboto\', sans-serif;"><br></br>Useful Documents</div>' +
-    '<button class="btn btn-primary text-center" onclick="window.open(\'https://www.reddit.com/r/UntitledSpaceCraft/comments/xvm0tw/untitled_space_craft_how_to_orderwhat_to_expect/\', \'_blank\')">Ordering and Shipping</button>' +
+    '<button class="btn btn-primary text-center" id="ordering-guide-button">Ordering and Shipping</button>' +
     '<div style="font-family: \'Roboto\', sans-serif;"><br></br>These controllers are compatible with both KSP1 and KSP2. The buttons and joysticks also work with other games.</div>',
     showCancelButton: true,
     cancelButtonText: 'Cancel',
@@ -397,6 +396,17 @@ infoButton.addEventListener('click', function() {
     const page2 = document.getElementById('page2-wrapper');
     page1.style.visibility = 'hidden';
     page2.style.visibility = 'visible';
+    // Close the Swal.fire popup
+    Swal.close();
+  });
+
+  // Add event listener to the Starter Guide button after it's been created
+  const orderingGuideButton = document.getElementById('ordering-guide-button');
+  orderingGuideButton.addEventListener('click', function() {
+    const page1 = document.getElementById('page-wrapper');
+    const page3 = document.getElementById('page3-wrapper');
+    page1.style.visibility = 'hidden';
+    page3.style.visibility = 'visible';
     // Close the Swal.fire popup
     Swal.close();
   });
@@ -1150,9 +1160,9 @@ window.onload = function() {
 
 
 
-//|----------------|
-//|     Page 2     |
-//|----------------|
+//|---------------------|
+//|     Page 2 and 3    |
+//|---------------------|
 
 const page2BackButtonButton = document.getElementById('back-button');
 page2BackButtonButton.addEventListener('click', function() {
@@ -1160,5 +1170,14 @@ page2BackButtonButton.addEventListener('click', function() {
   const page2 = document.getElementById('page2-wrapper');
   page1.style.visibility = 'visible';
   page2.style.visibility = 'hidden';
+  
+});
+
+const page3BackButtonButton = document.getElementById('back-button-3');
+page3BackButtonButton.addEventListener('click', function() {
+  const page1 = document.getElementById('page-wrapper');
+  const page3 = document.getElementById('page3-wrapper');
+  page1.style.visibility = 'visible';
+  page3.style.visibility = 'hidden';
   
 });
