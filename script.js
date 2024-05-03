@@ -1060,6 +1060,7 @@ function loadController(inputData, color, description) {
   }
   updateTotalPrice()
 
+  // Handle descriptions for the Recommended Configs
   const recConfigsDescriptionLabel = document.getElementById('recommended-configs-description');
   const recConfigsDescriptionWrapper = document.getElementById('recommended-configs-description-wrapper');
   if (description==='JebediahsCommandDescription') {
@@ -1084,13 +1085,13 @@ function loadController(inputData, color, description) {
     recConfigsDescriptionLabel.innerHTML = KeybCompanion1Description;
     recConfigsDescriptionLabel.style.visibility = 'visible';
     recConfigsDescriptionWrapper.style.width = '70vh';
-    recConfigsDescriptionWrapper.style.top = '12%';
+    recConfigsDescriptionWrapper.style.top = '14%';
   }
   if (description==='KeybCompanion2Description') {
     recConfigsDescriptionLabel.innerHTML = KeybCompanion2Description;
     recConfigsDescriptionLabel.style.visibility = 'visible';
     recConfigsDescriptionWrapper.style.width = '70vh';
-    recConfigsDescriptionWrapper.style.top = '12%';
+    recConfigsDescriptionWrapper.style.top = '14%';
   }
   if (description==='ExtCommandSeat1Description') {
     recConfigsDescriptionLabel.innerHTML = ExtCommandSeat1Description;
@@ -1102,19 +1103,19 @@ function loadController(inputData, color, description) {
     recConfigsDescriptionLabel.innerHTML = ExtCommandSeat2Description;
     recConfigsDescriptionLabel.style.visibility = 'visible';
     recConfigsDescriptionWrapper.style.width = '70vh';
-    recConfigsDescriptionWrapper.style.top = '10%';
+    recConfigsDescriptionWrapper.style.top = '12%';
   }
   if (description==='ValentinasCommandDescription') {
     recConfigsDescriptionLabel.innerHTML = ValentinasCommandDescription;
     recConfigsDescriptionLabel.style.visibility = 'visible';
     recConfigsDescriptionWrapper.style.width = '70vh';
-    recConfigsDescriptionWrapper.style.top = '48%';
+    recConfigsDescriptionWrapper.style.top = '52%';
   }
   if (description==='MissionControlDescription') {
     recConfigsDescriptionLabel.innerHTML = MissionControlDescription;
     recConfigsDescriptionLabel.style.visibility = 'visible';
     recConfigsDescriptionWrapper.style.width = '50vh';
-    recConfigsDescriptionWrapper.style.top = '48%';
+    recConfigsDescriptionWrapper.style.top = '52%';
   }
 }
 
