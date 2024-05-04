@@ -376,7 +376,7 @@ infoButton.addEventListener('click', function() {
   Swal.fire({
     title: 'Information',
     html:
-    '<div style="font-family: \'Roboto\', sans-serif;"><br></br>For more information, you may read the following guides.</div>' +
+    '<div style="font-family: \'Roboto\', sans-serif;"></br>For more information, you may read the following guides.</div>' +
     '<button class="btn btn-primary text-center" id="starter-guide-button">Starter Guide</button>' +
     '<button class="btn btn-primary text-center" id="ordering-guide-button">Ordering and Shipping</button>' +
     '<div style="font-family: \'Roboto\', sans-serif;"><br></br>These controllers are compatible with both KSP1 and KSP2. The buttons and joysticks also work with other games.</div>',
