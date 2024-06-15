@@ -14,6 +14,10 @@ body {
     display: none;
 }
 
+.meta {
+    color: #d4d4d4;
+}
+
 #wrapper-wrapper {
     position: relative;
     height: 99vh;
