@@ -124,7 +124,7 @@ let moduleData = [
     {
         name: "Blank Module Cover",
         id: "i1",
-        price: 0,
+        price: 5,
         image: "modules/blank-agency.png",
         tooltip: "Blank module covers can be useful if you want to have a larger container without needing to fill it with modules, or if you know you eventually want to fill it but don't yet have the means to do so. For an additional $10 you can have an image or text engraved onto the surface.",
     },
