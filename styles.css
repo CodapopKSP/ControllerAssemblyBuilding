@@ -198,173 +198,6 @@ body {
 
 
 /*
-|====================|
-|  Scaling Elements  |
-|====================|
-*/
-
-@media (max-aspect-ratio: 2/1.1) {
-    #wrapper-wrapper {
-        transform: scale(0.9);
-        width: calc(100vw / 0.9) !important;
-        transform-origin: center;
-        left: 50%;
-        margin-left: calc(-50vw / 0.9);
-    }
-}
-
-@media (max-aspect-ratio: 2/1.2) {
-    #wrapper-wrapper {
-        transform: scale(0.8);
-        width: calc(100vw / 0.8) !important;
-        margin-left: calc(-50vw / 0.8);
-    }
-}
-
-@media (max-aspect-ratio: 2/1.32) {
-    #wrapper-wrapper {
-        transform: scale(0.7);
-        width: calc(100vw / 0.7) !important;
-        margin-left: calc(-50vw / 0.7);
-    }
-}
-
-@media (max-aspect-ratio: 2/1.59) {
-    #wrapper-wrapper {
-        transform: scale(0.6);
-        width: calc(100vw / 0.6) !important;
-        margin-left: calc(-50vw / 0.6);
-    }
-    .tooltip {
-        transform: scale(1.2);
-    }
-}
-
-@media (max-aspect-ratio: 2/1.85) {
-    
-    #wrapper-wrapper {
-        transform: scale(0.49);
-        width: calc(100vw / 0.49) !important;
-        height: calc(100vh / 0.49) !important;
-        transform-origin: top;
-        margin-left: calc(-50vw / 0.49);
-    }
-
-    #canvas {
-        transform: translateY(-50%) !important;
-        max-width: calc(99vw / 0.49) !important;
-    }
-
-    .module-array {
-        grid-template-columns: repeat(6, 1fr) !important;
-        align-self: flex-end;
-        left: 0 !important;
-        z-index: 50 !important;
-    }
-
-    .left-module-array {
-        transform: translate(calc(53.75% / 0.49), -205%);
-    }
-    
-    .right-module-array {
-        transform: translate(calc(-53.75% / 0.49), -102.5%);
-    }
-
-    .tooltip {
-        transform: scale(1.5);
-        z-index: 1000 !important;
-    }
-
-    .tooltip.bottom {
-        top: -30vh !important;
-    }
-
-    .left-module-array.mouseover {
-        z-index: 999 !important;
-    }
-
-    .swal2-popup {
-        transform: scale(0.8) !important;
-    }
-    
-    #swal2-title {
-        font-size: 2vh;
-    }
-
-    .btn {
-        width: 25vh !important;
-    }
-
-    #swal2-content {
-        width: 27vh !important;
-    }
-
-    #page2-wrapper {
-        width: 90vw;
-    }
-
-    #page3-wrapper {
-        width: 90vw;
-    }
-}
-
-/*
-|=========================|
-|  Apple Device Elements  |
-|=========================|
-*/
-
-.apple-device #wrapper-wrapper {
-    transform: scale(0.49);
-    width: calc(100vw / 0.49) !important;
-    height: calc(100vh / 0.49) !important;
-    transform-origin: top;
-    margin-left: calc(-50vw) !important;
-}
-
-.apple-device #canvas {
-    transform: translateY(-50%) !important;
-    max-width: calc(99vw / 0.49) !important;
-}
-
-.apple-device .module-array {
-    grid-template-columns: repeat(6, 1fr) !important;
-    align-self: flex-end;
-    left: 0 !important;
-    z-index: 50 !important;
-}
-
-.apple-device .left-module-array {
-    transform: translate(calc(53.75% / 0.49), -205%);
-}
-    
-.apple-device .right-module-array {
-    transform: translate(calc(-53.75% / 0.49), -102.5%);
-}
-
-.apple-device .tooltip {
-    transform: scale(1.5);
-    z-index: 1000 !important;
-}
-
-.apple-device .tooltip.bottom {
-    top: -30vh !important;
-}
-
-.apple-device .left-module-array.mouseover {
-    z-index: 999 !important;
-}
-
-.apple-device .swal2-popup {
-    transform: scale(0.8);
-}
-    
-.apple-device #swal2-title {
-    font-size: 1.5vh;
-}
-
-
-/*
 |======================|
 |  Container Elements  |
 |======================|
@@ -861,4 +694,175 @@ body {
     left: -3vh;
     top: 50%;
     transform: translate(-50%, -50%) rotate(-90deg);
+}
+
+/*
+|====================|
+|  Scaling Elements  |
+|====================|
+*/
+
+@media (max-aspect-ratio: 2/1.1) {
+    #wrapper-wrapper {
+        transform: scale(0.9);
+        width: calc(100vw / 0.9);
+        transform-origin: center;
+        left: 50%;
+        margin-left: calc(-50vw / 0.9);
+    }
+}
+
+@media (max-aspect-ratio: 2/1.2) {
+    #wrapper-wrapper {
+        transform: scale(0.8);
+        width: calc(100vw / 0.8);
+        margin-left: calc(-50vw / 0.8);
+    }
+}
+
+@media (max-aspect-ratio: 2/1.32) {
+    #wrapper-wrapper {
+        transform: scale(0.7);
+        width: calc(100vw / 0.7);
+        margin-left: calc(-50vw / 0.7);
+    }
+}
+
+@media (max-aspect-ratio: 2/1.59) {
+    #wrapper-wrapper {
+        transform: scale(0.6);
+        width: calc(100vw / 0.6);
+        margin-left: calc(-50vw / 0.6);
+    }
+    .tooltip {
+        transform: scale(1.2);
+    }
+}
+
+@media (max-aspect-ratio: 2/1.85) {
+    
+    #wrapper-wrapper {
+        transform: scale(0.48);
+        width: calc(100vw / 0.49);
+        height: calc(100vh / 0.49);
+        transform-origin: top;
+        margin-left: calc(-50vw / 0.49);
+    }
+
+    #canvas {
+        transform: translateY(-50%);
+        max-width: calc(99vw / 0.49);
+    }
+
+    .module-array {
+        grid-template-columns: repeat(6, 1fr);
+        align-self: flex-end;
+        left: 0;
+        z-index: 50;
+    }
+
+    .left-module-array {
+        transform: translate(calc(48.75% / 0.49), -205%);
+    }
+    
+    .right-module-array {
+        transform: translate(calc(-48.75% / 0.49), -102.5%);
+    }
+
+    .tooltip {
+        transform: scale(1.5);
+        z-index: 1000;
+    }
+
+    .tooltip.bottom {
+        top: -30vh;
+    }
+
+    .left-module-array.mouseover {
+        z-index: 999;
+    }
+
+    .swal2-popup {
+        transform: scale(0.8);
+    }
+    
+    #swal2-title {
+        font-size: 2vh;
+    }
+
+    .btn {
+        width: 25vh;
+    }
+
+    #swal2-content {
+        width: 27vh;
+    }
+
+    #page2-wrapper {
+        width: 90vw;
+    }
+
+    #page3-wrapper {
+        width: 90vw;
+    }
+
+    #price-display {
+        position: absolute;
+        top: 5vh;
+    }
+}
+
+/*
+|=========================|
+|  Apple Device Elements  |
+|=========================|
+*/
+
+.apple-device #wrapper-wrapper {
+    transform: scale(0.49);
+    width: calc(100vw / 0.49);
+    height: calc(100vh / 0.49);
+    transform-origin: top;
+    margin-left: calc(-50vw);
+}
+
+.apple-device #canvas {
+    transform: translateY(-50%);
+    max-width: calc(99vw / 0.49);
+}
+
+.apple-device .module-array {
+    grid-template-columns: repeat(6, 1fr);
+    align-self: flex-end;
+    left: 0;
+    z-index: 50;
+}
+
+.apple-device .left-module-array {
+    transform: translate(calc(53.75% / 0.49), -205%);
+}
+    
+.apple-device .right-module-array {
+    transform: translate(calc(-53.75% / 0.49), -102.5%);
+}
+
+.apple-device .tooltip {
+    transform: scale(1.5);
+    z-index: 1000;
+}
+
+.apple-device .tooltip.bottom {
+    top: -30vh;
+}
+
+.apple-device .left-module-array.mouseover {
+    z-index: 999;
+}
+
+.apple-device .swal2-popup {
+    transform: scale(0.8);
+}
+    
+.apple-device #swal2-title {
+    font-size: 1.5vh;
 }
