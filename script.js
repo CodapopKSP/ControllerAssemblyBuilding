@@ -643,18 +643,22 @@ modules.forEach(module => {
       tooltip.classList.remove('left');
       tooltip.classList.add('right');
     }
+
     const positionv = rect.top + (rect.height / 2) - (tooltip.offsetHeight / 2);
+    tooltip.classList.remove('top', 'bottom', 'far-bottom');
+
     if (positionv < window.innerHeight / 3.4) {
-      tooltip.classList.remove('bottom');
       tooltip.classList.add('top');
+    } else if (positionv > window.innerHeight / 2) {
+      tooltip.classList.add('far-bottom');
     } else {
-      tooltip.classList.remove('top');
       tooltip.classList.add('bottom');
     }
 
     setContainerStackZIndex(module, 'set');
     activeModule_mobile = module;
   });
+
   
 
   // Hide tooltip

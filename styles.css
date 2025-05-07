@@ -329,6 +329,10 @@ body {
 .tooltip.bottom {
     top: -15vh;
 }
+
+.tooltip.far-bottom {
+    top: -26vh;
+}
   
 .module:hover .tooltip {
     display: block;
