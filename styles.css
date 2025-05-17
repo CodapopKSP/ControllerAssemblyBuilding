@@ -24,7 +24,7 @@ body {
     width: 99vw;
     display: flex;
     justify-content: center;
-    align-items: top;
+    align-items: flex-start;
     overflow-x: visible;
 }
 
