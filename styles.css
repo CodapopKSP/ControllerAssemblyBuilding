@@ -20,25 +20,27 @@ body {
 
 #wrapper-wrapper {
     position: relative;
-    height: 99vh;
-    width: 99vw;
+    width: 100%;      /* was 99vw */
+    height: 100vh;    /* was 99vh */
     display: flex;
     justify-content: center;
     align-items: flex-start;
     overflow-x: visible;
+    margin: 0;        /* reset any default margins */
 }
 
 #page-wrapper {
-    position: absolute;
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
     width: 100%;
     max-width: 180vh;
-    transform: translateY(-4%) !important;
+    top: -5vh;
     overflow-x: hidden;
     flex-shrink: 0;
+    margin: 2vh auto 0 auto;
 }
 
 #page2-wrapper {
