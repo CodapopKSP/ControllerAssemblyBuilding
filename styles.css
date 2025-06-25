@@ -873,7 +873,7 @@ body {
 |=========================|
 |  Apple Device Elements  |
 |=========================|
-*/
+
 
 .apple-device #wrapper-wrapper {
     transform: scale(0.49);
@@ -922,4 +922,4 @@ body {
     
 .apple-device #swal2-title {
     font-size: 1.5vh;
-}
+}*/
