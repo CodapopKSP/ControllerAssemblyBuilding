@@ -131,7 +131,7 @@ let moduleData = [
     {
         name: "Analog Controls Module",
         id: "f1",
-        price: 95,
+        price: 100,
         image: "modules/analog2.png",
         tooltip: "The Analog Controls module roughly combines the functionality of the Rotation and Translation Controls modules. It is incompatible with those modules. It features a large 3-axis joystick that controls the pitch/yaw/roll or the x/y/z impulse of the craft depending on the state of a Mode toggle switch. Another Mode switch remaps the joystick control depending on the craft for more intuitive gameplay. The joystick button sets the trim, and the brakes can be held with the button. The brakes can also be locked on by pressing the brake button and then pressing the joystick button. Another toggle switch controls the Gear action group.",
         has: ['Rotation', 'Translation', 'Gear'],
@@ -141,7 +141,7 @@ let moduleData = [
     {
         name: "Analog Controls Module (Throttle)",
         id: "f2",
-        price: 95,
+        price: 100,
         image: "modules/analog1.png",
         tooltip: "The Analog Controls module (Throttle) roughly combines the functionality of the Rotation and Translation Controls modules and Throttle module. It is incompatible with those modules. It features a large 3-axis joystick that controls the pitch/yaw/roll or the x/y/z impulse of the craft depending on the state of a Mode toggle switch. Another Mode switch remaps the joystick control depending on the craft for more intuitive gameplay. A dial controls the throttle. The joystick button sets the trim, and the brakes can be held with the button. The brakes can also be locked on by pressing the brake button and then pressing the joystick button.",
         has: ['Rotation', 'Translation', 'Throttle']
@@ -149,7 +149,7 @@ let moduleData = [
     {
         name: "Rotation Controls Module",
         id: "f3",
-        price: 95,
+        price: 100,
         image: "modules/rot2.png",
         tooltip: "The Rotation Controls module is intended to be used together with the Translation Controls module. It features a large 3-axis joystick that controls the pitch/yaw/roll of the craft. A mode switch remaps the axes depending on the type of craft to lead to more intuitive gameplay. The joystick button and trim button allow you to set the trim per axis. Two other switches toggle the Light and Gear action groups.",
         has: ['Rotation', 'Light', 'Gear'],
@@ -159,7 +159,7 @@ let moduleData = [
     {
         name: "Rotation Controls Module (Throttle)",
         id: "f4",
-        price: 95,
+        price: 100,
         image: "modules/rot1.png",
         tooltip: "The Rotation Controls (Throttle) module is intended to be used together with the Translation Controls module. It features a large 3-axis joystick that controls the pitch/yaw/roll of the craft. A mode switch remaps the axes depending on the type of craft to lead to more intuitive gameplay. The joystick button and trim button allow you to set the trim per axis. It also features a dial for controlling the throttle, with an enable switch for quick on/off or for safety.",
         has: ['Rotation', 'Throttle'],
@@ -168,7 +168,7 @@ let moduleData = [
     {
         name: "Translation Controls Module",
         id: "f5",
-        price: 95,
+        price: 100,
         image: "modules/trans.png",
         tooltip: "The Translation Controls module is intended to be used together with the Rotation Controls module. It features a large 3-axis joystick that controls the x/y/z impulse of the craft, such as during docking. It also controls the wheels while in Rover mode. Also while in Rover mode, a cruise control function allows you to set a speed for the craft to maintain. Brakes and Brake Lock inputs allow you to press and hold or toggle on/off the brakes respectively. A toggle switch for Precision Control reduces the translation and rotation inputs by 80%, allowing you to more accurately insert into an orbit.",
         has: ['Translation'],
