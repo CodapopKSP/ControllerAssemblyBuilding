@@ -39,7 +39,7 @@ leftArray.addEventListener('mouseout', function() {
 // Container settings
 let NullContainer = false;
 let containerColor = "rgb(0,0,0)";
-let kit = false;
+let kit = kitConfigString === 'true';
 
 
 
@@ -236,6 +236,7 @@ function updateTotalPrice() {
 
   // Display price
   priceDisplay.innerText = `Total: $${parseInt(totalPrice.toFixed(2))}`;
+  console.log(kit);
 };
 
 
@@ -1109,7 +1110,6 @@ function loadController(inputData, color, kit, description) {
       if (kit) {
         const kitSwitch = document.getElementById('kit')
         kitSwitch.classList.toggle('active');
-        kit = true;
       }
     })
 
@@ -1144,7 +1144,7 @@ function loadController(inputData, color, kit, description) {
       }
     })
   }
-  updateTotalPrice()
+  updateTotalPrice();
 
   // Handle descriptions for the Recommended Configs
   const recConfigsDescriptionLabel = document.getElementById('recommended-configs-description');
