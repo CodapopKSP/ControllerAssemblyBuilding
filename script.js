@@ -111,7 +111,7 @@ moduleData.forEach(module => {
   // Construct price and tooltip message
   const modulePrice = document.createElement('span');
   modulePrice.style.fontSize = '1.7vh';
-  modulePrice.innerHTML = `<br>$${module.price}</br>`;
+  modulePrice.innerHTML = `<br>$${module.price}</br>Kit: $${module.kit_price}</br>`;
   const moduleDescription = document.createElement('span');
   moduleDescription.innerHTML = module.tooltip;
 
