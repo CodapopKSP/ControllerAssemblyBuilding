@@ -164,7 +164,7 @@ engineersReport.addEventListener('click', function() {
         telemetryConflict:                True if Telemetry Module exists with other data-hungry modules.
         rotTransSeparated:                True if Translation and Rotation modules are on separate containers.
     */
-    if ((!isSizeMismatch) || (hasFunctionDuplicates.length > 0) || (missingFunctions.length > 0) || (telemetryConflict) || (rotTransSeparated)) {
+    if ((!isSizeMismatch) || (hasFunctionDuplicates.length > 0) || (missingFunctions.length > 0) || (telemetryConflict) || (rotTransSeparated) || NullContainer) {
         recommendation += `<hr><p style="color: #afe06b;"><strong>Warning:</strong></p>`;
       if (!isSizeMismatch) {
         recommendation += `<p style="color: #ee2828;">One or more of your containers does not have the correct number of modules.</p>`;
