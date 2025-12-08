@@ -236,7 +236,6 @@ function updateTotalPrice() {
 
   // Display price
   priceDisplay.innerText = `Total: $${parseInt(totalPrice.toFixed(2))}`;
-  console.log(kit);
 };
 
 

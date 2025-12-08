@@ -138,8 +138,6 @@ engineersReport.addEventListener('click', function() {
     }
   });
 
-  console.log(allHasFunctions);
-
   // Check if there are any duplicate hasFunctions
   const hasFunctionDuplicates = [];
   const encounteredItems = [];
