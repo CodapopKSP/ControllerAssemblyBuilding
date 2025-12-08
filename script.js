@@ -292,19 +292,20 @@ saveButton.addEventListener('click', function() {
     });
   })
 
-  // Add the color information to the end of the urlConfigCode array
+  // Add the color information
   const color = containerBoxes[0].style.borderColor;
   if (color) {
     urlConfigCode.push(`&color=${color.replace(/\s/g, '')}`);
   } else {
     urlConfigCode.push(`&color=rgb(0,0,0)`);
   }
-  const url = "https://untitledspacecraft.com/?config=" + urlConfigCode.join('');
 
-  // Add the kit info
+  // Add kit config information
   if (kit) {
     urlConfigCode.push(`&kit=true`);
   }
+
+  const url = "https://untitledspacecraft.com/?config=" + urlConfigCode.join('');
 
   // Copy the URL to the clipboard
   navigator.clipboard.writeText(url).then(() => {
