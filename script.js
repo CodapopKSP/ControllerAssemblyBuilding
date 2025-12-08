@@ -1107,6 +1107,8 @@ function loadController(inputData, color, kit, description) {
 
       // Set kit
       if (kit) {
+        const kitSwitch = document.getElementById('kit')
+        kitSwitch.classList.toggle('active');
         kit = true;
       }
     })
