@@ -7,6 +7,7 @@ containerData is an array that contains all of the data for each container.
     name:               The name of the container.
     class:              The class for CSS reasons.
     price:              The price in USD.
+    null_acryl__price:  The price if acrylic is not included.
     num_modules:        Total number of module docks.
     num_angled:         Number of angled module docks.
     num_level:          [Optional] Number of level module docks.
@@ -20,6 +21,7 @@ const Mark0 = {
     name: "Mark 0 Container",
     class: "one-one",
     price: 50,
+    null_acryl__price: 30,
     num_modules: 1,
     num_angled: 1,
     horizontal_ruler: "12.5cm",
@@ -31,6 +33,7 @@ const MarkIhoriz = {
     name: "Mark I Container (Horizontal)",
     class: "one-two",
     price: 55,
+    null_acryl__price: 30,
     num_modules: 2,
     num_angled: 2,
     horizontal_ruler: "24cm",
@@ -42,6 +45,7 @@ const MarkIvert = {
     name: "Mark I Container (Vertical)",
     class: "two-one",
     price: 55,
+    null_acryl__price: 30,
     num_modules: 2,
     num_angled: 1,
     num_level: 1,
@@ -54,6 +58,7 @@ const MarkII = {
     name: "Mark II Container",
     class: "three-one",
     price: 65,
+    null_acryl__price: 30,
     num_modules: 3,
     num_angled: 1,
     num_level: 1,
@@ -67,6 +72,7 @@ const MarkIII = {
     name: "Mark III Container",
     class: "two-two",
     price: 75,
+    null_acryl__price: 32,
     num_modules: 4,
     num_angled: 2,
     num_level: 2,
@@ -79,10 +85,11 @@ const MarkIV = {
     name: "Mark IV Container",
     class: "two-three",
     price: 95,
+    null_acryl__price: 34,
     num_modules: 6,
     num_angled: 3,
     num_level: 3,
-    horizontal_ruler: "35.5cm",
+    horizontal_ruler: "35.5cm (9.5cm tall)",
     vertical_ruler: "24cm"
 }
 
@@ -91,9 +98,10 @@ const MarkV = {
     name: "Mark V Container",
     class: "two-four",
     price: 125,
+    null_acryl__price: 49,
     num_modules: 8,
     num_angled: 4,
     num_level: 4,
-    horizontal_ruler: "47cm",
+    horizontal_ruler: "47cm (9.5cm tall)",
     vertical_ruler: "24cm"
 }

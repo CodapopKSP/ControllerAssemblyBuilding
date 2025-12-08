@@ -35,6 +35,10 @@ leftArray.addEventListener('mouseout', function() {
   leftArray.classList.remove('mouseover');
 });
 
+// Container settings
+let NullContainer = false;
+let containerColor = "rgb(0,0,0)";
+
 
 
 //|----------------------|
@@ -139,11 +143,19 @@ colorButtons.forEach((button) => {
     Uses .color-button to change the color of .container-box
   */
   button.addEventListener('click', () => {
+    // Check if null container setting
+    if (button.id === "NullContainer") {
+      NullContainer = true;
+    } else {
+      NullContainer = false;
+    }
+    updateTotalPrice();
     const color = button.style.backgroundColor;
     const containerBoxes = document.querySelectorAll('.container-box');
     containerBoxes.forEach(containerBox => {
       containerBox.style.borderColor = color;
     })
+    containerColor = color;
   });
 });
 
@@ -194,7 +206,12 @@ function updateTotalPrice() {
   // Calculate price for containers
   const containerBoxes = document.querySelectorAll('.container-box');
   containerBoxes.forEach(containerBox => {
-    const priceOfContainer = parseFloat(containerBox.dataset.price);
+    let priceOfContainer = 0;
+    if (NullContainer) {
+      priceOfContainer = parseFloat(containerBox.dataset.null_acryl__price);
+    } else {
+      priceOfContainer = parseFloat(containerBox.dataset.price);
+    }
     totalPrice += priceOfContainer;
   });
 
@@ -759,6 +776,7 @@ function addContainer(containerData, type) {
       name:               The name of the container.
       class:              The class for CSS reasons.
       price:              The price in USD.
+      null_acryl__price:  The price if acrylic is not included.
       num_modules:        Total number of module docks.
       num_angled:         Number of angled module docks.
       num_level:          [Optional] Number of level module docks.
@@ -782,6 +800,7 @@ function addContainer(containerData, type) {
     containerElement.classList.add(containerData.class);
     containerElement.setAttribute('data-name', containerData.name);
     containerElement.setAttribute('data-price', containerData.price);
+    containerElement.setAttribute('data-null_acryl__price', containerData.null_acryl__price);
     containerElement.setAttribute('data-size', containerData.num_modules);
     containerElement.setAttribute('draggable', "true");
 
@@ -834,6 +853,7 @@ function addContainer(containerData, type) {
     // Add container to canvas
     const canvas = document.getElementById('canvas');
     canvas.appendChild(containerElement);
+    containerElement.style.borderColor = containerColor;
     updateTotalPrice()
 
     
@@ -1054,6 +1074,9 @@ function loadController(inputData, color, description) {
       // Set container color
       if (color) {
         container.style.borderColor = color;
+        if (color === "rgb(212,212,212)") {
+          NullContainer = true;
+        }
       }
     })
 

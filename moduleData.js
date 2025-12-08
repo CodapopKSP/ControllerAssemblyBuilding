@@ -50,7 +50,7 @@ let moduleData = [
         image: "modules/exec2.png",
         image_light: "modules/light/exec2_l.png",
         tooltip: "The Executive Actions (Groups) module combines the functions of the Executive Actions module with some of the features of the Action Groups module. Two buttons, activated by a safety key switch, control the Stage and Abort groups, with an LED indicator built into the Abort button and covered by a plastic safety cover. Five buttons control the Action Groups, each with an LED indicator. The Action Group mappings can be changed upon request.",
-        has: ['Stage', 'Abort'],
+        has: ['Stage', 'Abort', 'Action Groups 1-5'],
         needs_data: true
     },
     {
@@ -201,6 +201,7 @@ let moduleData = [
         image: "modules/ag1.png",
         image_light: "modules/light/ag1_l.png",
         tooltip: "The Action Groups module consists of 10 pushbuttons, each with an LED indicator. The buttons activate Action Groups 1-10, and the LED indicators determine the states of the action groups.  When switching between different crafts, the indicators will change depending on that craft's specific active action groups. The empty space in the center leaves room for stickers or can be drawn on with a dry-erase marker for labeling.",
+        has: ['Action Groups 1-5'],
         needs_data: true
     },
     {

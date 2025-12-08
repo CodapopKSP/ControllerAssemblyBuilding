@@ -21,7 +21,12 @@ engineersReport.addEventListener('click', function() {
   // Check to make sure each container is filled and display price breakdown
   containerBoxes.forEach(containerBox => {
     const modules = containerBox.querySelectorAll('.module');
-    let containerPrice = parseFloat(containerBox.getAttribute('data-price'));
+    let containerPrice = 0;
+    if (NullContainer) {
+      containerPrice = parseFloat(containerBox.getAttribute('data-null_acryl__price'));
+    } else {
+      containerPrice = parseFloat(containerBox.getAttribute('data-price'));
+    }
     totalPrice += containerPrice;
 
     // Make sure all module docks are filled
@@ -175,6 +180,9 @@ engineersReport.addEventListener('click', function() {
       }
       if (rotTransSeparated) {
         recommendation += `<p style="color: #ffe600;">The Rotation and Translation modules must be in the same container.</p>`;
+      }
+      if (NullContainer) {
+        recommendation += `<p style="color: #ffe600;">Your build does not include the container acrylic. This is for customers who wish to build their own containers.</p>`;
       }
 
     // No conflicts found

@@ -347,6 +347,13 @@ body {
     z-index: 999;
 }
 
+.color-button:hover .tooltip {
+    display: block;
+    left: 3vh;
+    z-index: 999;
+    width: 18vh;
+}
+
 
 /*
 |======================|
@@ -534,6 +541,35 @@ body {
 
 .color-button:not(:first-child) {
     margin-top: 0.5vh;
+}
+
+/* Override background for this one button */
+#NullContainer {
+    background-color: white !important;
+    position: relative;
+}
+
+/* Draw the red X lines */
+#NullContainer::before,
+#NullContainer::after {
+    content: "";
+    position: absolute;
+    width: 70%;
+    height: 4px;              /* thickness of the X stroke */
+    background-color: red;
+    top: 50%;
+    left: 50%;
+    transform-origin: center;
+}
+
+/* First diagonal */
+#NullContainer::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+/* Second diagonal */
+#NullContainer::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
 }
 
 #recommended-configs-description-wrapper {
@@ -867,59 +903,3 @@ body {
         transform: translate(calc(-47.75% / 0.48), -102.5%);
     }
 }
-
-
-/*
-|=========================|
-|  Apple Device Elements  |
-|=========================|
-
-
-.apple-device #wrapper-wrapper {
-    transform: scale(0.49);
-    width: calc(100vw / 0.49);
-    height: calc(100vh / 0.49);
-    transform-origin: top;
-    margin-left: calc(-50vw);
-}
-
-.apple-device #canvas {
-    transform: translateY(-50%);
-    max-width: calc(99vw / 0.49);
-}
-
-.apple-device .module-array {
-    grid-template-columns: repeat(6, 1fr);
-    align-self: flex-end;
-    left: 0;
-    z-index: 50;
-}
-
-.apple-device .left-module-array {
-    transform: translate(calc(53.75% / 0.49), -205%);
-}
-    
-.apple-device .right-module-array {
-    transform: translate(calc(-53.75% / 0.49), -102.5%);
-}
-
-.apple-device .tooltip {
-    transform: scale(1.5);
-    z-index: 1000;
-}
-
-.apple-device .tooltip.bottom {
-    top: -30vh;
-}
-
-.apple-device .left-module-array.mouseover {
-    z-index: 999;
-}
-
-.apple-device .swal2-popup {
-    transform: scale(0.8);
-}
-    
-.apple-device #swal2-title {
-    font-size: 1.5vh;
-}*/
