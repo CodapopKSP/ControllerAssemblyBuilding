@@ -365,7 +365,7 @@ body {
     position: absolute;
     top: 0;
     color: black;
-    font-size: 3vh;
+    font-size: 2.9vh;
     font-weight: bold;
     padding: 0.75vh;
     right: 0;
@@ -456,7 +456,7 @@ body {
     position: absolute;
     top: 0.5vh;
     left: 0.5vh;
-    width: 84vh;
+    width: 88vh;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -578,6 +578,10 @@ body {
     text-align: center;
     font-size: 2.3vh;
     visibility: hidden;
+}
+
+#kit.active {
+    background-color: rgb(192, 0, 0);
 }
 
 

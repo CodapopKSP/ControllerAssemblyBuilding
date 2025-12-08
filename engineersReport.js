@@ -36,7 +36,12 @@ engineersReport.addEventListener('click', function() {
 
     // Add the price of each module
     modules.forEach(module => {
-      const price = parseFloat(module.getAttribute('data-price'));
+      let price = 0;
+      if (kit) {
+        price = parseFloat(module.getAttribute('data-kit_price'));
+      } else {
+        price = parseFloat(module.getAttribute('data-price'));
+      }
       totalPrice += price;
     });
 
@@ -44,7 +49,12 @@ engineersReport.addEventListener('click', function() {
     if (containerPrice > 0) {
       reportContent += `<p style="color: #4d9de3;"><strong>${containerBox.getAttribute('data-name')}</strong> - $${containerPrice.toFixed(2)}</p>`;
       modules.forEach(module => {
-        const price = parseFloat(module.getAttribute('data-price'));
+        let price = 0;
+        if (kit) {
+          price = parseFloat(module.getAttribute('data-kit_price'));
+        } else {
+          price = parseFloat(module.getAttribute('data-price'));
+        }
         reportContent += `<p>&emsp;${module.getAttribute('data-name')} - $${price.toFixed(2)}</p>`;
       });
       reportContent += `<hr>`;
@@ -164,7 +174,7 @@ engineersReport.addEventListener('click', function() {
         telemetryConflict:                True if Telemetry Module exists with other data-hungry modules.
         rotTransSeparated:                True if Translation and Rotation modules are on separate containers.
     */
-    if ((!isSizeMismatch) || (hasFunctionDuplicates.length > 0) || (missingFunctions.length > 0) || (telemetryConflict) || (rotTransSeparated) || NullContainer) {
+    if ((!isSizeMismatch) || (hasFunctionDuplicates.length > 0) || (missingFunctions.length > 0) || (telemetryConflict) || (rotTransSeparated) || NullContainer || kit) {
         recommendation += `<hr><p style="color: #afe06b;"><strong>Warning:</strong></p>`;
       if (!isSizeMismatch) {
         recommendation += `<p style="color: #ee2828;">One or more of your containers does not have the correct number of modules.</p>`;
@@ -183,6 +193,9 @@ engineersReport.addEventListener('click', function() {
       }
       if (NullContainer) {
         recommendation += `<p style="color: #ffe600;">Your build does not include the container acrylic. This is for customers who wish to build their own containers.</p>`;
+      }
+      if (kit) {
+        recommendation += `<p style="color: #ffe600;">The listed price is for a DIY kit. If you do not want a kit, please deselect the Kit button.</p>`;
       }
 
     // No conflicts found

@@ -38,6 +38,7 @@ leftArray.addEventListener('mouseout', function() {
 // Container settings
 let NullContainer = false;
 let containerColor = "rgb(0,0,0)";
+let kit = false;
 
 
 
@@ -56,6 +57,7 @@ moduleData.forEach(module => {
       name:           The name of the module.
       id:             The letter code for the module for things such as generating the URL code on save.
       price:          The price for the module in USD.
+      kit_price:      The price of the module if purchased as a kit.
       image:          The graphical image of the module.
       image_light:    The image used when the lights are switched on.
       tooltip:        The tooltip text.
@@ -76,6 +78,7 @@ moduleData.forEach(module => {
   // Set the module ID, price, and name
   moduleElement.setAttribute('id', module.id);
   moduleElement.setAttribute('data-price', module.price);
+  moduleElement.setAttribute('data-kit_price', module.kit_price);
   moduleElement.setAttribute('data-name', module.name);
 
   // Create the module image element
@@ -220,7 +223,12 @@ function updateTotalPrice() {
   containerModuleDocks.forEach(containerModuleDock => {
     const dockedModules = containerModuleDock.querySelectorAll('.module');
     dockedModules.forEach(dockedModule => {
-      const priceOfModule = parseFloat(dockedModule.dataset.price);
+      let priceOfModule = 0;
+      if (kit) {
+        priceOfModule = parseFloat(dockedModule.dataset.kit_price);
+      } else {
+        priceOfModule = parseFloat(dockedModule.dataset.price);
+      }
       totalPrice += priceOfModule;
     });
   });
@@ -292,6 +300,11 @@ saveButton.addEventListener('click', function() {
   }
   const url = "https://untitledspacecraft.com/?config=" + urlConfigCode.join('');
 
+  // Add the kit info
+  if (kit) {
+    urlConfigCode.push(`&kit=true`);
+  }
+
   // Copy the URL to the clipboard
   navigator.clipboard.writeText(url).then(() => {
 
@@ -325,6 +338,17 @@ lightSwitch.addEventListener('click', function() {
     image1.classList.toggle('hidden');
     image2.classList.toggle('hidden');
   });
+});
+
+// Kit Button
+const kitSwitch = document.getElementById('kit')
+kitSwitch.addEventListener('click', function() {
+  /*
+    Button that toggles kit setting.
+  */
+  this.classList.toggle('active');
+  kit = !kit;
+  updateTotalPrice();
 });
 
 
@@ -983,7 +1007,7 @@ function addContainer(containerData, type) {
 //|------------------------|
 
 // Load a controller from a valid URL
-function loadController(inputData, color, description) {
+function loadController(inputData, color, kit, description) {
   /*
     Load a controller from URL config.
     Takes two parameters:
@@ -1077,6 +1101,11 @@ function loadController(inputData, color, description) {
         if (color === "rgb(212,212,212)") {
           NullContainer = true;
         }
+      }
+
+      // Set kit
+      if (kit) {
+        kit = true;
       }
     })
 
