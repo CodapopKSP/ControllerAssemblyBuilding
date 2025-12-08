@@ -1141,9 +1141,8 @@ function loadController(inputData, color, kit, description) {
   if (kit) {
     const kitSwitch = document.getElementById('kit')
     kitSwitch.classList.toggle('active');
-    console.log(1);
   }
-  
+
   updateTotalPrice();
 
   // Handle descriptions for the Recommended Configs
