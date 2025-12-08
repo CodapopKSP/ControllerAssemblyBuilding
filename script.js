@@ -1104,14 +1104,7 @@ function loadController(inputData, color, kit, description) {
           NullContainer = true;
         }
       }
-
-      // Set kit
-      if (kit) {
-        const kitSwitch = document.getElementById('kit')
-        kitSwitch.classList.toggle('active');
-      }
     })
-
 
     // Update the canvas elements as if someone dragged and dropped the containers and modules
     const containerGrids = document.querySelectorAll('.container-grid');
@@ -1143,6 +1136,14 @@ function loadController(inputData, color, kit, description) {
       }
     })
   }
+
+  // Set kit
+  if (kit) {
+    const kitSwitch = document.getElementById('kit')
+    kitSwitch.classList.toggle('active');
+    console.log(1);
+  }
+  
   updateTotalPrice();
 
   // Handle descriptions for the Recommended Configs
