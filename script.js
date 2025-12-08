@@ -9,6 +9,7 @@ const deleteBin = document.getElementById('delete-bin')
 const urlParameters = new URLSearchParams(window.location.search);
 const controllerConfigString = urlParameters.get('config');
 const colorConfigString = urlParameters.get('color');
+const kitConfigString = urlParameters.get('kit');
 const descriptionConfigString = urlParameters.get('description');
 
 // Prevent users from right clicking
@@ -1209,7 +1210,7 @@ function loadController(inputData, color, kit, description) {
 window.onload = function() {
   if (controllerConfigString) {
     if (controllerConfigString.startsWith('z')) {
-      loadController(controllerConfigString, colorConfigString, descriptionConfigString);
+      loadController(controllerConfigString, colorConfigString, kitConfigString, descriptionConfigString);
     }
   }
 }
