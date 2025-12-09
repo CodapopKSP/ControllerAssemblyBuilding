@@ -171,6 +171,11 @@ body {
     margin: 0.75vh;
     z-index: 0;
 }
+.container-grid.has-13child {
+    transform: translate(-15vh, 0vh);
+    margin: 0.75vh;
+    z-index: 0;
+}
 .container-grid.has-11child {
     transform: translateY(0vh);
     margin: 0.75vh;
@@ -263,6 +268,14 @@ body {
     min-width: 7vh;
     min-height: 22vh;
 }
+
+.one-three {
+    width: 45vh;
+    height: 15vh;
+    min-width: 45vh;
+    min-height: 15vh;
+}
+
 .one-one {
     width: 15vh;
     height: 15vh;
@@ -409,6 +422,14 @@ body {
     background-image: url('containers/3x1.png');
     right: 56%;
     bottom: 1vh;
+}
+
+#add-1x3 {
+    width: 11.25vh;
+    height: 4.125vh;
+    background-image: url('containers/1x3.png');
+    right: 70%;
+    bottom: 7vh;
 }
 
 #add-2x1 {

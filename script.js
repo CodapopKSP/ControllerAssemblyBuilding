@@ -259,6 +259,7 @@ saveButton.addEventListener('click', function() {
       'one-two': 'z12',
       'two-one': 'z21',
       'three-one': 'z31',
+      'one-three': 'z13',
       'two-two': 'z22',
       'two-three': 'z23',
       'two-four': 'z24'
@@ -471,7 +472,8 @@ document.addEventListener('DOMContentLoaded', () => {
     { addButtonId: 'add-2x3', containerType: MarkIV, containerClass: '.two-three' },
     { addButtonId: 'add-2x2', containerType: MarkIII, containerClass: '.two-two' },
     { addButtonId: 'add-1x2', containerType: MarkIhoriz, containerClass: '.one-two' },
-    { addButtonId: 'add-3x1', containerType: MarkII, containerClass: '.three-one' },
+    { addButtonId: 'add-3x1', containerType: MarkIIvert, containerClass: '.three-one' },
+    { addButtonId: 'add-1x3', containerType: MarkIIhoriz, containerClass: '.one-three' },
     { addButtonId: 'add-2x1', containerType: MarkIvert, containerClass: '.two-one' },
     { addButtonId: 'add-1x1', containerType: Mark0, containerClass: '.one-one' }
   ];
@@ -583,6 +585,7 @@ deleteBin.addEventListener('drop', (event) => {
       containerGrid.classList.remove('has-22child');
       containerGrid.classList.remove('has-12child');
       containerGrid.classList.remove('has-31child');
+      containerGrid.classList.remove('has-13child');
       containerGrid.classList.remove('has-21child');
       containerGrid.classList.remove('has-11child');
     }
@@ -755,6 +758,7 @@ containerGrids.forEach(containerGrid => {
         'two-two': 'has-22child',
         'one-two': 'has-12child',
         'three-one': 'has-31child',
+        'one-three': 'has-13child',
         'two-one': 'has-21child',
         'one-one': 'has-11child'
       };
@@ -778,6 +782,7 @@ containerGrids.forEach(containerGrid => {
         containerGrid.classList.remove('has-22child');
         containerGrid.classList.remove('has-12child');
         containerGrid.classList.remove('has-31child');
+        containerGrid.classList.remove('has-13child');
         containerGrid.classList.remove('has-21child');
         containerGrid.classList.remove('has-11child');
       }
@@ -1053,7 +1058,8 @@ function loadController(inputData, color, kit, description) {
       '11': { type: '.one-one', template: Mark0 },
       '12': { type: '.one-two', template: MarkIhoriz },
       '21': { type: '.two-one', template: MarkIvert },
-      '31': { type: '.three-one', template: MarkII },
+      '31': { type: '.three-one', template: MarkIIvert },
+      '13': { type: '.one-three', template: MarkIIhoriz },
       '22': { type: '.two-two', template: MarkIII },
       '23': { type: '.two-three', template: MarkIV },
       '24': { type: '.two-four', template: MarkV }
@@ -1123,6 +1129,7 @@ function loadController(inputData, color, kit, description) {
             'two-two': 'has-22child',
             'one-two': 'has-12child',
             'three-one': 'has-31child',
+            'one-three': 'has-13child',
             'two-one': 'has-21child',
             'one-one': 'has-11child'
           };

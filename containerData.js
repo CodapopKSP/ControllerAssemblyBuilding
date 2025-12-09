@@ -53,9 +53,21 @@ const MarkIvert = {
     vertical_ruler: "24cm"
 }
 
-// Mark II
-const MarkII = {
-    name: "Mark II Container",
+// Mark II Horizontal
+const MarkIIhoriz = {
+    name: "Mark II Container (Horizontal)",
+    class: "one-three",
+    price: 65,
+    null_acryl__price: 30,
+    num_modules: 3,
+    num_angled: 3,
+    horizontal_ruler: "35.5cm (9.5cm tall)",
+    vertical_ruler: "12.5cm"
+}
+
+// Mark II Vertical
+const MarkIIvert = {
+    name: "Mark II Container (Vertical)",
     class: "three-one",
     price: 65,
     null_acryl__price: 30,
