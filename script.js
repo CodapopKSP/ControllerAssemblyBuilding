@@ -197,7 +197,6 @@ recommendedConfigsButton.addEventListener('click', function() {
   });
 });
 
-
 // Main Price Display
 const priceDisplay = document.getElementById('price-display')
 function updateTotalPrice() {
@@ -238,6 +237,40 @@ function updateTotalPrice() {
   priceDisplay.innerText = `Total: $${parseInt(totalPrice.toFixed(2))}`;
 };
 
+// Build the config string for firmware generation
+function getConfigStringFromCanvas() {
+  const urlConfigCode = [];
+  const containerBoxes = document.querySelectorAll('.container-box');
+  const containerSizeMap = {
+    'one-one': 'z11',
+    'one-two': 'z12',
+    'two-one': 'z21',
+    'three-one': 'z31',
+    'one-three': 'z13',
+    'two-two': 'z22',
+    'two-three': 'z23',
+    'two-four': 'z24'
+  };
+  containerBoxes.forEach(containerBox => {
+    for (const className in containerSizeMap) {
+      if (containerBox.id.includes(className)) {
+        urlConfigCode.push(containerSizeMap[className]);
+        break;
+      }
+    }
+    const containerLocation = containerBox.parentNode;
+    if (containerLocation.id.includes('canvas')) {
+      urlConfigCode.push('00');
+    } else {
+      urlConfigCode.push(containerLocation.id);
+    }
+    const modules = containerBox.querySelectorAll('.module');
+    modules.forEach(module => {
+      urlConfigCode.push(module.id);
+    });
+  });
+  return urlConfigCode.join('');
+}
 
 // Save Button
 const saveButton = document.getElementById('save')
@@ -246,72 +279,14 @@ saveButton.addEventListener('click', function() {
     Create a popup to save the current config to a url and copy it to the clipboard
     Uses .container-box to get current containers and then locates all .modules inside.
   */
-  const urlConfigCode = [];
-
-  // Add container info to the URL
+  const configPart = getConfigStringFromCanvas();
   const containerBoxes = document.querySelectorAll('.container-box');
-  containerBoxes.forEach(containerBox => {
-    const containerSizeMap = {
-      /*
-        class name: container size code
-      */
-      'one-one': 'z11',
-      'one-two': 'z12',
-      'two-one': 'z21',
-      'three-one': 'z31',
-      'one-three': 'z13',
-      'two-two': 'z22',
-      'two-three': 'z23',
-      'two-four': 'z24'
-    };
-    
-    for (const className in containerSizeMap) {
-      if (containerBox.id.includes(className)) {
-        urlConfigCode.push(containerSizeMap[className]);
-        break;
-      }
-    }
-    
-    // Add container location data
-    let containerLocation = containerBox.parentNode;
-    /*
-      Add container address to the URL.
-        00 - Unplaced
-        1X - Top row of container grids, left to right.
-        2X - Bottom row of container grids, left to right.
-    */
-    if (containerLocation.id.includes('canvas')) {
-      urlConfigCode.push('00');
-    } else {
-      urlConfigCode.push(containerLocation.id);
-    }
+  const color = containerBoxes[0] ? containerBoxes[0].style.borderColor : null;
+  const colorParam = color ? `&color=${color.replace(/\s/g, '')}` : '&color=rgb(0,0,0)';
+  const kitParam = kit ? '&kit=true' : '';
+  const url = "https://untitledspacecraft.com/?config=" + configPart + colorParam + kitParam;
 
-    // Add module info to the URL
-    const modules = containerBox.querySelectorAll('.module');
-    modules.forEach(module => {
-      urlConfigCode.push(module.id);
-    });
-  })
-
-  // Add the color information
-  const color = containerBoxes[0].style.borderColor;
-  if (color) {
-    urlConfigCode.push(`&color=${color.replace(/\s/g, '')}`);
-  } else {
-    urlConfigCode.push(`&color=rgb(0,0,0)`);
-  }
-
-  // Add kit config information
-  if (kit) {
-    urlConfigCode.push(`&kit=true`);
-  }
-
-  const url = "https://untitledspacecraft.com/?config=" + urlConfigCode.join('');
-
-  // Copy the URL to the clipboard
   navigator.clipboard.writeText(url).then(() => {
-
-    // Activate the button
     Swal.fire({
       title: 'Copied!',
       html: '<div>This configuration URL has been copied to your clipboard!<br><br>' + url + '</div>',
@@ -325,6 +300,56 @@ saveButton.addEventListener('click', function() {
   });
 });
 
+// Firmware Button
+async function triggerCodeGeneration() {
+  const configString = getConfigStringFromCanvas();
+  if (!configString) {
+    Swal.fire({
+      title: 'No configuration',
+      text: 'Add at least one container with modules to generate code.',
+      icon: 'warning',
+      buttonsStyling: false,
+      customClass: { confirmButton: 'btn btn-primary' },
+    });
+    return;
+  }
+  if (typeof window.generateArduinoZipFromConfig !== 'function') {
+    Swal.fire({
+      title: 'Code generator not loaded',
+      text: 'The code generation script could not be loaded. Please refresh the page.',
+      icon: 'error',
+      buttonsStyling: false,
+      customClass: { confirmButton: 'btn btn-primary' },
+    });
+    return;
+  }
+  try {
+    const zipBlob = await window.generateArduinoZipFromConfig(configString);
+    const url = URL.createObjectURL(zipBlob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'arduino_project_' + new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19) + '.zip';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    Swal.fire({
+      title: 'Download started',
+      text: 'Your firmware has been downloaded.',
+      icon: 'success',
+      buttonsStyling: false,
+      customClass: { confirmButton: 'btn btn-primary' },
+    });
+  } catch (err) {
+    Swal.fire({
+      title: 'Generation failed',
+      text: err.message || 'Could not generate code.',
+      icon: 'error',
+      buttonsStyling: false,
+      customClass: { confirmButton: 'btn btn-primary' },
+    });
+  }
+}
 
 // Light Switch
 const lightSwitch = document.getElementById('lights')

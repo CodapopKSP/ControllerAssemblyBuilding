@@ -212,16 +212,22 @@ engineersReport.addEventListener('click', function() {
     </div>
   `;
 
-  // Activate the button
+  // Activate the popup (Code button triggers generation, Ok closes)
   Swal.fire({
     title: 'Engineer\'s Report',
     html: report,
     showCancelButton: true,
     cancelButtonText: 'Ok',
+    showConfirmButton: true,
+    confirmButtonText: 'Firmware',
     buttonsStyling: false,
-    showConfirmButton: false,
     customClass: {
       cancelButton: 'btn btn-danger',
+      confirmButton: 'btn btn-primary',
     },
+  }).then((result) => {
+    if (result.isConfirmed && typeof triggerCodeGeneration === 'function') {
+      triggerCodeGeneration();
+    }
   });
 });

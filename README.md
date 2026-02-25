@@ -11,6 +11,7 @@ This is a webtool for streamlining several aspects of Untitled Space Craft contr
 * Includes an Engineer's Report for automatically checking module compatibility, greatly reducing customer service workload
 * Provides several handpicked controller configuration examples for the customer to use as a starting point
 * Includes a Lights toggle so customers may see which parts of the controller can light up
+* The **Firmware** button located within the Engineer's Report builds an Arduino project zip from the current layout.
 
 
 ## How to Use It
@@ -21,12 +22,23 @@ This is a webtool for streamlining several aspects of Untitled Space Craft contr
 * Check the Engineer's Report by clicking a button at the top of the screen.
 * Save the URL of your configuration by clicking the Save button to later send it in an email or chat message.
 * (Optional) Drag and drop the container to a spot on the canvas to add multiple containers.
+* Download your controller's firmware.
 
 ### As a Developer
 
 * Click the link sent by a customer or saved in the database.
 * Check the Engineer's Report to make sure the chosen modules are compatible.
 * Paste the link into the off-site Logistics tool to receive a list of necessary parts and materials.
+
+### Firmware button
+
+The **Firmware** button located within the Engineer's Report builds an Arduino project zip from the current layout. Browsers block loading local files when the page is opened from disk (`file://`). For the Code button to work, serve the project over HTTP, e.g. from the project folder run:
+
+```bash
+python3 -m http.server 8000
+```
+
+Then open **http://localhost:8000** in your browser.
 
 
 ## Contact

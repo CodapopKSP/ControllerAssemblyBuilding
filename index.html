@@ -323,7 +323,9 @@
 			</button>
 		</div>
 
-		<!-- Scripts -->
+		<!-- Scripts (JSZip and code generator must load before main script) -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+		<script src="generateCode.js"></script>
 		<script src="script.js" defer></script>
 		<script src="moduleData.js"></script>
 		<script src="engineersReport.js"></script>
