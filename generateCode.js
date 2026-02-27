@@ -18,7 +18,7 @@
         'd1': 'd1.ino',
         'e1': 'e1.ino',
         'f1': 'f1f2.ino', 'f2': 'f1f2.ino',
-        'f3': 'f3f4.ino', 'f4': 'f3f4.ino',
+        'f3': 'f3.ino', 'f4': 'f4.ino',
         'f5': 'f5.ino',
         'f6': 'f6.ino',
         'g1': 'g1.ino',

@@ -79,6 +79,7 @@
   #define deadZone_max 557
   #define maxVolt_ 1020
   #define minVolt_ 3
+  #define keyboardEmulation_threshold 20000
 
 
 //|-----------------------|

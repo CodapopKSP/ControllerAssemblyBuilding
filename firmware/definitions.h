@@ -127,6 +127,7 @@ bool keyboardEmulation = false;
   byte Util_Nav_Ctrl[1] = {};
   byte Util_Time_Ctrl[1] = {};
   byte Analog[8] = {};
+  byte Rotation_Throttle[9] = {};
 
   byte Action_Dspl[2] = {};
   byte Action2_Dspl[2] = {};
@@ -136,6 +137,7 @@ bool keyboardEmulation = false;
   byte EA_Groups_Dspl[1] = {};
   byte EVA_Dspl[1];
   byte EA_Control_Dspl[1] = {};
+  byte Rotation_Throttle_Dspl[1] = {};
 
   int Action_STATE;
   int Action2_STATE;
@@ -157,6 +159,7 @@ bool keyboardEmulation = false;
   int Analog_STATE;
   byte Util_Nav_STATE;
   byte Util_Time_STATE;
+  int Rotation_Throttle_STATE;
 
   int Action_LAST;
   int Action2_LAST;
@@ -178,7 +181,8 @@ bool keyboardEmulation = false;
   int Analog_LAST;
   byte Util_Nav_LAST;
   byte Util_Time_LAST;
-
+  int Rotation_Throttle_LAST;
+  
 //|-----------------------|
 //|     Miscellaneous     |
 //|-----------------------|
@@ -239,7 +243,7 @@ bool keyboardEmulation = false;
   bool Action_flag[10] = {false, false, false, false, false, false, false, false, false, false};
   bool Action2_flag[10] = {false, false, false, false, false, false, false, false, false, false};
   bool Action3_flag[10] = {false, false, false, false, false, false, false, false, false, false};
-
+  bool Rotation_Throttle_flag[9] = {false, false, false, false, false, false, false, false, false};
 
 //|-------------------|
 //|      Analog       |

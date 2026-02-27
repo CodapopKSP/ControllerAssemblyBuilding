@@ -77,11 +77,11 @@ void Translation_Action() {
       }
     } else {
       // Controller is in Keyboard Emulation mode
+      setSimpitAction(Translation[0] & 1, Translation_Cruise, Translation_flag[4], tapKey);
       setSimpitAction_Switch(Translation[0] & 2, Translation_Precision_Control, Translation_flag[0], tapKey, tapKey);
       setSimpitAction_Switch(Translation[0] & 4, Translation_Brakes_Lock, Translation_flag[1], tapKey, tapKey);
       setSimpitAction(Translation[0] & 8, Translation_Brakes, Translation_flag[2], tapKey);
       setSimpitAction(Translation[0] & 16, Translation_Reset_Cruise, Translation_flag[3], tapKey);
-      setSimpitAction(Translation[0] & 32, Translation_Cruise, Translation_flag[4], tapKey);
     }
     Translation_LAST = Translation_STATE;Translation_LAST = Translation_STATE;
   }
@@ -109,13 +109,12 @@ void Translation_Action() {
     sendTranslationIfChanged();
     sendWheelIfChanged();
   } else {
-  
-    setAnalogAxisKey(Translation_axis2, deadZone_max, true,  Translation_Twist_Right,   Translation_flag[6]);
-    setAnalogAxisKey(Translation_axis2, deadZone_min, false, Translation_Twist_Left,    Translation_flag[7]);
-    setAnalogAxisKey(Translation_axis1, deadZone_max, true,  Translation_Forward,       Translation_flag[8]);
-    setAnalogAxisKey(Translation_axis1, deadZone_min, false, Translation_Backward,      Translation_flag[9]);
-    setAnalogAxisKey(Translation_axis0, deadZone_max, true,  Translation_Right,         Translation_flag[10]);
-    setAnalogAxisKey(Translation_axis0, deadZone_min, false, Translation_Left,          Translation_flag[11]);
+    setKey(Translation_axis2 > keyboardEmulation_threshold, Translation_Twist_Left, Translation_flag[6]);
+    setKey(Translation_axis2 < -keyboardEmulation_threshold, Translation_Twist_Right, Translation_flag[7]);
+    setKey(Translation_axis1 > keyboardEmulation_threshold, Translation_Backward, Translation_flag[8]);
+    setKey(Translation_axis1 < -keyboardEmulation_threshold, Translation_Forward, Translation_flag[9]);
+    setKey(Translation_axis0 > keyboardEmulation_threshold, Translation_Left, Translation_flag[10]);
+    setKey(Translation_axis0 < -keyboardEmulation_threshold, Translation_Right, Translation_flag[11]);
   }
 }
 

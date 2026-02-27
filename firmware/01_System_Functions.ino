@@ -173,15 +173,6 @@ static void setSimpitAction_Switch(bool state, byte action, bool &flag, void (*o
   }
 }
 
-// Keyboard emulation functions for analog joysticks.
-static void setAnalogAxisKey(int axisValue, int threshold, bool positiveDir, uint8_t key, bool &flag) {
-  if (positiveDir) {
-    setKey_Switch(axisValue > threshold, key, flag);
-  } else {
-    setKey_Switch(axisValue < threshold, key, flag);
-  }
-}
-
 // Wrapper so setSimpitAction can call activateAction (member functions can't be passed as pointers).
 static void simpitActivateAction(byte action) {
   mySimpit.activateAction(action);

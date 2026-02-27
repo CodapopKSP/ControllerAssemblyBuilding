@@ -75,6 +75,7 @@ void setup() {
     if (checkEmuButton(Camera_Con, Camera_, TWO_BYTES)) break;
     delay(10);
   }
+  Keyboard.releaseAll();
   
   if (!keyboardEmulation) {
     if (mySimpit.connectedToKSP2()) {
@@ -94,6 +95,7 @@ void setup() {
   // Setup Analogs
   if (Rotation_Throttle_Con or Translation_Con or Rotation_Con or Analog_Con or Analog_Throttle_Con) {
     analogSetup();
+    Keyboard.releaseAll();
   }
 }
 
