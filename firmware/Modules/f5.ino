@@ -26,12 +26,6 @@ void Translation_Action() {
     if (!keyboardEmulation) {
       // Controller is in KSP mode
       if (On_EVA and !EVA_Ctrl_Con) {
-        setKey(Translation_axis0 < 0, EVA_List_Analog[9], EVA_flag[0]);
-        setKey(Translation_axis0 > 0, EVA_List_Analog[7], EVA_flag[1]);
-        setKey(Translation_axis2 < 0, EVA_List_Analog[4], EVA_flag[2]);
-        setKey(Translation_axis2 > 0, EVA_List_Analog[5], EVA_flag[3]);
-        setKey(Translation_axis1 < 0, EVA_List_Analog[6], EVA_flag[4]);
-        setKey(Translation_axis1 > 0, EVA_List_Analog[8], EVA_flag[5]);
         setKey(Translation[0] & 8, EVA_List_Analog[2], EVA_flag[6]);
         setKey(Translation[0] & 1, EVA_List_Analog[1], EVA_flag[7]);
         setKey(Translation[0] & 16, EVA_List_Analog[0], EVA_flag[8]);
@@ -109,12 +103,21 @@ void Translation_Action() {
     sendTranslationIfChanged();
     sendWheelIfChanged();
   } else {
-    setKey(Translation_axis2 > keyboardEmulation_threshold, Translation_Twist_Left, Translation_flag[6]);
-    setKey(Translation_axis2 < -keyboardEmulation_threshold, Translation_Twist_Right, Translation_flag[7]);
-    setKey(Translation_axis1 > keyboardEmulation_threshold, Translation_Backward, Translation_flag[8]);
-    setKey(Translation_axis1 < -keyboardEmulation_threshold, Translation_Forward, Translation_flag[9]);
-    setKey(Translation_axis0 > keyboardEmulation_threshold, Translation_Left, Translation_flag[10]);
-    setKey(Translation_axis0 < -keyboardEmulation_threshold, Translation_Right, Translation_flag[11]);
+    if (On_EVA and !EVA_Ctrl_Con) {
+      setKey(Translation_axis0 < 0, EVA_List_Analog[9], EVA_flag[0]);
+      setKey(Translation_axis0 > 0, EVA_List_Analog[7], EVA_flag[1]);
+      setKey(Translation_axis2 < 0, EVA_List_Analog[4], EVA_flag[2]);
+      setKey(Translation_axis2 > 0, EVA_List_Analog[5], EVA_flag[3]);
+      setKey(Translation_axis1 < 0, EVA_List_Analog[6], EVA_flag[4]);
+      setKey(Translation_axis1 > 0, EVA_List_Analog[8], EVA_flag[5]);
+    } else {
+      setKey(Translation_axis2 > keyboardEmulation_threshold, Translation_Twist_Left, Translation_flag[6]);
+      setKey(Translation_axis2 < -keyboardEmulation_threshold, Translation_Twist_Right, Translation_flag[7]);
+      setKey(Translation_axis1 > keyboardEmulation_threshold, Translation_Backward, Translation_flag[8]);
+      setKey(Translation_axis1 < -keyboardEmulation_threshold, Translation_Forward, Translation_flag[9]);
+      setKey(Translation_axis0 > keyboardEmulation_threshold, Translation_Left, Translation_flag[10]);
+      setKey(Translation_axis0 < -keyboardEmulation_threshold, Translation_Right, Translation_flag[11]);
+    }
   }
 }
 
