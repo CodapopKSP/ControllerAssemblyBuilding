@@ -76,7 +76,7 @@ let moduleData = [
         kit_price: 51,
         image: "modules/time.png",
         image_light: "modules/light/time_l.png",
-        tooltip: "The Time module manages the timewarp functions of the game. A large rocker switch allows you to step up/down timewarp speeds. A button with an LED indicator lights up if the game is in timewarp, and pressing it will cancel timewarp. Physical timewarp can be activated by holding a button and pressing the large rocker. Another button allows you to warp directly to the next maneuver node. Three more buttons allow you to pause, quicksave, and load the last quicksave. Note: This module is only available for Windows. This module has a function from KSP1 that won't work in KSP2 (Phys TW); Consider requesting a modification.",
+        tooltip: "The Time module manages the timewarp functions of the game. A large rocker switch allows you to step up/down timewarp speeds. A button with an LED indicator lights up if the game is in timewarp, and pressing it will cancel timewarp. Physical timewarp can be activated by holding a button and pressing the large rocker. Another button allows you to warp directly to the next maneuver node. Three more buttons allow you to pause, quicksave, and load the last quicksave.",
         has: ['Timewarp', 'Pause', 'Save', 'Load'],
         needs_data: true
     },
@@ -87,7 +87,7 @@ let moduleData = [
         kit_price: 45,
         image: "modules/nav1.png",
         image_light: "modules/light/nav1_l.png",
-        tooltip: "The Navigation module manages the map and navball. Two large toggle switches activate/decativate the Map/Navball and light up slightly while on. The rest of the buttons allow you to change views while in map mode, change the navball mode (orbit/surface/target) or switch between nearby vessels. Note: This module is only available for Windows. This module is not recommended for KSP2.",
+        tooltip: "The Navigation module manages the map and navball. Two large toggle switches activate/decativate the Map/Navball and light up slightly while on. The rest of the buttons allow you to change views while in map mode, change the navball mode (orbit/surface/target) or switch between nearby vessels.",
         has: ['Map']
     },
     {
@@ -97,7 +97,7 @@ let moduleData = [
         kit_price: 51,
         image: "modules/nav2.png",
         image_light: "modules/light/nav2_l.png",
-        tooltip: "The Navigation (Time) module combines some of the features of the Navigation module and the Time module. A large switch toggles the Map and lights up slightly while on. A large rocker switch allows you to step up/down timewarp speeds. A button with an LED indicator lights up if the game is in timewarp, and pressing it will cancel timewarp. Physical timewarp can be activated by holding a button and pressing the large rocker. Other buttons handle warpingto the next maneuver node, Cycle Ship, and Reset Map Focus. Note: This module is only available for Windows. This module has a function from KSP1 that won't work in KSP2 (Phys TW); Consider requesting a modification.",
+        tooltip: "The Navigation (Time) module combines some of the features of the Navigation module and the Time module. A large switch toggles the Map and lights up slightly while on. A large rocker switch allows you to step up/down timewarp speeds. A button with an LED indicator lights up if the game is in timewarp, and pressing it will cancel timewarp. Physical timewarp can be activated by holding a button and pressing the large rocker. Other buttons handle warpingto the next maneuver node, Cycle Ship, and Reset Map Focus.",
         has: ['Timewarp', 'Map'],
         needs_data: true
     },
@@ -108,7 +108,7 @@ let moduleData = [
         kit_price: 51,
         image: "modules/utility_nav.png",
         image_light: "modules/light/utility_nav_l.png",
-        tooltip: "The Utility (Navigation) module combines some of the features of the Navigation module and the EVA module. A large switch toggles the Map and lights up slightly while on. It includes buttons for EVA functions as well as buttons for cycling the Navball mode and cycling ships. Parachute deployment can be achieved by pressing both the Jump and Light buttons at the same time. It also features a Monopropellant fuel gauge to show the current fuel level of the kerbal's jetpack. Note: This module is only available for Windows.",
+        tooltip: "The Utility (Navigation) module combines some of the features of the Navigation module and the EVA module. A large switch toggles the Map and lights up slightly while on. It includes buttons for EVA functions as well as buttons for cycling the Navball mode and cycling ships. Parachute deployment can be achieved by pressing both the Jump and Light buttons at the same time. It also features a Monopropellant fuel gauge to show the current fuel level of the kerbal's jetpack.",
         has: ['EVA', 'Map'],
         needs_data: true
     },
@@ -119,7 +119,7 @@ let moduleData = [
         kit_price: 51,
         image: "modules/utility_time.png",
         image_light: "modules/light/utility_time_l.png",
-        tooltip: "The Utility (Time) module combines some of the features of the Time module and the EVA module. It includes buttons for EVA functions as well as buttons for pause, quicksave, and quickload. Parachute deployment can be achieved by pressing both the Jump and Light buttons at the same time. It also features a Monopropellant fuel gauge to show the current fuel level of the kerbal's jetpack. Note: This module is only available for Windows.",
+        tooltip: "The Utility (Time) module combines some of the features of the Time module and the EVA module. It includes buttons for EVA functions as well as buttons for pause, quicksave, and quickload. Parachute deployment can be achieved by pressing both the Jump and Light buttons at the same time. It also features a Monopropellant fuel gauge to show the current fuel level of the kerbal's jetpack.",
         has: ['EVA', 'Pause', 'Save', 'Load'],
         needs_data: true
     },
@@ -130,7 +130,7 @@ let moduleData = [
         kit_price: 51,
         image: "modules/eva.png",
         image_light: "modules/light/eva_l.png",
-        tooltip: "The EVA module controls Kerbals while on EVA. It provides dedicated inputs for walking/flying, and it includes buttons for the other EVA functions. Parachute deployment can be achieved by pressing both the Jump and Light buttons at the same time. It also features a Monopropellant fuel gauge to show the current fuel level of the kerbal's jetpack. Note: This module is only available for Windows.",
+        tooltip: "The EVA module controls Kerbals while on EVA. It provides dedicated inputs for walking/flying, and it includes buttons for the other EVA functions. Parachute deployment can be achieved by pressing both the Jump and Light buttons at the same time. It also features a Monopropellant fuel gauge to show the current fuel level of the kerbal's jetpack.",
         needs_data: true
     },
     {
@@ -251,7 +251,7 @@ let moduleData = [
         price: 75,
         kit_price: 45,
         image: "modules/camera.png",
-        tooltip: "The Camera module allows you to change the view and position of the camera. The white buttons control the camera angle, and the rest of the buttons toggle the UI, take a screenshot, toggle IVA view, and cycle the camera modes. Note: This module is only available for Windows.",
+        tooltip: "The Camera module allows you to change the view and position of the camera. The white buttons control the camera angle, and the rest of the buttons toggle the UI, take a screenshot, toggle IVA view, and cycle the camera modes.",
     },
     {
         name: "Telemetry Module",
