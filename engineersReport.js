@@ -183,9 +183,6 @@ engineersReport.addEventListener('click', function() {
       if (missingFunctions.length > 0) {
         recommendation += `<p style="color: #ffe600;">You are missing a way to control ${missingFunctions.join(', ')}.</p>`;
       }
-      if (telemetryConflict) {
-        recommendation += `<p style="color: #ffe600;">You are using the Telemetry module with another module that needs data from Simpit. This will result in the second module's displays not updating properly. Please use multiple containers instead.</p>`;
-      }
       if (rotTransSeparated) {
         recommendation += `<p style="color: #ffe600;">The Rotation and Translation modules must be in the same container.</p>`;
       }
