@@ -40,6 +40,8 @@ leftArray.addEventListener('mouseout', function() {
 let NullContainer = false;
 let containerColor = "rgb(0,0,0)";
 let kit = kitConfigString === 'true';
+const moduleSpriteSheetImage = new Image();
+moduleSpriteSheetImage.src = 'modules/sprite.png';
 
 function createModuleImageElement(imagePath, className) {
   const spriteMap = window.moduleSpriteMap || {};
@@ -67,6 +69,97 @@ function createModuleImageElement(imagePath, className) {
   moduleImage.src = imagePath;
   moduleImage.classList.add(className);
   return moduleImage;
+}
+
+function applyModuleSpriteBackground(element, imagePath) {
+  const spriteMap = window.moduleSpriteMap || {};
+  const spriteMeta = window.moduleSpriteSheetMeta || {};
+  const spriteCoords = spriteMap[imagePath];
+  if (spriteCoords && spriteMeta.width && spriteMeta.height) {
+    const elementWidth = element.clientWidth || 1;
+    const elementHeight = element.clientHeight || 1;
+    const scaleX = elementWidth / spriteCoords.w;
+    const scaleY = elementHeight / spriteCoords.h;
+    element.style.backgroundImage = "url('modules/sprite.png')";
+    element.style.backgroundSize = `${spriteMeta.width * scaleX}px ${spriteMeta.height * scaleY}px`;
+    element.style.backgroundPosition = `${-spriteCoords.x * scaleX}px ${-spriteCoords.y * scaleY}px`;
+    element.style.backgroundRepeat = 'no-repeat';
+    return true;
+  }
+  return false;
+}
+
+function createModuleDragPreview(module) {
+  const dragPreview = document.createElement('div');
+  dragPreview.style.position = 'fixed';
+  dragPreview.style.left = '-1000px';
+  dragPreview.style.top = '-1000px';
+  dragPreview.style.width = `${module.offsetWidth}px`;
+  dragPreview.style.height = `${module.offsetHeight}px`;
+  dragPreview.style.margin = '0';
+  dragPreview.style.pointerEvents = 'none';
+  dragPreview.style.overflow = 'hidden';
+
+  const image1 = module.querySelector('.image-1');
+  const imagePath = image1 && image1.classList.contains('hidden')
+    ? module.dataset.imageLight || module.dataset.image
+    : module.dataset.image;
+
+  if (!applyModuleSpriteBackground(dragPreview, imagePath || '')) {
+    const fallbackImage = document.createElement('img');
+    fallbackImage.src = imagePath || '';
+    fallbackImage.style.width = '100%';
+    fallbackImage.style.height = '100%';
+    fallbackImage.draggable = false;
+    dragPreview.appendChild(fallbackImage);
+  }
+
+  return dragPreview;
+}
+
+function createModuleDragCanvas(module) {
+  const image1 = module.querySelector('.image-1');
+  const imagePath = image1 && image1.classList.contains('hidden')
+    ? module.dataset.imageLight || module.dataset.image
+    : module.dataset.image;
+  if (!imagePath) {
+    return null;
+  }
+
+  const spriteMap = window.moduleSpriteMap || {};
+  const spriteCoords = spriteMap[imagePath];
+  if (!spriteCoords || !moduleSpriteSheetImage.complete) {
+    return null;
+  }
+
+  const width = Math.max(1, Math.round(module.offsetWidth));
+  const height = Math.max(1, Math.round(module.offsetHeight));
+  const pixelRatio = window.devicePixelRatio || 1;
+  const canvas = document.createElement('canvas');
+  canvas.width = Math.round(width * pixelRatio);
+  canvas.height = Math.round(height * pixelRatio);
+  canvas.style.width = `${width}px`;
+  canvas.style.height = `${height}px`;
+
+  const context = canvas.getContext('2d');
+  if (!context) {
+    return null;
+  }
+
+  context.scale(pixelRatio, pixelRatio);
+  context.drawImage(
+    moduleSpriteSheetImage,
+    spriteCoords.x,
+    spriteCoords.y,
+    spriteCoords.w,
+    spriteCoords.h,
+    0,
+    0,
+    width,
+    height
+  );
+
+  return canvas;
 }
 
 
@@ -109,6 +202,10 @@ moduleData.forEach(module => {
   moduleElement.setAttribute('data-price', module.price);
   moduleElement.setAttribute('data-kit_price', module.kit_price);
   moduleElement.setAttribute('data-name', module.name);
+  moduleElement.dataset.image = module.image;
+  if (module.image_light) {
+    moduleElement.dataset.imageLight = module.image_light;
+  }
 
   // Create the module image element
   const moduleImage = createModuleImageElement(module.image, 'image-1');
@@ -768,25 +865,13 @@ modules.forEach(module => {
     */
     module.classList.add('dragging');
     event.dataTransfer.setData('text/plain', this.id);
-    const dragPreview = module.cloneNode(true);
-    dragPreview.style.position = 'fixed';
-    dragPreview.style.left = '-1000px';
-    dragPreview.style.top = '-1000px';
-    dragPreview.style.width = `${module.offsetWidth}px`;
-    dragPreview.style.height = `${module.offsetHeight}px`;
-    dragPreview.style.margin = '0';
-    dragPreview.style.pointerEvents = 'none';
-    dragPreview.style.overflow = 'hidden';
-    dragPreview.classList.remove('dragging', 'mouseover');
-    const previewTooltip = dragPreview.querySelector('.tooltip');
-    if (previewTooltip) {
-      previewTooltip.style.display = 'none';
+    event.dataTransfer.effectAllowed = 'move';
+    const dragCanvas = createModuleDragCanvas(module);
+    if (dragCanvas) {
+      event.dataTransfer.setDragImage(dragCanvas, module.offsetWidth / 2, module.offsetHeight / 2);
+    } else {
+      event.dataTransfer.setDragImage(module, module.offsetWidth / 2, module.offsetHeight / 2);
     }
-    document.body.appendChild(dragPreview);
-    event.dataTransfer.setDragImage(dragPreview, module.offsetWidth / 2, module.offsetHeight / 2);
-    setTimeout(() => {
-      dragPreview.remove();
-    }, 0);
     let tooltip = module.querySelector(".tooltip");
     tooltip.style.display = 'none';
     setContainerStackZIndex(module, 'reset');
