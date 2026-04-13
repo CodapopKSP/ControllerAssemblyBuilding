@@ -91,12 +91,12 @@ void Rotation_Action() {
 
     sendWheelIfChanged();
   } else {
-    setAnalogAxisKey(Rotation_axis2, deadZone_max, true,  Rotation_Twist_Right,   Rotation_flag[6]);
-    setAnalogAxisKey(Rotation_axis2, deadZone_min, false, Rotation_Twist_Left,    Rotation_flag[7]);
-    setAnalogAxisKey(Rotation_axis1, deadZone_max, true,  Rotation_Forward,       Rotation_flag[8]);
-    setAnalogAxisKey(Rotation_axis1, deadZone_min, false, Rotation_Backward,      Rotation_flag[9]);
-    setAnalogAxisKey(Rotation_axis0, deadZone_max, true,  Rotation_Right,         Rotation_flag[10]);
-    setAnalogAxisKey(Rotation_axis0, deadZone_min, false, Rotation_Left,          Rotation_flag[11]);
+    setKey(Rotation_axis2 > keyboardEmulation_threshold, Rotation_Twist_Right, Rotation_flag[6]);
+    setKey(Rotation_axis2 < -keyboardEmulation_threshold, Rotation_Twist_Left, Rotation_flag[7]);
+    setKey(Rotation_axis1 > keyboardEmulation_threshold, Rotation_Backward, Rotation_flag[8]);
+    setKey(Rotation_axis1 < -keyboardEmulation_threshold, Rotation_Forward, Rotation_flag[9]);
+    setKey(Rotation_axis0 > keyboardEmulation_threshold, Rotation_Right, Rotation_flag[10]);
+    setKey(Rotation_axis0 < -keyboardEmulation_threshold, Rotation_Left, Rotation_flag[11]);
   }
 }
 

@@ -200,6 +200,7 @@ bool keyboardEmulation = false;
   bool On_EVA = false;
   int LCD_transmit = 0;
   byte LCD_mode = 0;
+  byte LCD_mode_registered = 255;
   String LCD_data[10] = {"0", "0", "0", "0", "0", "0", "0", "0", "0", "0"};
 
   int ControlSys_combinedBytes;

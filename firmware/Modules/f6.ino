@@ -23,7 +23,7 @@ void Throttle_Action() {
       // Controller is in Keyboard Emulation mode
       setSimpitAction_Switch(Throttle[0] & 1, Throttle_Precision, Throttle_flag[0], tapKey, tapKey);
       setSimpitAction(Throttle[0] & 2, Throttle_Min, Throttle_flag[1], tapKey);
-      setAnalogAxisKey(throttle, throttle_min+100, true,  Throttle_Forward,   Throttle_flag[2]);
+      setKey(throttle > throttle_min+100, Throttle_Forward, Throttle_flag[2]);
     }
   }
   Throttle_LAST = Throttle_STATE;
