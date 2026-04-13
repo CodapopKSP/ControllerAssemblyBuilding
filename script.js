@@ -41,6 +41,34 @@ let NullContainer = false;
 let containerColor = "rgb(0,0,0)";
 let kit = kitConfigString === 'true';
 
+function createModuleImageElement(imagePath, className) {
+  const spriteMap = window.moduleSpriteMap || {};
+  const spriteMeta = window.moduleSpriteSheetMeta || {};
+  const spriteCoords = spriteMap[imagePath];
+
+  if (spriteCoords && spriteMeta.width && spriteMeta.height) {
+    const moduleImage = document.createElement('div');
+    moduleImage.classList.add(className);
+    moduleImage.classList.add('module-image');
+
+    const spriteImage = document.createElement('img');
+    spriteImage.src = 'modules/sprite.png';
+    spriteImage.classList.add('module-sprite-image');
+    spriteImage.style.width = `${(spriteMeta.width / spriteCoords.w) * 100}%`;
+    spriteImage.style.height = `${(spriteMeta.height / spriteCoords.h) * 100}%`;
+    spriteImage.style.left = `-${(spriteCoords.x / spriteCoords.w) * 100}%`;
+    spriteImage.style.top = `-${(spriteCoords.y / spriteCoords.h) * 100}%`;
+    moduleImage.appendChild(spriteImage);
+
+    return moduleImage;
+  }
+
+  const moduleImage = document.createElement('img');
+  moduleImage.src = imagePath;
+  moduleImage.classList.add(className);
+  return moduleImage;
+}
+
 
 
 //|----------------------|
@@ -83,16 +111,12 @@ moduleData.forEach(module => {
   moduleElement.setAttribute('data-name', module.name);
 
   // Create the module image element
-  const moduleImage = document.createElement('img');
-  moduleImage.src = module.image;
-  moduleImage.classList.add('image-1');
+  const moduleImage = createModuleImageElement(module.image, 'image-1');
   moduleElement.appendChild(moduleImage);
 
   // Check if the module has the image_light property for turning the lights on and off
   if (module.image_light) {
-    const moduleImageLight = document.createElement('img');
-    moduleImageLight.src = module.image_light;
-    moduleImageLight.classList.add('image-2');
+    const moduleImageLight = createModuleImageElement(module.image_light, 'image-2');
     moduleImageLight.classList.add('hidden');
     moduleElement.appendChild(moduleImageLight);
     moduleElement.classList.add('light');
