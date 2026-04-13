@@ -43,10 +43,46 @@ let kit = kitConfigString === 'true';
 const moduleSpriteSheetImage = new Image();
 moduleSpriteSheetImage.src = 'modules/sprite.png';
 
+// Fine-tuning controls for sprite placement/scaling.
+// Supports decimal nudges for very small adjustments.
+const SPRITE_TUNING = {
+  module: {
+    scaleX: 1,
+    scaleY: 1,
+    offsetXPx: 0,
+    offsetYPx: 0,
+    lightOffsetXPx: 0.4,
+    lightOffsetYPx: 0,
+    perImage: {}
+  },
+  container: {
+    scaleX: 1,
+    scaleY: 1,
+    offsetXPx: 0,
+    offsetYPx: 0,
+    perImage: {
+      'containers/angled.png': { scaleX: 0.55, scaleY: 0.55 },
+      'containers/level.png': { scaleX: 0.55, scaleY: 0.55 }
+    }
+  }
+};
+
+function getSpriteTuning(kind, imagePath, isLight = false) {
+  const base = SPRITE_TUNING[kind] || {};
+  const perImage = (base.perImage && base.perImage[imagePath]) || {};
+  return {
+    scaleX: (perImage.scaleX ?? base.scaleX ?? 1),
+    scaleY: (perImage.scaleY ?? base.scaleY ?? 1),
+    offsetXPx: (perImage.offsetXPx ?? base.offsetXPx ?? 0) + (isLight ? (base.lightOffsetXPx ?? 0) : 0),
+    offsetYPx: (perImage.offsetYPx ?? base.offsetYPx ?? 0) + (isLight ? (base.lightOffsetYPx ?? 0) : 0)
+  };
+}
+
 function createModuleImageElement(imagePath, className) {
   const spriteMap = window.moduleSpriteMap || {};
   const spriteMeta = window.moduleSpriteSheetMeta || {};
   const spriteCoords = spriteMap[imagePath];
+  const tuning = getSpriteTuning('module', imagePath, className === 'image-2');
 
   if (spriteCoords && spriteMeta.width && spriteMeta.height) {
     const moduleImage = document.createElement('div');
@@ -56,10 +92,10 @@ function createModuleImageElement(imagePath, className) {
     const spriteImage = document.createElement('img');
     spriteImage.src = 'modules/sprite.png';
     spriteImage.classList.add('module-sprite-image');
-    spriteImage.style.width = `${(spriteMeta.width / spriteCoords.w) * 100}%`;
-    spriteImage.style.height = `${(spriteMeta.height / spriteCoords.h) * 100}%`;
-    spriteImage.style.left = `-${(spriteCoords.x / spriteCoords.w) * 100}%`;
-    spriteImage.style.top = `-${(spriteCoords.y / spriteCoords.h) * 100}%`;
+    spriteImage.style.width = `${((spriteMeta.width / spriteCoords.w) * 100) * tuning.scaleX}%`;
+    spriteImage.style.height = `${((spriteMeta.height / spriteCoords.h) * 100) * tuning.scaleY}%`;
+    spriteImage.style.left = `calc(-${(spriteCoords.x / spriteCoords.w) * 100}% + ${tuning.offsetXPx}px)`;
+    spriteImage.style.top = `calc(-${(spriteCoords.y / spriteCoords.h) * 100}% + ${tuning.offsetYPx}px)`;
     moduleImage.appendChild(spriteImage);
 
     return moduleImage;
@@ -76,13 +112,14 @@ function applyModuleSpriteBackground(element, imagePath) {
   const spriteMeta = window.moduleSpriteSheetMeta || {};
   const spriteCoords = spriteMap[imagePath];
   if (spriteCoords && spriteMeta.width && spriteMeta.height) {
+    const tuning = getSpriteTuning('module', imagePath, false);
     const elementWidth = element.clientWidth || 1;
     const elementHeight = element.clientHeight || 1;
-    const scaleX = elementWidth / spriteCoords.w;
-    const scaleY = elementHeight / spriteCoords.h;
+    const scaleX = (elementWidth / spriteCoords.w) * tuning.scaleX;
+    const scaleY = (elementHeight / spriteCoords.h) * tuning.scaleY;
     element.style.backgroundImage = "url('modules/sprite.png')";
     element.style.backgroundSize = `${spriteMeta.width * scaleX}px ${spriteMeta.height * scaleY}px`;
-    element.style.backgroundPosition = `${-spriteCoords.x * scaleX}px ${-spriteCoords.y * scaleY}px`;
+    element.style.backgroundPosition = `${-spriteCoords.x * scaleX + tuning.offsetXPx}px ${-spriteCoords.y * scaleY + tuning.offsetYPx}px`;
     element.style.backgroundRepeat = 'no-repeat';
     return true;
   }
@@ -94,17 +131,14 @@ function applyContainerSpriteBackground(element, imagePath) {
   const spriteMeta = window.containerSpriteSheetMeta || {};
   const spriteCoords = spriteMap[imagePath];
   if (spriteCoords && spriteMeta.width && spriteMeta.height) {
+    const tuning = getSpriteTuning('container', imagePath, false);
     const elementWidth = element.clientWidth || spriteCoords.w;
     const elementHeight = element.clientHeight || spriteCoords.h;
-    let scaleX = elementWidth / spriteCoords.w;
-    let scaleY = elementHeight / spriteCoords.h;
-    if (imagePath.endsWith('/angled.png') || imagePath.endsWith('/level.png')) {
-      scaleX *= 0.55;
-      scaleY *= 0.55;
-    }
+    const scaleX = (elementWidth / spriteCoords.w) * tuning.scaleX;
+    const scaleY = (elementHeight / spriteCoords.h) * tuning.scaleY;
     element.style.backgroundImage = "url('containers/sprite.png')";
     element.style.backgroundSize = `${spriteMeta.width * scaleX}px ${spriteMeta.height * scaleY}px`;
-    element.style.backgroundPosition = `${-spriteCoords.x * scaleX}px ${-spriteCoords.y * scaleY}px`;
+    element.style.backgroundPosition = `${-spriteCoords.x * scaleX + tuning.offsetXPx}px ${-spriteCoords.y * scaleY + tuning.offsetYPx}px`;
     element.style.backgroundRepeat = 'no-repeat';
     return;
   }

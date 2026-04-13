@@ -50,3 +50,32 @@ Discord: codapopksp
 Email: UntitledSpaceCraft.Controllers@gmail.com
 
 Instagram: untitled_space_craft
+
+## Sprite Fine Tuning
+
+Use `build_sprites.py` to regenerate sheets:
+
+```bash
+python3 build_sprites.py --target modules
+python3 build_sprites.py --target containers
+python3 build_sprites.py --target all
+```
+
+For very fine runtime tuning (including decimal nudges), edit `SPRITE_TUNING` near the top of `script.js`.
+
+- `SPRITE_TUNING.module.scaleX/scaleY`
+- `SPRITE_TUNING.module.offsetXPx/offsetYPx`
+- `SPRITE_TUNING.module.lightOffsetXPx/lightOffsetYPx`
+- `SPRITE_TUNING.module.perImage['modules/<name>.png']`
+- `SPRITE_TUNING.container.perImage['containers/<name>.png']`
+
+Example:
+
+```js
+SPRITE_TUNING.module.perImage['modules/ag1.png'] = {
+  offsetXPx: 0.25,
+  offsetYPx: -0.15,
+  scaleX: 1.001,
+  scaleY: 1
+};
+```
