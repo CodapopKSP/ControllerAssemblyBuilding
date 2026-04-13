@@ -169,6 +169,72 @@ colorButtons.forEach((button) => {
 //|     Header Buttons     |
 //|------------------------|
 
+const recommendedConfigs = [
+  { name: "Jebediah's Command", config: 'z2400h1b1b4g1a3f3f5f6', color: 'rgb(0,0,0)', description: 'JebediahsCommandDescription' },
+  { name: 'USS Button Box', config: 'z2300b3a4g1f3f6f5', color: 'rgb(10,136,176)', description: 'ButtonBoxDescription' },
+  { name: "Keyboard's Lament", config: 'z2300b5h1b3f2a5e1', color: 'rgb(222,78,5)', description: 'KeyboardsLamentDescription' },
+  { name: 'Keyboard Companion', config: 'z1200f2a5', color: 'rgb(52,38,125)', description: 'KeybCompanion1Description' },
+  { name: 'Keyboard Companion 2', config: 'z1200f2g1', color: 'rgb(207,199,163)', description: 'KeybCompanion2Description' },
+  { name: 'External Command Seat', config: 'z2200a5b3f4f5', color: 'rgb(202,202,202)', description: 'ExtCommandSeat1Description' },
+  { name: 'External Command Seat 2', config: 'z2200g1b3f2a4', color: 'rgb(14,98,38)', description: 'ExtCommandSeat2Description' },
+  { name: "Valentina's Command", config: 'z2313h1b3b5f1f6g1z2115c1a3', color: 'rgb(255,255,255)', description: 'ValentinasCommandDescription' },
+  { name: 'Mission Control', config: 'z3111a1h3e1z2413g1b1h1h2d1f3a2f5z3116c1b2f6', color: 'rgb(173,22,27)', description: 'MissionControlDescription' }
+];
+
+function resetControllerBuilder(updateUrl = true) {
+  const sideModuleDocks = document.querySelectorAll('.module-dock[data-type="type2"]');
+  const dockedModules = document.querySelectorAll('.module-dock[data-type="type1"] .module');
+  dockedModules.forEach(module => {
+    for (const sideModuleDock of sideModuleDocks) {
+      if (sideModuleDock.querySelectorAll('.module').length === 0) {
+        sideModuleDock.appendChild(module);
+        break;
+      }
+    }
+  });
+
+  const containerBoxes = document.querySelectorAll('.container-box');
+  containerBoxes.forEach(containerBox => containerBox.remove());
+
+  const containerGrids = document.querySelectorAll('.container-grid');
+  containerGrids.forEach(containerGrid => {
+    containerGrid.classList.remove('has-24child', 'has-23child', 'has-22child', 'has-12child', 'has-31child', 'has-13child', 'has-21child', 'has-11child');
+  });
+
+  const welcomeMessage = document.getElementById('welcome-message');
+  welcomeMessage.style.display = '';
+
+  const recConfigsDescriptionLabel = document.getElementById('recommended-configs-description');
+  const recConfigsDescriptionWrapper = document.getElementById('recommended-configs-description-wrapper');
+  recConfigsDescriptionLabel.style.visibility = 'hidden';
+  recConfigsDescriptionWrapper.style.width = '';
+  recConfigsDescriptionWrapper.style.top = '';
+  recConfigsDescriptionWrapper.style.left = '';
+
+  NullContainer = false;
+  containerColor = "rgb(0,0,0)";
+  if (kit) {
+    kit = false;
+    kitSwitch.classList.remove('active');
+  }
+
+  updateTotalPrice();
+
+  if (updateUrl) {
+    history.replaceState({}, '', window.location.pathname);
+  }
+}
+
+function applyRecommendedConfig(recommendedConfig) {
+  resetControllerBuilder(false);
+  loadController(recommendedConfig.config, recommendedConfig.color, null, recommendedConfig.description);
+  const params = new URLSearchParams();
+  params.set('config', recommendedConfig.config);
+  params.set('color', recommendedConfig.color);
+  params.set('description', recommendedConfig.description);
+  history.replaceState({}, '', `${window.location.pathname}?${params.toString()}`);
+}
+
 // Recommended Configurations Button
 const recommendedConfigsButton = document.getElementById('recommendedConfigs');
 recommendedConfigsButton.addEventListener('click', function() {
@@ -177,16 +243,9 @@ recommendedConfigsButton.addEventListener('click', function() {
   */
   Swal.fire({
     title: 'Recommended Configurations',
-    html:
-    '<button id="btn1" class="btn btn-primary text-center" onclick="window.location.href=\'https://untitledspacecraft.com/?config=z2400h1b1b4g1a3f3f5f6&color=rgb(0,0,0)&description=JebediahsCommandDescription\'">Jebediah\'s Command</button>' +
-    '<button id="btn2" class="btn btn-primary text-center" onclick="window.location.href=\'https://untitledspacecraft.com/?config=z2300b3a4g1f3f6f5&color=rgb(10,136,176)&description=ButtonBoxDescription\'">USS Button Box</button>' +
-    '<button id="btn3" class="btn btn-primary text-center" onclick="window.location.href=\'https://untitledspacecraft.com/?config=z2300b5h1b3f2a5e1&color=rgb(222,78,5)&description=KeyboardsLamentDescription\'">Keyboard\'s Lament</button>' +
-    '<button id="btn1" class="btn btn-primary text-center" onclick="window.location.href=\'https://untitledspacecraft.com/?config=z1200f2a5&color=rgb(52,38,125)&description=KeybCompanion1Description\'">Keyboard Companion</button>' +
-    '<button id="btn1" class="btn btn-primary text-center" onclick="window.location.href=\'https://untitledspacecraft.com/?config=z1200f2g1&color=rgb(207,199,163)&description=KeybCompanion2Description\'">Keyboard Companion 2</button>' +
-    '<button id="btn1" class="btn btn-primary text-center" onclick="window.location.href=\'https://untitledspacecraft.com/?config=z2200a5b3f4f5&color=rgb(202,202,202)&description=ExtCommandSeat1Description\'">External Command Seat</button>' +
-    '<button id="btn1" class="btn btn-primary text-center" onclick="window.location.href=\'https://untitledspacecraft.com/?config=z2200g1b3f2a4&color=rgb(14,98,38)&description=ExtCommandSeat2Description\'">External Command Seat 2</button>' +
-    '<button id="btn1" class="btn btn-primary text-center" onclick="window.location.href=\'https://untitledspacecraft.com/?config=z2313h1b3b5f1f6g1z2115c1a3&color=rgb(255,255,255)&description=ValentinasCommandDescription\'">Valentina\'s Command</button>' +
-    '<button id="btn1" class="btn btn-primary text-center" onclick="window.location.href=\'https://untitledspacecraft.com/?config=z3111a1h3e1z2413g1b1h1h2d1f3a2f5z3116c1b2f6&color=rgb(173,22,27)&description=MissionControlDescription\'">Mission Control</button>',
+    html: recommendedConfigs
+      .map((config, index) => `<button class="btn btn-primary text-center rec-config-btn" data-rec-index="${index}">${config.name}</button>`)
+      .join(''),
     showCancelButton: true,
     cancelButtonText: 'Cancel',
     buttonsStyling: false,
@@ -194,7 +253,24 @@ recommendedConfigsButton.addEventListener('click', function() {
     customClass: {
       cancelButton: 'btn btn-danger',
     },
+    didOpen: () => {
+      document.querySelectorAll('.rec-config-btn').forEach(button => {
+        button.addEventListener('click', () => {
+          const index = Number(button.dataset.recIndex);
+          const recommendedConfig = recommendedConfigs[index];
+          if (recommendedConfig) {
+            applyRecommendedConfig(recommendedConfig);
+            Swal.close();
+          }
+        });
+      });
+    }
   });
+});
+
+const resetButton = document.getElementById('reset');
+resetButton.addEventListener('click', function() {
+  resetControllerBuilder(true);
 });
 
 // Main Price Display
