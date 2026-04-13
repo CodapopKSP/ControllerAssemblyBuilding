@@ -68,13 +68,11 @@ engineersReport.addEventListener('click', function() {
     Check for conflicts across all containers.
       allHasFunctions:      Array of all functions on the controller.
       allNeedsFunctions:    Array of all needed functions on the controller.
-      telemetryConflict:    True if a Telemetry module exists in a container that also has another data-hungry module.
       hasRotOrTrans:        True if any container has Translation or Rotation functions.
       rotTransSeparated:    True if Translation and Rotation are found on separate containers.
   */
   const allHasFunctions = [];
   const allNeedsFunctions = [];
-  let telemetryConflict;
   let hasRotOrTrans;
   let rotTransSeparated;
 
@@ -83,11 +81,9 @@ engineersReport.addEventListener('click', function() {
     /*
       Compile data from each container.
         needsData:                      The container has a module that needs data.
-        hasTelemetry:                   The container has a Telemetry module.
         checkedRotTransThisContainer:   The container has gone through a check for Translation or Rotation.
     */
     let needsData;
-    let hasTelemetry;
     let checkedRotTransThisContainer;
     const modules = containerBox.querySelectorAll('.module');
 
@@ -115,9 +111,6 @@ engineersReport.addEventListener('click', function() {
               rotTransSeparated = true;
             }
           }
-          if (hasValues.includes("Telemetry")) {
-            hasTelemetry = true;
-          }
         }
 
         // Compile a list of functions missing from the container
@@ -131,11 +124,6 @@ engineersReport.addEventListener('click', function() {
         }
       }
     });
-
-    // Mark true if a Telemetry module exists in a container with another data-hungry module
-    if (needsData && hasTelemetry) {
-        telemetryConflict = true;
-    }
   });
 
   // Check if there are any duplicate hasFunctions
@@ -169,10 +157,9 @@ engineersReport.addEventListener('click', function() {
         isSizeMismatch:                   True if all module docks are filled.
         hasFunctionDuplicates.length:     Zero if there are no duplicate functions.
         missingFunctions.length:          Zero if there are no missing functions.
-        telemetryConflict:                True if Telemetry Module exists with other data-hungry modules.
         rotTransSeparated:                True if Translation and Rotation modules are on separate containers.
     */
-    if ((!isSizeMismatch) || (hasFunctionDuplicates.length > 0) || (missingFunctions.length > 0) || (telemetryConflict) || (rotTransSeparated) || NullContainer || kit) {
+    if ((!isSizeMismatch) || (hasFunctionDuplicates.length > 0) || (missingFunctions.length > 0) || (rotTransSeparated) || NullContainer || kit) {
         recommendation += `<hr><p style="color: #afe06b;"><strong>Warning:</strong></p>`;
       if (!isSizeMismatch) {
         recommendation += `<p style="color: #ee2828;">One or more of your containers does not have the correct number of modules.</p>`;
