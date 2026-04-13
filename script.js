@@ -89,6 +89,29 @@ function applyModuleSpriteBackground(element, imagePath) {
   return false;
 }
 
+function applyContainerSpriteBackground(element, imagePath) {
+  const spriteMap = window.containerSpriteMap || {};
+  const spriteMeta = window.containerSpriteSheetMeta || {};
+  const spriteCoords = spriteMap[imagePath];
+  if (spriteCoords && spriteMeta.width && spriteMeta.height) {
+    const elementWidth = element.clientWidth || spriteCoords.w;
+    const elementHeight = element.clientHeight || spriteCoords.h;
+    let scaleX = elementWidth / spriteCoords.w;
+    let scaleY = elementHeight / spriteCoords.h;
+    if (imagePath.endsWith('/angled.png') || imagePath.endsWith('/level.png')) {
+      scaleX *= 0.55;
+      scaleY *= 0.55;
+    }
+    element.style.backgroundImage = "url('containers/sprite.png')";
+    element.style.backgroundSize = `${spriteMeta.width * scaleX}px ${spriteMeta.height * scaleY}px`;
+    element.style.backgroundPosition = `${-spriteCoords.x * scaleX}px ${-spriteCoords.y * scaleY}px`;
+    element.style.backgroundRepeat = 'no-repeat';
+    return;
+  }
+  element.style.backgroundImage = `url('${imagePath}')`;
+  element.style.backgroundSize = 'cover';
+}
+
 function createModuleDragPreview(module) {
   const dragPreview = document.createElement('div');
   dragPreview.style.position = 'fixed';
@@ -690,18 +713,19 @@ document.addEventListener('DOMContentLoaded', () => {
     /*
       addButtonId, containerData, containerClass
     */
-    { addButtonId: 'add-2x4', containerType: MarkV, containerClass: '.two-four' },
-    { addButtonId: 'add-2x3', containerType: MarkIV, containerClass: '.two-three' },
-    { addButtonId: 'add-2x2', containerType: MarkIII, containerClass: '.two-two' },
-    { addButtonId: 'add-1x2', containerType: MarkIhoriz, containerClass: '.one-two' },
-    { addButtonId: 'add-3x1', containerType: MarkIIvert, containerClass: '.three-one' },
-    { addButtonId: 'add-1x3', containerType: MarkIIhoriz, containerClass: '.one-three' },
-    { addButtonId: 'add-2x1', containerType: MarkIvert, containerClass: '.two-one' },
-    { addButtonId: 'add-1x1', containerType: Mark0, containerClass: '.one-one' }
+    { addButtonId: 'add-2x4', containerType: MarkV, containerClass: '.two-four', previewImage: 'containers/2x4.png' },
+    { addButtonId: 'add-2x3', containerType: MarkIV, containerClass: '.two-three', previewImage: 'containers/2x3.png' },
+    { addButtonId: 'add-2x2', containerType: MarkIII, containerClass: '.two-two', previewImage: 'containers/2x2.png' },
+    { addButtonId: 'add-1x2', containerType: MarkIhoriz, containerClass: '.one-two', previewImage: 'containers/1x2.png' },
+    { addButtonId: 'add-3x1', containerType: MarkIIvert, containerClass: '.three-one', previewImage: 'containers/3x1.png' },
+    { addButtonId: 'add-1x3', containerType: MarkIIhoriz, containerClass: '.one-three', previewImage: 'containers/1x3.png' },
+    { addButtonId: 'add-2x1', containerType: MarkIvert, containerClass: '.two-one', previewImage: 'containers/2x1.png' },
+    { addButtonId: 'add-1x1', containerType: Mark0, containerClass: '.one-one', previewImage: 'containers/1x1.png' }
   ];
 
   containerTypes.forEach(container => {
     const addButton = document.getElementById(container.addButtonId);
+    applyContainerSpriteBackground(addButton, container.previewImage);
     addButton.addEventListener('click', () => {
       addContainer(container.containerType, container.containerClass);
       // Remove recommended configs description
@@ -1094,7 +1118,7 @@ function addContainer(containerData, type) {
         const moduleDock = document.createElement('div');
         moduleDock.classList.add('module-dock');
         moduleDock.setAttribute('data-type', "type1");
-        moduleDock.setAttribute('style', `background-image: url('containers/${img_type}.png'); background-size: cover;`);
+        applyContainerSpriteBackground(moduleDock, `containers/${img_type}.png`);
         moduleDockRow.appendChild(moduleDock);
       }
       containerElement.appendChild(moduleDockRow);
