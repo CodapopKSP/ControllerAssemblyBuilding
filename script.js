@@ -768,6 +768,25 @@ modules.forEach(module => {
     */
     module.classList.add('dragging');
     event.dataTransfer.setData('text/plain', this.id);
+    const dragPreview = module.cloneNode(true);
+    dragPreview.style.position = 'fixed';
+    dragPreview.style.left = '-1000px';
+    dragPreview.style.top = '-1000px';
+    dragPreview.style.width = `${module.offsetWidth}px`;
+    dragPreview.style.height = `${module.offsetHeight}px`;
+    dragPreview.style.margin = '0';
+    dragPreview.style.pointerEvents = 'none';
+    dragPreview.style.overflow = 'hidden';
+    dragPreview.classList.remove('dragging', 'mouseover');
+    const previewTooltip = dragPreview.querySelector('.tooltip');
+    if (previewTooltip) {
+      previewTooltip.style.display = 'none';
+    }
+    document.body.appendChild(dragPreview);
+    event.dataTransfer.setDragImage(dragPreview, module.offsetWidth / 2, module.offsetHeight / 2);
+    setTimeout(() => {
+      dragPreview.remove();
+    }, 0);
     let tooltip = module.querySelector(".tooltip");
     tooltip.style.display = 'none';
     setContainerStackZIndex(module, 'reset');
