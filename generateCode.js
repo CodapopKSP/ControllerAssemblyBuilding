@@ -76,6 +76,15 @@
         }
     }
 
+    async function getModuleFileContent(basePath, fileName) {
+        const bundledModules = window.firmwareModuleFiles || {};
+        if (Object.prototype.hasOwnProperty.call(bundledModules, fileName)) {
+            return bundledModules[fileName];
+        }
+
+        return await fetchFileContent(basePath + 'Modules/' + fileName);
+    }
+
     function parseFileSections(content) {
         const sections = {
             transmissions: [],
@@ -384,8 +393,7 @@
         // Fetch and parse all module files
         for (const file of files) {
             try {
-                const filePath = basePath + 'Modules/' + file;
-                const content = await fetchFileContent(filePath);
+                const content = await getModuleFileContent(basePath, file);
                 const sections = parseFileSections(content);
                 allSections.push(sections);
             } catch (error) {
