@@ -924,7 +924,8 @@ modules.forEach(module => {
     if (moduleCenterY < window.innerHeight / 2) {
       tooltip.style.top = '10vh';
     } else {
-      tooltip.style.top = `-${Math.max(130, Math.ceil(tooltip.offsetHeight + 20))}px`;
+      const tooltipHeightVh = (tooltip.offsetHeight / window.innerHeight) * 100;
+      tooltip.style.top = `-${Math.max(12, tooltipHeightVh - 5)}vh`;
     }
 
     setContainerStackZIndex(module, 'set');
