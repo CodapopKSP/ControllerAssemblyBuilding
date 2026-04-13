@@ -896,7 +896,7 @@ modules.forEach(module => {
 
 
   // Show tooltip
-  module.addEventListener('mouseover', (event) => {
+  module.addEventListener('mouseover', () => {
     /*
       Show tooltip for objects with class mouseover.
       Get the vert/horiz position of the tooltip in the window and
@@ -909,7 +909,7 @@ modules.forEach(module => {
     tooltip.style.display = 'block';
 
     // Determine location based on coordinates of the module
-    const rect = event.target.getBoundingClientRect();
+    const rect = module.getBoundingClientRect();
     const position = rect.left + (rect.width / 2) - (tooltip.offsetWidth / 2);
     if (position < window.innerWidth / 3) {
       tooltip.classList.remove('right');
@@ -919,15 +919,12 @@ modules.forEach(module => {
       tooltip.classList.add('right');
     }
 
-    const positionv = rect.top + (rect.height / 2) - (tooltip.offsetHeight / 2);
+    const moduleCenterY = rect.top + (rect.height / 2);
     tooltip.classList.remove('top', 'bottom', 'far-bottom');
-
-    if (positionv < window.innerHeight / 3.4) {
-      tooltip.classList.add('top');
-    } else if (positionv > window.innerHeight / 2) {
-      tooltip.classList.add('far-bottom');
+    if (moduleCenterY < window.innerHeight / 2) {
+      tooltip.style.top = '10vh';
     } else {
-      tooltip.classList.add('bottom');
+      tooltip.style.top = `-${Math.max(130, Math.ceil(tooltip.offsetHeight + 20))}px`;
     }
 
     setContainerStackZIndex(module, 'set');
@@ -945,6 +942,7 @@ modules.forEach(module => {
     */
     let tooltip = module.querySelector(".tooltip");
     tooltip.style.display = 'none';
+    tooltip.style.top = '';
     module.classList.remove("mouseover");
     setContainerStackZIndex(module, 'reset');
   });
