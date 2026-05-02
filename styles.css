@@ -90,6 +90,11 @@ body {
     font-size: 2vh !important;
     background-color: #686868 !important;
     color: white !important;
+    cursor: pointer;
+}
+
+.back-button:hover {
+    background-color: #7a7a7a !important;
 }
 
 #canvas {
@@ -402,6 +407,7 @@ body {
     display: block;
     background-size: cover;
     position: absolute;
+    cursor: pointer;
 }
 
 #add-2x4 {
@@ -505,6 +511,19 @@ body {
     border: 0.4vh solid #3d3d3d;
     border-radius: 1.5vh;
     max-height: 5vh;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #7a7a7a;
+}
+
+#kit.active:hover {
+    background-color: rgb(220, 35, 35);
+}
+
+#lights.light:hover {
+    background-color: #f0f0f0;
 }
 
 #save:active {
@@ -637,6 +656,15 @@ body {
     margin: 0.5vh;
     font-family: 'Orbitron', sans-serif !important;
     text-align: center !important;
+    cursor: pointer;
+}
+
+.btn:hover:not(.back-button) {
+    filter: brightness(1.12);
+}
+
+.btn:active:not(.back-button) {
+    filter: brightness(0.94);
 }
   
 .swal2-popup {
@@ -659,6 +687,16 @@ body {
 .swal2-title {
     color: #ffffff !important;
     font-family: 'Orbitron', sans-serif !important;
+}
+
+.swal2-popup.kit-warning-dialog #swal2-content {
+    width: auto;
+    max-width: 100%;
+}
+
+.btn-kit-understand {
+    background-color: rgb(192, 0, 0) !important;
+    color: rgb(255, 255, 255) !important;
 }
 
 .btn-reddit {

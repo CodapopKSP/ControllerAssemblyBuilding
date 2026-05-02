@@ -626,11 +626,45 @@ lightSwitch.addEventListener('click', function() {
 const kitSwitch = document.getElementById('kit')
 kitSwitch.addEventListener('click', function() {
   /*
-    Button that toggles kit setting.
+    Button that toggles kit setting. Enabling kit shows a confirmation warning.
   */
-  this.classList.toggle('active');
-  kit = !kit;
+  if (kit) {
+    this.classList.remove('active');
+    kit = false;
+    updateTotalPrice();
+    return;
+  }
+  this.classList.add('active');
+  kit = true;
   updateTotalPrice();
+  Swal.fire({
+    title: 'Warning',
+    width: 'min(90vw, 42em)',
+    html:
+      '<p style="font-family: Roboto, sans-serif; text-align: left; margin: 0; line-height: 1.45; color: #ffe600;">' +
+      '<strong>Warning:</strong> selecting the kit option means you will be shipped the parts with instructions on how to build them yourself. ' +
+      'This means you intend to do all of the soldering, wire cutting, firmware flashing, and testing.' +
+      '</p>' +
+      '<p style="font-family: Roboto, sans-serif; text-align: left; margin: 0.75em 0 0; line-height: 1.45; color: #ffffff;">' +
+      'This is recommended for people who are already comfortable building electronics from scratch and can fix mistakes on their own.' +
+      '</p>',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'I understand',
+    cancelButtonText: 'No, take me back',
+    buttonsStyling: false,
+    customClass: {
+      popup: 'kit-warning-dialog',
+      confirmButton: 'btn btn-kit-understand',
+      cancelButton: 'btn btn-danger',
+    },
+  }).then((result) => {
+    if (!result.isConfirmed) {
+      kitSwitch.classList.remove('active');
+      kit = false;
+      updateTotalPrice();
+    }
+  });
 });
 
 
