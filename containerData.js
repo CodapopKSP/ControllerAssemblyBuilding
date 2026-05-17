@@ -20,7 +20,7 @@ containerData is an array that contains all of the data for each container.
 const Mark0 = {
     name: "Mark 0 Container",
     class: "one-one",
-    price: 50,
+    price: 55,
     null_acryl__price: 30,
     num_modules: 1,
     num_angled: 1,
@@ -32,7 +32,7 @@ const Mark0 = {
 const MarkIhoriz = {
     name: "Mark I Container (Horizontal)",
     class: "one-two",
-    price: 55,
+    price: 60,
     null_acryl__price: 30,
     num_modules: 2,
     num_angled: 2,
@@ -44,7 +44,7 @@ const MarkIhoriz = {
 const MarkIvert = {
     name: "Mark I Container (Vertical)",
     class: "two-one",
-    price: 55,
+    price: 60,
     null_acryl__price: 30,
     num_modules: 2,
     num_angled: 1,
@@ -57,7 +57,7 @@ const MarkIvert = {
 const MarkIIhoriz = {
     name: "Mark II Container (Horizontal)",
     class: "one-three",
-    price: 65,
+    price: 70,
     null_acryl__price: 30,
     num_modules: 3,
     num_angled: 3,
@@ -69,7 +69,7 @@ const MarkIIhoriz = {
 const MarkIIvert = {
     name: "Mark II Container (Vertical)",
     class: "three-one",
-    price: 65,
+    price: 70,
     null_acryl__price: 30,
     num_modules: 3,
     num_angled: 1,
@@ -83,7 +83,7 @@ const MarkIIvert = {
 const MarkIII = {
     name: "Mark III Container",
     class: "two-two",
-    price: 75,
+    price: 85,
     null_acryl__price: 32,
     num_modules: 4,
     num_angled: 2,
@@ -96,7 +96,7 @@ const MarkIII = {
 const MarkIV = {
     name: "Mark IV Container",
     class: "two-three",
-    price: 95,
+    price: 105,
     null_acryl__price: 34,
     num_modules: 6,
     num_angled: 3,
@@ -109,7 +109,7 @@ const MarkIV = {
 const MarkV = {
     name: "Mark V Container",
     class: "two-four",
-    price: 125,
+    price: 135,
     null_acryl__price: 49,
     num_modules: 8,
     num_angled: 4,
