@@ -3,6 +3,7 @@
 
 This is a webtool for streamlining several aspects of Untitled Space Craft controller development and improving the customer experience. The CAB was designed to mimic the aesthetic and vibe of the VAB (Vehicle Assembly Building) in KSP.
 
+![Animated Controller](Controller%20Animation.svg)
 
 ## Features
 
