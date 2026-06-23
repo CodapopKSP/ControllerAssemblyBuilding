@@ -12,11 +12,6 @@ const colorConfigString = urlParameters.get('color');
 const kitConfigString = urlParameters.get('kit');
 const descriptionConfigString = urlParameters.get('description');
 
-// Prevent users from right clicking
-document.addEventListener('contextmenu', function(event) {
-  event.preventDefault();
-});
-
 // Page zoom (vh/vw layout ignores browser zoom, so we apply CSS zoom instead)
 const PAGE_ZOOM_MIN = 0.5;
 const PAGE_ZOOM_MAX = 3;
