@@ -91,6 +91,7 @@ function createModuleImageElement(imagePath, className) {
 
     const spriteImage = document.createElement('img');
     spriteImage.src = 'modules/sprite.png';
+    spriteImage.draggable = false;
     spriteImage.classList.add('module-sprite-image');
     spriteImage.style.width = `${((spriteMeta.width / spriteCoords.w) * 100) * tuning.scaleX}%`;
     spriteImage.style.height = `${((spriteMeta.height / spriteCoords.h) * 100) * tuning.scaleY}%`;
@@ -103,6 +104,7 @@ function createModuleImageElement(imagePath, className) {
 
   const moduleImage = document.createElement('img');
   moduleImage.src = imagePath;
+  moduleImage.draggable = false;
   moduleImage.classList.add(className);
   return moduleImage;
 }
@@ -219,6 +221,35 @@ function createModuleDragCanvas(module) {
   return canvas;
 }
 
+let activeModuleDragImage = null;
+
+function hideOffscreenDragImage(element) {
+  element.style.position = 'fixed';
+  element.style.left = '-10000px';
+  element.style.top = '0';
+  element.style.pointerEvents = 'none';
+  element.style.margin = '0';
+}
+
+function setModuleDragImage(event, module) {
+  const offsetX = module.offsetWidth / 2;
+  const offsetY = module.offsetHeight / 2;
+  const dragCanvas = createModuleDragCanvas(module);
+  const dragImage = dragCanvas || createModuleDragPreview(module);
+
+  hideOffscreenDragImage(dragImage);
+  document.body.appendChild(dragImage);
+  event.dataTransfer.setDragImage(dragImage, offsetX, offsetY);
+  activeModuleDragImage = dragImage;
+}
+
+function clearModuleDragImage() {
+  if (activeModuleDragImage) {
+    activeModuleDragImage.remove();
+    activeModuleDragImage = null;
+  }
+}
+
 
 
 //|----------------------|
@@ -253,6 +284,7 @@ moduleData.forEach(module => {
   const moduleElement = document.createElement('div');
   moduleElement.classList.add('module');
   moduleElement.setAttribute('module', 'true');
+  moduleElement.setAttribute('draggable', 'true');
 
   // Set the module ID, price, and name
   moduleElement.setAttribute('id', module.id);
@@ -958,12 +990,7 @@ modules.forEach(module => {
     module.classList.add('dragging');
     event.dataTransfer.setData('text/plain', this.id);
     event.dataTransfer.effectAllowed = 'move';
-    const dragCanvas = createModuleDragCanvas(module);
-    if (dragCanvas) {
-      event.dataTransfer.setDragImage(dragCanvas, module.offsetWidth / 2, module.offsetHeight / 2);
-    } else {
-      event.dataTransfer.setDragImage(module, module.offsetWidth / 2, module.offsetHeight / 2);
-    }
+    setModuleDragImage(event, module);
     let tooltip = module.querySelector(".tooltip");
     tooltip.style.display = 'none';
     setContainerStackZIndex(module, 'reset');
@@ -981,6 +1008,7 @@ modules.forEach(module => {
       Remove highlight from the Delete Bin.
     */
     module.classList.remove('dragging');
+    clearModuleDragImage();
     updateTotalPrice();
     setContainerStackZIndex(module, 'reset');
     deleteBin.classList.remove('highlight');
@@ -1222,10 +1250,11 @@ function addContainer(containerData, type) {
           Highlight the Delete Container.
           Get rid of recommended configs description.
         */
-        if (event.target.id === counter) {
-          event.dataTransfer.setData('dragged', event.target.id);
-          event.target.classList.add('dragging2');
-          const id = event.target.id;
+        const draggedContainer = event.currentTarget;
+        if (draggedContainer.id === counter) {
+          event.dataTransfer.setData('dragged', draggedContainer.id);
+          draggedContainer.classList.add('dragging2');
+          const id = draggedContainer.id;
           event.dataTransfer.setData('text/plain', id);
           const containerGrids = document.querySelectorAll('.container-grid')
           containerGrids.forEach(containerGrid => {
@@ -1246,8 +1275,8 @@ function addContainer(containerData, type) {
           Add class dragging-container to containerGrids for visibility.
           Highlight the Delete Container.
         */
-        if (event.target.id === counter) {
-          event.target.classList.remove('dragging2');
+        if (event.currentTarget.id === counter) {
+          event.currentTarget.classList.remove('dragging2');
           const containerGrids = document.querySelectorAll('.container-grid')
           containerGrids.forEach(containerGrid => {
             containerGrid.classList.remove('dragging-container');
