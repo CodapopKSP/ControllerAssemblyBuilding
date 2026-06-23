@@ -346,6 +346,19 @@ function clearModuleDragImage() {
   }
 }
 
+function clearContainerDragUi() {
+  document.querySelectorAll('.dragging2').forEach((element) => {
+    element.classList.remove('dragging2');
+  });
+  document.querySelectorAll('.container-grid.dragging-container').forEach((grid) => {
+    grid.classList.remove('dragging-container');
+  });
+}
+
+function isModuleDragActive() {
+  return Boolean(document.querySelector('.module.dragging'));
+}
+
 
 
 //|----------------------|
@@ -1084,6 +1097,9 @@ modules.forEach(module => {
       Get rid of recommended configs description.
     */
     module.classList.add('dragging');
+    event.stopPropagation();
+    clearContainerDragUi();
+    document.body.classList.add('is-dragging-module');
     event.dataTransfer.setData('text/plain', this.id);
     event.dataTransfer.effectAllowed = 'move';
     setModuleDragImage(event, module);
@@ -1105,6 +1121,8 @@ modules.forEach(module => {
     */
     module.classList.remove('dragging');
     clearModuleDragImage();
+    clearContainerDragUi();
+    document.body.classList.remove('is-dragging-module');
     updateTotalPrice();
     setContainerStackZIndex(module, 'reset');
     deleteBin.classList.remove('highlight');
@@ -1174,6 +1192,9 @@ modules.forEach(module => {
 const containerGrids = document.querySelectorAll('.container-grid-array');
 containerGrids.forEach(containerGrid => {
   containerGrid.addEventListener('dragover', (event) => {
+    if (!document.querySelector('.dragging2')) {
+      return;
+    }
     event.preventDefault();
   });
 
@@ -1187,6 +1208,9 @@ containerGrids.forEach(containerGrid => {
       Check all containers for resizing and double check class removal.
     */
     event.preventDefault();
+    if (isModuleDragActive()) {
+      return;
+    }
     const containerBox = document.querySelector('.dragging2');
     const containerGrid = event.target.closest('.container-grid');
     if (containerGrid && containerBox) {
@@ -1346,6 +1370,9 @@ function addContainer(containerData, type) {
           Highlight the Delete Container.
           Get rid of recommended configs description.
         */
+        if (event.target.closest('.module')) {
+          return;
+        }
         const draggedContainer = event.currentTarget;
         if (draggedContainer.id === counter) {
           event.dataTransfer.setData('dragged', draggedContainer.id);

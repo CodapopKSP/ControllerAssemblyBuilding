@@ -735,6 +735,11 @@ body {
     display: block;
 }
 
+body.is-dragging-module .container-box .ruler,
+body.is-dragging-module .container-box:hover .ruler {
+    display: none;
+}
+
 .ruler {
     position: absolute;
     height: 0.4vh;
