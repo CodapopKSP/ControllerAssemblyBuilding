@@ -17,6 +17,107 @@ document.addEventListener('contextmenu', function(event) {
   event.preventDefault();
 });
 
+// Page zoom (vh/vw layout ignores browser zoom, so we apply CSS zoom instead)
+const PAGE_ZOOM_MIN = 0.5;
+const PAGE_ZOOM_MAX = 3;
+const PAGE_ZOOM_STEP = 0.1;
+const supportsCssZoom = typeof CSS !== 'undefined' && CSS.supports('zoom', '1');
+let pageZoom = 1;
+let pinchStartDistance = 0;
+let pinchStartZoom = 1;
+
+function clampPageZoom(value) {
+  return Math.min(PAGE_ZOOM_MAX, Math.max(PAGE_ZOOM_MIN, value));
+}
+
+function setPageZoom(zoom) {
+  pageZoom = clampPageZoom(zoom);
+  const root = document.documentElement;
+
+  if (supportsCssZoom) {
+    root.style.zoom = String(pageZoom);
+    root.style.transform = '';
+    root.style.width = '';
+  } else if (pageZoom === 1) {
+    root.style.zoom = '';
+    root.style.transform = '';
+    root.style.width = '';
+  } else {
+    root.style.zoom = '';
+    root.style.transformOrigin = 'top center';
+    root.style.transform = `scale(${pageZoom})`;
+    root.style.width = `${100 / pageZoom}%`;
+  }
+
+  try {
+    sessionStorage.setItem('pageZoom', String(pageZoom));
+  } catch (_) {}
+}
+
+function changePageZoom(delta) {
+  setPageZoom(pageZoom + delta);
+}
+
+function getTouchDistance(touches) {
+  const dx = touches[0].clientX - touches[1].clientX;
+  const dy = touches[0].clientY - touches[1].clientY;
+  return Math.hypot(dx, dy);
+}
+
+document.addEventListener('wheel', (event) => {
+  if (!event.ctrlKey && !event.metaKey) {
+    return;
+  }
+  event.preventDefault();
+  changePageZoom(event.deltaY < 0 ? PAGE_ZOOM_STEP : -PAGE_ZOOM_STEP);
+}, { passive: false });
+
+document.addEventListener('keydown', (event) => {
+  if (!event.ctrlKey && !event.metaKey) {
+    return;
+  }
+  if (event.key === '=' || event.key === '+' || event.code === 'NumpadAdd') {
+    event.preventDefault();
+    changePageZoom(PAGE_ZOOM_STEP);
+  } else if (event.key === '-' || event.key === '_' || event.code === 'NumpadSubtract') {
+    event.preventDefault();
+    changePageZoom(-PAGE_ZOOM_STEP);
+  } else if (event.key === '0' || event.code === 'Numpad0') {
+    event.preventDefault();
+    setPageZoom(1);
+  }
+});
+
+document.addEventListener('touchstart', (event) => {
+  if (event.touches.length === 2) {
+    pinchStartDistance = getTouchDistance(event.touches);
+    pinchStartZoom = pageZoom;
+  }
+}, { passive: true });
+
+document.addEventListener('touchmove', (event) => {
+  if (event.touches.length !== 2 || pinchStartDistance === 0) {
+    return;
+  }
+  event.preventDefault();
+  const scale = getTouchDistance(event.touches) / pinchStartDistance;
+  setPageZoom(pinchStartZoom * scale);
+}, { passive: false });
+
+document.addEventListener('touchend', (event) => {
+  if (event.touches.length < 2) {
+    pinchStartDistance = 0;
+  }
+});
+
+try {
+  const storedPageZoom = parseFloat(sessionStorage.getItem('pageZoom'));
+  if (!Number.isNaN(storedPageZoom)) {
+    pageZoom = clampPageZoom(storedPageZoom);
+  }
+} catch (_) {}
+setPageZoom(pageZoom);
+
 // Mobile-specific Variables
 let activeModule_mobile = null;
 function isPhone() {

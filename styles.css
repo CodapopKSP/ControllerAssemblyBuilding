@@ -4,9 +4,13 @@
 |=================|
 */
 
+html {
+    overflow: auto;
+}
+
 body {
     margin: 0;
-    overflow: hidden;
+    overflow: auto;
     user-select: none;
 }
 
@@ -21,7 +25,7 @@ body {
 #wrapper-wrapper {
     position: relative;
     width: 100%;      /* was 99vw */
-    height: 100vh;    /* was 99vh */
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -38,7 +42,7 @@ body {
     width: 100%;
     max-width: 180vh;
     top: -5vh;
-    overflow-x: hidden;
+    overflow-x: visible;
     flex-shrink: 0;
     margin: 2vh auto 0 auto;
 }
