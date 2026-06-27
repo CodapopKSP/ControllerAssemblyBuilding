@@ -185,15 +185,23 @@ function createModuleImageElement(imagePath, className) {
     moduleImage.classList.add(className);
     moduleImage.classList.add('module-image');
 
-    const spriteImage = document.createElement('img');
-    spriteImage.src = 'modules/sprite.png';
-    spriteImage.draggable = false;
-    spriteImage.classList.add('module-sprite-image');
-    spriteImage.style.width = `${((spriteMeta.width / spriteCoords.w) * 100) * tuning.scaleX}%`;
-    spriteImage.style.height = `${((spriteMeta.height / spriteCoords.h) * 100) * tuning.scaleY}%`;
-    spriteImage.style.left = `calc(-${(spriteCoords.x / spriteCoords.w) * 100}% + ${tuning.offsetXPx}px)`;
-    spriteImage.style.top = `calc(-${(spriteCoords.y / spriteCoords.h) * 100}% + ${tuning.offsetYPx}px)`;
-    moduleImage.appendChild(spriteImage);
+    // Render the sprite cell as a CSS background. This is resolution-independent
+    // (Chrome's sub-pixel painting of a scaled overflow:hidden <img> mis-scaled the cell),
+    // so the same percentages map a cell to the box identically in every browser.
+    const sizeX = (spriteMeta.width / spriteCoords.w) * 100 * tuning.scaleX;
+    const sizeY = (spriteMeta.height / spriteCoords.h) * 100 * tuning.scaleY;
+    const posX = spriteMeta.width === spriteCoords.w
+      ? 0
+      : (spriteCoords.x / (spriteMeta.width - spriteCoords.w)) * 100;
+    const posY = spriteMeta.height === spriteCoords.h
+      ? 0
+      : (spriteCoords.y / (spriteMeta.height - spriteCoords.h)) * 100;
+
+    moduleImage.style.backgroundImage = "url('modules/sprite.png')";
+    moduleImage.style.backgroundRepeat = 'no-repeat';
+    moduleImage.style.backgroundSize = `${sizeX}% ${sizeY}%`;
+    moduleImage.style.backgroundPosition =
+      `calc(${posX}% + ${tuning.offsetXPx}px) calc(${posY}% + ${tuning.offsetYPx}px)`;
 
     return moduleImage;
   }
