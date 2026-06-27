@@ -157,8 +157,8 @@ const SPRITE_TUNING = {
     offsetXPx: 0,
     offsetYPx: 0,
     perImage: {
-      'containers/angled.png': { scaleX: 0.55, scaleY: 0.55 },
-      'containers/level.png': { scaleX: 0.55, scaleY: 0.55 }
+      'containers/angled.png': { scaleX: 1, scaleY: 1 },
+      'containers/level.png': { scaleX: 1, scaleY: 1 }
     }
   }
 };
@@ -238,13 +238,23 @@ function applyContainerSpriteBackground(element, imagePath) {
   const spriteCoords = spriteMap[imagePath];
   if (spriteCoords && spriteMeta.width && spriteMeta.height) {
     const tuning = getSpriteTuning('container', imagePath, false);
-    const elementWidth = element.clientWidth || spriteCoords.w;
-    const elementHeight = element.clientHeight || spriteCoords.h;
-    const scaleX = (elementWidth / spriteCoords.w) * tuning.scaleX;
-    const scaleY = (elementHeight / spriteCoords.h) * tuning.scaleY;
+    // Resolution-independent percentage mapping. The old version scaled by
+    // element.clientWidth, but the in-container slot docks are styled before they
+    // are attached to the DOM, so clientWidth was 0 and the cell rendered at its
+    // natural sprite resolution. Percentages map the cell to the box regardless of
+    // measurement (and identically across browsers/DPRs).
+    const sX = tuning.scaleX;
+    const sY = tuning.scaleY;
+    const sizeX = (spriteMeta.width / spriteCoords.w) * 100 * sX;
+    const sizeY = (spriteMeta.height / spriteCoords.h) * 100 * sY;
+    const denomX = spriteMeta.width * sX - spriteCoords.w;
+    const denomY = spriteMeta.height * sY - spriteCoords.h;
+    const posX = denomX === 0 ? 0 : (spriteCoords.x * sX) / denomX * 100;
+    const posY = denomY === 0 ? 0 : (spriteCoords.y * sY) / denomY * 100;
     element.style.backgroundImage = "url('containers/sprite.png')";
-    element.style.backgroundSize = `${spriteMeta.width * scaleX}px ${spriteMeta.height * scaleY}px`;
-    element.style.backgroundPosition = `${-spriteCoords.x * scaleX + tuning.offsetXPx}px ${-spriteCoords.y * scaleY + tuning.offsetYPx}px`;
+    element.style.backgroundSize = `${sizeX}% ${sizeY}%`;
+    element.style.backgroundPosition =
+      `calc(${posX}% + ${tuning.offsetXPx}px) calc(${posY}% + ${tuning.offsetYPx}px)`;
     element.style.backgroundRepeat = 'no-repeat';
     return;
   }
