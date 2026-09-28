@@ -41,8 +41,11 @@ void setup() {
   // Connect to Simpit
   Serial.begin(115200);
 
-  // Turn on Keyboard Emulation
-  Keyboard.begin();
+  // Turn on Keyboard Emulation.
+  // Keyboard.begin() prevents the board from enumerating as a keyboard on macOS.
+  #if OPERATING_SYSTEM != MAC
+    Keyboard.begin();
+  #endif
   delay(1500);
   
   // Reset Modules
@@ -84,12 +87,12 @@ void setup() {
     }
     mySimpit.printToKSP(F("Connected to KSP"), PRINT_TO_SCREEN);
     lastSimpitMessageAt = millis();
+    // Register Channels
+    registerMessageChannels();
     // Register Telemetry for LCD
     if (LCD_Con) {
       registerTelemetryChannels();
     }
-    // Register Channels
-    registerMessageChannels();
   }
 
   // Setup Analogs
@@ -110,8 +113,8 @@ void loop() {
       allZero();
       while (!mySimpit.init()) {delay(10);}
       lastSimpitMessageAt = millis();
-      if (LCD_Con) registerTelemetryChannels();
       registerMessageChannels();
+      if (LCD_Con) registerTelemetryChannels();
     }
   }
 

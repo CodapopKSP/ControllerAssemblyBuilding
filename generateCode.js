@@ -386,6 +386,37 @@
         return result.join('\n');
     }
 
+    function hostOperatingSystem() {
+        if (typeof navigator === 'undefined') {
+            return null;
+        }
+        const platform = `${(navigator.userAgentData && navigator.userAgentData.platform) || ''} ${navigator.platform || ''} ${navigator.userAgent || ''}`;
+        if (/Android/i.test(platform)) {
+            return null;
+        }
+        if (/Mac|iPhone|iPad|iPod/i.test(platform)) {
+            return 'MAC';
+        }
+        if (/Win/i.test(platform)) {
+            return 'WINDOWS';
+        }
+        if (/Linux/i.test(platform)) {
+            return 'LINUX';
+        }
+        return null;
+    }
+
+    function applyHostOperatingSystem(settingsContent) {
+        const hostOS = hostOperatingSystem();
+        if (!hostOS) {
+            return settingsContent;
+        }
+        return settingsContent.replace(
+            /#define\s+OPERATING_SYSTEM\s+\w+/,
+            `#define OPERATING_SYSTEM ${hostOS}`
+        );
+    }
+
     async function createArduinoProject(files) {
         const basePath = 'firmware/';
         const allSections = [];
@@ -481,6 +512,7 @@
         }
 
         let settingsContent = settingsTemplate;
+        settingsContent = applyHostOperatingSystem(settingsContent);
         if (combined.emulation.length > 0) {
             // Remove duplicates - keep only first occurrence of each #define
             const seenDefines = new Set();
@@ -536,7 +568,7 @@
     async function createZip(modifiedFiles) {
         const zip = new JSZip();
         const basePath = 'firmware/';
-        const folderName = 'Hub_3_0/';
+        const folderName = 'Hub_3_1/';
 
         // Add modified files
         zip.file(folderName + '01_System_Functions.ino', modifiedFiles['01_System_Functions.ino']);
@@ -547,7 +579,7 @@
 
         // Add other necessary project files
         const projectFiles = [
-            'Hub_3_0.ino',
+            'Hub_3_1.ino',
             '04_Analog.ino',
             'definitions.h'
         ];
@@ -628,7 +660,7 @@
                 }
                 const zipBlob = await window.generateArduinoZipFromConfig(configString);
                 const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, -5);
-                downloadZip(zipBlob, `arduino_project_${timestamp}.zip`);
+                downloadZip(zipBlob, `Hub_3_1_${timestamp}.zip`);
                 output.textContent = `Success! Generated Arduino project.`;
                 output.style.color = '#28a745';
             } catch (error) {

@@ -741,7 +741,7 @@ async function triggerCodeGeneration() {
     const url = URL.createObjectURL(zipBlob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'arduino_project_' + new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19) + '.zip';
+    a.download = 'Hub_3_1_' + new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19) + '.zip';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);

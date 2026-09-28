@@ -10,6 +10,7 @@
 
 #define WINDOWS 1
 #define LINUX   2
+#define MAC     3
 bool KSP2 = false;
 bool keyboardEmulation = false;
 
@@ -19,6 +20,9 @@ bool keyboardEmulation = false;
 #elif OPERATING_SYSTEM == LINUX
   #define KSP_MOD_KEY  KEY_LEFT_SHIFT
   #define KSP_MOD_KEY2 KEY_RIGHT_SHIFT
+#elif OPERATING_SYSTEM == MAC
+  #define KSP_MOD_KEY  KEY_LEFT_SHIFT
+  #define KSP_MOD_KEY2 KEY_LEFT_ALT
 #endif
 
 
