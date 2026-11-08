@@ -147,7 +147,7 @@ const SPRITE_TUNING = {
     scaleY: 1,
     offsetXPx: 0,
     offsetYPx: 0,
-    lightOffsetXPx: 0.4,
+    lightOffsetXPx: 0,
     lightOffsetYPx: 0,
     perImage: {}
   },
@@ -174,43 +174,107 @@ function getSpriteTuning(kind, imagePath, isLight = false) {
   };
 }
 
+// Each sheet is one network request. Its cells are then cut into individual images
+// in the browser, because a background positioned inside a whole sheet gets snapped
+// to device pixels differently per column, which made lit modules shift when toggled.
+const containerSpriteSheetImage = new Image();
+containerSpriteSheetImage.src = 'containers/sprite.png';
+
+const spriteSheets = {
+  module: {
+    src: 'modules/sprite.png',
+    image: moduleSpriteSheetImage,
+    map: window.moduleSpriteMap || {},
+    meta: window.moduleSpriteSheetMeta || {}
+  },
+  container: {
+    src: 'containers/sprite.png',
+    image: containerSpriteSheetImage,
+    map: window.containerSpriteMap || {},
+    meta: window.containerSpriteSheetMeta || {}
+  }
+};
+
+// Keeps decoded copies alive so a lit image is ready the first time it is shown.
+const decodedSpriteCells = [];
+
+function cutSpriteCell(sheetImage, cell) {
+  const canvas = document.createElement('canvas');
+  canvas.width = cell.w;
+  canvas.height = cell.h;
+  canvas.getContext('2d').drawImage(sheetImage, cell.x, cell.y, cell.w, cell.h, 0, 0, cell.w, cell.h);
+  return new Promise((resolve, reject) => {
+    canvas.toBlob((blob) => {
+      if (!blob) {
+        reject(new Error('Could not cut sprite cell'));
+        return;
+      }
+      const url = URL.createObjectURL(blob);
+      const decodedCell = new Image();
+      decodedCell.src = url;
+      decodedCell.decode().catch(() => {});
+      decodedSpriteCells.push(decodedCell);
+      resolve(url);
+    }, 'image/png');
+  });
+}
+
+function cutSpriteSheet(sheet) {
+  return sheet.image.decode()
+    .then(() => Promise.all(Object.entries(sheet.map).map(([path, cell]) =>
+      cutSpriteCell(sheet.image, cell).then((url) => [path, url])
+    )))
+    .then(Object.fromEntries);
+}
+
+Object.values(spriteSheets).forEach((sheet) => {
+  sheet.cells = cutSpriteSheet(sheet);
+});
+
+// Used when cells can't be cut, e.g. the canvas is tainted on a file:// page.
+function applySheetBackground(element, sheet, cell, tuning) {
+  const { width, height } = sheet.meta;
+  const denomX = width * tuning.scaleX - cell.w;
+  const denomY = height * tuning.scaleY - cell.h;
+  const posX = denomX === 0 ? 0 : (cell.x * tuning.scaleX) / denomX * 100;
+  const posY = denomY === 0 ? 0 : (cell.y * tuning.scaleY) / denomY * 100;
+  element.style.backgroundImage = `url('${sheet.src}')`;
+  element.style.backgroundSize =
+    `${(width / cell.w) * 100 * tuning.scaleX}% ${(height / cell.h) * 100 * tuning.scaleY}%`;
+  element.style.backgroundPosition =
+    `calc(${posX}% + ${tuning.offsetXPx}px) calc(${posY}% + ${tuning.offsetYPx}px)`;
+}
+
+function applySprite(element, kind, imagePath, isLight = false) {
+  const sheet = spriteSheets[kind];
+  const cell = sheet.map[imagePath];
+  if (!cell || !sheet.meta.width || !sheet.meta.height) {
+    return false;
+  }
+
+  const tuning = getSpriteTuning(kind, imagePath, isLight);
+  element.style.backgroundRepeat = 'no-repeat';
+  sheet.cells.then((cells) => {
+    element.style.backgroundImage = `url('${cells[imagePath]}')`;
+    element.style.backgroundSize = `${tuning.scaleX * 100}% ${tuning.scaleY * 100}%`;
+    element.style.backgroundPosition = `${tuning.offsetXPx}px ${tuning.offsetYPx}px`;
+  }, () => applySheetBackground(element, sheet, cell, tuning));
+  return true;
+}
+
 function createModuleImageElement(imagePath, className) {
-  const spriteMap = window.moduleSpriteMap || {};
-  const spriteMeta = window.moduleSpriteSheetMeta || {};
-  const spriteCoords = spriteMap[imagePath];
-  const tuning = getSpriteTuning('module', imagePath, className === 'image-2');
-
-  if (spriteCoords && spriteMeta.width && spriteMeta.height) {
-    const moduleImage = document.createElement('div');
-    moduleImage.classList.add(className);
-    moduleImage.classList.add('module-image');
-
-    // Render the sprite cell as a CSS background. This is resolution-independent
-    // (Chrome's sub-pixel painting of a scaled overflow:hidden <img> mis-scaled the cell),
-    // so the same percentages map a cell to the box identically in every browser.
-    const sizeX = (spriteMeta.width / spriteCoords.w) * 100 * tuning.scaleX;
-    const sizeY = (spriteMeta.height / spriteCoords.h) * 100 * tuning.scaleY;
-    const posX = spriteMeta.width === spriteCoords.w
-      ? 0
-      : (spriteCoords.x / (spriteMeta.width - spriteCoords.w)) * 100;
-    const posY = spriteMeta.height === spriteCoords.h
-      ? 0
-      : (spriteCoords.y / (spriteMeta.height - spriteCoords.h)) * 100;
-
-    moduleImage.style.backgroundImage = "url('modules/sprite.png')";
-    moduleImage.style.backgroundRepeat = 'no-repeat';
-    moduleImage.style.backgroundSize = `${sizeX}% ${sizeY}%`;
-    moduleImage.style.backgroundPosition =
-      `calc(${posX}% + ${tuning.offsetXPx}px) calc(${posY}% + ${tuning.offsetYPx}px)`;
-
+  const moduleImage = document.createElement('div');
+  moduleImage.classList.add(className);
+  moduleImage.classList.add('module-image');
+  if (applySprite(moduleImage, 'module', imagePath, className === 'image-2')) {
     return moduleImage;
   }
 
-  const moduleImage = document.createElement('img');
-  moduleImage.src = imagePath;
-  moduleImage.draggable = false;
-  moduleImage.classList.add(className);
-  return moduleImage;
+  const fallbackImage = document.createElement('img');
+  fallbackImage.src = imagePath;
+  fallbackImage.draggable = false;
+  fallbackImage.classList.add(className);
+  return fallbackImage;
 }
 
 function applyModuleSpriteBackground(element, imagePath) {
@@ -233,29 +297,7 @@ function applyModuleSpriteBackground(element, imagePath) {
 }
 
 function applyContainerSpriteBackground(element, imagePath) {
-  const spriteMap = window.containerSpriteMap || {};
-  const spriteMeta = window.containerSpriteSheetMeta || {};
-  const spriteCoords = spriteMap[imagePath];
-  if (spriteCoords && spriteMeta.width && spriteMeta.height) {
-    const tuning = getSpriteTuning('container', imagePath, false);
-    // Resolution-independent percentage mapping. The old version scaled by
-    // element.clientWidth, but the in-container slot docks are styled before they
-    // are attached to the DOM, so clientWidth was 0 and the cell rendered at its
-    // natural sprite resolution. Percentages map the cell to the box regardless of
-    // measurement (and identically across browsers/DPRs).
-    const sX = tuning.scaleX;
-    const sY = tuning.scaleY;
-    const sizeX = (spriteMeta.width / spriteCoords.w) * 100 * sX;
-    const sizeY = (spriteMeta.height / spriteCoords.h) * 100 * sY;
-    const denomX = spriteMeta.width * sX - spriteCoords.w;
-    const denomY = spriteMeta.height * sY - spriteCoords.h;
-    const posX = denomX === 0 ? 0 : (spriteCoords.x * sX) / denomX * 100;
-    const posY = denomY === 0 ? 0 : (spriteCoords.y * sY) / denomY * 100;
-    element.style.backgroundImage = "url('containers/sprite.png')";
-    element.style.backgroundSize = `${sizeX}% ${sizeY}%`;
-    element.style.backgroundPosition =
-      `calc(${posX}% + ${tuning.offsetXPx}px) calc(${posY}% + ${tuning.offsetYPx}px)`;
-    element.style.backgroundRepeat = 'no-repeat';
+  if (applySprite(element, 'container', imagePath)) {
     return;
   }
   element.style.backgroundImage = `url('${imagePath}')`;
@@ -442,12 +484,12 @@ moduleData.forEach(module => {
 
   // Create the module tooltip content
   const moduleTooltipContent = document.createElement('strong');
-  moduleTooltipContent.style.fontSize = '1.8vh';
+  moduleTooltipContent.style.fontSize = 'calc(1.8 * var(--u))';
   moduleTooltipContent.textContent = module.name;
 
   // Construct price and tooltip message
   const modulePrice = document.createElement('span');
-  modulePrice.style.fontSize = '1.7vh';
+  modulePrice.style.fontSize = 'calc(1.7 * var(--u))';
   modulePrice.innerHTML = `<br>$${module.price}</br>Kit: $${module.kit_price}</br>`;
   const moduleDescription = document.createElement('span');
   moduleDescription.innerHTML = module.tooltip;
@@ -1174,10 +1216,11 @@ modules.forEach(module => {
     const moduleCenterY = rect.top + (rect.height / 2);
     tooltip.classList.remove('top', 'bottom', 'far-bottom');
     if (moduleCenterY < window.innerHeight / 2) {
-      tooltip.style.top = '10vh';
+      tooltip.style.top = 'calc(10 * var(--u))';
     } else {
-      const tooltipHeightVh = (tooltip.offsetHeight / window.innerHeight) * 100;
-      tooltip.style.top = `-${Math.max(12, tooltipHeightVh - 5)}vh`;
+      const layoutUnitPx = module.offsetHeight / 15;
+      const tooltipHeightUnits = tooltip.offsetHeight / layoutUnitPx;
+      tooltip.style.top = `calc(${-Math.max(12, tooltipHeightUnits - 5)} * var(--u))`;
     }
 
     setContainerStackZIndex(module, 'set');
@@ -1648,49 +1691,49 @@ function loadController(inputData, color, kit, description) {
   if (description==='JebediahsCommandDescription') {
     recConfigsDescriptionLabel.innerHTML = JebediahsCommandDescription;
     recConfigsDescriptionLabel.style.visibility = 'visible';
-    recConfigsDescriptionWrapper.style.width = '75vh';
+    recConfigsDescriptionWrapper.style.width = 'calc(75 * var(--u))';
     recConfigsDescriptionWrapper.style.top = '10%';
   }
   if (description==='ButtonBoxDescription') {
     recConfigsDescriptionLabel.innerHTML = ButtonBoxDescription;
     recConfigsDescriptionLabel.style.visibility = 'visible';
-    recConfigsDescriptionWrapper.style.width = '70vh';
+    recConfigsDescriptionWrapper.style.width = 'calc(70 * var(--u))';
     recConfigsDescriptionWrapper.style.top = '12%';
   }
   if (description==='KeyboardsLamentDescription') {
     recConfigsDescriptionLabel.innerHTML = KeyboardsLamentDescription;
     recConfigsDescriptionLabel.style.visibility = 'visible';
-    recConfigsDescriptionWrapper.style.width = '70vh';
+    recConfigsDescriptionWrapper.style.width = 'calc(70 * var(--u))';
     recConfigsDescriptionWrapper.style.top = '10%';
   }
   if (description==='KeybCompanion1Description') {
     recConfigsDescriptionLabel.innerHTML = KeybCompanion1Description;
     recConfigsDescriptionLabel.style.visibility = 'visible';
-    recConfigsDescriptionWrapper.style.width = '70vh';
+    recConfigsDescriptionWrapper.style.width = 'calc(70 * var(--u))';
     recConfigsDescriptionWrapper.style.top = '14%';
   }
   if (description==='KeybCompanion2Description') {
     recConfigsDescriptionLabel.innerHTML = KeybCompanion2Description;
     recConfigsDescriptionLabel.style.visibility = 'visible';
-    recConfigsDescriptionWrapper.style.width = '70vh';
+    recConfigsDescriptionWrapper.style.width = 'calc(70 * var(--u))';
     recConfigsDescriptionWrapper.style.top = '14%';
   }
   if (description==='ExtCommandSeat1Description') {
     recConfigsDescriptionLabel.innerHTML = ExtCommandSeat1Description;
     recConfigsDescriptionLabel.style.visibility = 'visible';
-    recConfigsDescriptionWrapper.style.width = '70vh';
+    recConfigsDescriptionWrapper.style.width = 'calc(70 * var(--u))';
     recConfigsDescriptionWrapper.style.top = '10%';
   }
   if (description==='ExtCommandSeat2Description') {
     recConfigsDescriptionLabel.innerHTML = ExtCommandSeat2Description;
     recConfigsDescriptionLabel.style.visibility = 'visible';
-    recConfigsDescriptionWrapper.style.width = '65vh';
+    recConfigsDescriptionWrapper.style.width = 'calc(65 * var(--u))';
     recConfigsDescriptionWrapper.style.top = '12%';
   }
   if (description==='ValentinasCommandDescription') {
     recConfigsDescriptionLabel.innerHTML = ValentinasCommandDescription;
     recConfigsDescriptionLabel.style.visibility = 'visible';
-    recConfigsDescriptionWrapper.style.width = '70vh';
+    recConfigsDescriptionWrapper.style.width = 'calc(70 * var(--u))';
     recConfigsDescriptionWrapper.style.top = '52%';
     recConfigsDescriptionWrapper.style.left = '19.2%';
 
@@ -1698,7 +1741,7 @@ function loadController(inputData, color, kit, description) {
   if (description==='MissionControlDescription') {
     recConfigsDescriptionLabel.innerHTML = MissionControlDescription;
     recConfigsDescriptionLabel.style.visibility = 'visible';
-    recConfigsDescriptionWrapper.style.width = '50vh';
+    recConfigsDescriptionWrapper.style.width = 'calc(50 * var(--u))';
     recConfigsDescriptionWrapper.style.top = '52%';
     recConfigsDescriptionWrapper.style.left = '28.2%';
   }
